@@ -1,0 +1,338 @@
+{{ 'gls-header.css' | asset_url | stylesheet_tag }}
+
+<header class="gls-header" data-section-id="{{ section.id }}">
+  <!-- Top Bar -->
+  <div class="gls-header__top-bar">
+    <div class="gls-header__container">
+      <div class="gls-header__top-left">
+        <a href="tel:{{ section.settings.phone_number | replace: ' ', '' | replace: '-', '' }}" class="gls-header__phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Sales: {{ section.settings.phone_number }}
+        </a>
+        <span class="gls-header__divider">|</span>
+        <a href="{{ section.settings.promo_link }}" class="gls-header__promo">
+          {{ section.settings.promo_text }}
+        </a>
+      </div>
+      <div class="gls-header__top-right">
+        {% for block in section.blocks %}
+          {% if block.type == 'top_link' %}
+            <a href="{{ block.settings.link }}" class="gls-header__top-link {% if block.settings.highlight %}gls-header__top-link--highlight{% endif %}">
+              {{ block.settings.text }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="gls-header__main">
+    <div class="gls-header__container">
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="gls-header__logo-link">
+        {% if section.settings.logo != blank %}
+          <img 
+            src="{{ section.settings.logo | image_url: width: 200 }}" 
+            alt="{{ shop.name }}" 
+            class="gls-header__logo"
+            width="120"
+            height="auto"
+            loading="eager"
+          >
+        {% else %}
+          <span class="gls-header__logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+
+      <!-- Search Bar -->
+      <div class="gls-header__search">
+        <form action="{{ routes.search_url }}" method="get" class="gls-header__search-form">
+          <input type="hidden" name="type" value="product">
+          <div class="gls-header__search-wrapper">
+            <svg class="gls-header__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input 
+              type="search" 
+              name="q" 
+              placeholder="{{ section.settings.search_placeholder }}"
+              class="gls-header__search-input"
+              autocomplete="off"
+            >
+            <button type="submit" class="gls-header__search-btn">
+              {{ section.settings.search_button_text }}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Account & Cart -->
+      <div class="gls-header__actions">
+        <!-- Account -->
+        <a href="{{ routes.account_url }}" class="gls-header__account">
+          <div class="gls-header__account-text">
+            <span class="gls-header__account-greeting">HELLO, {% if customer %}{{ customer.first_name | upcase }}{% else %}GUEST{% endif %}</span>
+            <span class="gls-header__account-link">My Account <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Cart -->
+        <a href="{{ routes.cart_url }}" class="gls-header__cart">
+          <div class="gls-header__cart-icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="gls-header__cart-count">{{ cart.item_count }}</span>
+          </div>
+          <div class="gls-header__cart-text">
+            <span class="gls-header__cart-label">CART</span>
+            <span class="gls-header__cart-items">{{ cart.item_count }} Items</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="gls-header__nav">
+    <div class="gls-header__container">
+      <div class="gls-header__nav-left">
+        <!-- Shop Catalog Dropdown -->
+        <div class="gls-header__catalog-dropdown">
+          <button class="gls-header__catalog-btn" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+            {{ section.settings.catalog_text }}
+            <svg class="gls-header__catalog-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="gls-header__mega-menu">
+            <div class="gls-header__mega-menu-inner">
+              {% for link in linklists[section.settings.catalog_menu].links %}
+                <div class="gls-header__mega-column">
+                  <a href="{{ link.url }}" class="gls-header__mega-title">{{ link.title }}</a>
+                  {% if link.links.size > 0 %}
+                    <ul class="gls-header__mega-list">
+                      {% for child_link in link.links %}
+                        <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Menu -->
+        <ul class="gls-header__menu">
+          {% for link in linklists[section.settings.main_menu].links %}
+            <li class="gls-header__menu-item">
+              <a href="{{ link.url }}" class="gls-header__menu-link {% if link.active %}gls-header__menu-link--active{% endif %}">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Request Quote Button -->
+      <a href="{{ section.settings.quote_link }}" class="gls-header__quote-btn">
+        {{ section.settings.quote_text }}
+      </a>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Toggle (hidden on desktop) -->
+  <button class="gls-header__mobile-toggle" aria-label="Toggle menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const catalogBtn = document.querySelector('.gls-header__catalog-btn');
+    const megaMenu = document.querySelector('.gls-header__mega-menu');
+    
+    if (catalogBtn && megaMenu) {
+      catalogBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        megaMenu.classList.toggle('is-open');
+      });
+
+      // Close on outside click
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.gls-header__catalog-dropdown')) {
+          catalogBtn.setAttribute('aria-expanded', 'false');
+          megaMenu.classList.remove('is-open');
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "GLS Header",
+  "class": "gls-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Mobile Logo (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Top Bar"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Sales Phone Number",
+      "default": "+1 862-237-7067"
+    },
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promotional Text",
+      "default": "Net-30 Terms Available for Qualified Buyers"
+    },
+    {
+      "type": "url",
+      "id": "promo_link",
+      "label": "Promotional Link"
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "Search SKUs, product names, or categories..."
+    },
+    {
+      "type": "text",
+      "id": "search_button_text",
+      "label": "Search Button Text",
+      "default": "SEARCH"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "catalog_text",
+      "label": "Shop Catalog Button Text",
+      "default": "Shop Catalog"
+    },
+    {
+      "type": "link_list",
+      "id": "catalog_menu",
+      "label": "Catalog Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Request Quote"
+    },
+    {
+      "type": "text",
+      "id": "quote_text",
+      "label": "Quote Button Text",
+      "default": "REQUEST QUOTE"
+    },
+    {
+      "type": "url",
+      "id": "quote_link",
+      "label": "Quote Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "top_link",
+      "name": "Top Bar Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Link Text",
+          "default": "Support"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight Link (colored)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GLS Header",
+      "blocks": [
+        {
+          "type": "top_link",
+          "settings": {
+            "text": "Support",
+            "highlight": false
+          }
+        },
+        {
+          "type": "top_link",
+          "settings": {
+            "text": "Track Order",
+            "highlight": false
+          }
+        },
+        {
+          "type": "top_link",
+          "settings": {
+            "text": "Apply for Credit",
+            "highlight": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
