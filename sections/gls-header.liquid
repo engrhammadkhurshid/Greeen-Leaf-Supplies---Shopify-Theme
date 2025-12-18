@@ -102,116 +102,145 @@
   <!-- Navigation Bar -->
   <nav class="gls-header__nav">
     <div class="gls-header__container">
-      <div class="gls-header__nav-left">
-        <!-- Shop Catalog Dropdown -->
-        <div class="gls-header__catalog-dropdown">
-          <button class="gls-header__catalog-btn" aria-expanded="false">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-            {{ section.settings.catalog_text }}
-            <svg class="gls-header__catalog-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-              <path d="m6 9 6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="gls-header__mega-menu">
-            <div class="gls-header__mega-menu-inner">
-              {% for block in section.blocks %}
-                {% if block.type == 'mega_category' %}
-                  <div class="gls-header__mega-column" {{ block.shopify_attributes }}>
-                    <!-- Category Thumbnail -->
-                    <a href="{{ block.settings.category_link }}" class="gls-header__mega-image-link">
-                      {% if block.settings.category_image != blank %}
-                        <img 
-                          src="{{ block.settings.category_image | image_url: width: 400 }}" 
-                          alt="{{ block.settings.category_title }}"
-                          class="gls-header__mega-image"
-                          width="250"
-                          height="150"
-                          loading="lazy"
-                        >
-                      {% else %}
-                        <div class="gls-header__mega-image-placeholder">
-                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <circle cx="8.5" cy="8.5" r="1.5"/>
-                            <polyline points="21 15 16 10 5 21"/>
-                          </svg>
-                        </div>
-                      {% endif %}
-                    </a>
-                    
-                    <!-- Category Title -->
-                    <a href="{{ block.settings.category_link }}" class="gls-header__mega-title">
-                      {{ block.settings.category_title }}
-                    </a>
-                    
-                    <!-- Subcategories List -->
-                    <ul class="gls-header__mega-list">
-                      {% if block.settings.subcategory_1 != blank %}
-                        <li><a href="{{ block.settings.subcategory_1_link }}">{{ block.settings.subcategory_1 }}</a></li>
-                      {% endif %}
-                      {% if block.settings.subcategory_2 != blank %}
-                        <li><a href="{{ block.settings.subcategory_2_link }}">{{ block.settings.subcategory_2 }}</a></li>
-                      {% endif %}
-                      {% if block.settings.subcategory_3 != blank %}
-                        <li><a href="{{ block.settings.subcategory_3_link }}">{{ block.settings.subcategory_3 }}</a></li>
-                      {% endif %}
-                      {% if block.settings.subcategory_4 != blank %}
-                        <li><a href="{{ block.settings.subcategory_4_link }}">{{ block.settings.subcategory_4 }}</a></li>
-                      {% endif %}
-                      {% if block.settings.subcategory_5 != blank %}
-                        <li><a href="{{ block.settings.subcategory_5_link }}">{{ block.settings.subcategory_5 }}</a></li>
-                      {% endif %}
-                      {% if block.settings.subcategory_6 != blank %}
-                        <li><a href="{{ block.settings.subcategory_6_link }}">{{ block.settings.subcategory_6 }}</a></li>
-                      {% endif %}
-                    </ul>
-                    
-                    <!-- Request Quote Button -->
-                    <a href="{{ block.settings.quote_link | default: section.settings.quote_link }}" class="gls-header__mega-quote-btn">
-                      Request Quote
-                    </a>
-                  </div>
-                {% endif %}
+      <!-- Shop Catalog Dropdown -->
+      <div class="gls-header__catalog-dropdown">
+        <button class="gls-header__catalog-btn" aria-expanded="false" aria-haspopup="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <span>{{ section.settings.catalog_text }}</span>
+          <svg class="gls-header__catalog-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        
+        <!-- Mega Menu Dropdown -->
+        <div class="gls-header__mega-menu" role="menu">
+          <div class="gls-header__mega-menu-inner">
+            {% assign mega_categories = section.blocks | where: "type", "mega_category" %}
+            {% if mega_categories.size > 0 %}
+              {% for block in mega_categories %}
+                <div class="gls-header__mega-column" {{ block.shopify_attributes }}>
+                  <!-- Category Thumbnail -->
+                  <a href="{{ block.settings.category_link | default: '#' }}" class="gls-header__mega-image-link">
+                    {% if block.settings.category_image != blank %}
+                      <img 
+                        src="{{ block.settings.category_image | image_url: width: 400 }}" 
+                        alt="{{ block.settings.category_title }}"
+                        class="gls-header__mega-image"
+                        width="220"
+                        height="130"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="gls-header__mega-image-placeholder">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                          <circle cx="8.5" cy="8.5" r="1.5"/>
+                          <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                      </div>
+                    {% endif %}
+                  </a>
+                  
+                  <!-- Category Title -->
+                  <a href="{{ block.settings.category_link | default: '#' }}" class="gls-header__mega-title">
+                    {{ block.settings.category_title }}
+                  </a>
+                  
+                  <!-- Subcategories List -->
+                  <ul class="gls-header__mega-list">
+                    {% if block.settings.subcategory_1 != blank %}
+                      <li><a href="{{ block.settings.subcategory_1_link | default: '#' }}">{{ block.settings.subcategory_1 }}</a></li>
+                    {% endif %}
+                    {% if block.settings.subcategory_2 != blank %}
+                      <li><a href="{{ block.settings.subcategory_2_link | default: '#' }}">{{ block.settings.subcategory_2 }}</a></li>
+                    {% endif %}
+                    {% if block.settings.subcategory_3 != blank %}
+                      <li><a href="{{ block.settings.subcategory_3_link | default: '#' }}">{{ block.settings.subcategory_3 }}</a></li>
+                    {% endif %}
+                    {% if block.settings.subcategory_4 != blank %}
+                      <li><a href="{{ block.settings.subcategory_4_link | default: '#' }}">{{ block.settings.subcategory_4 }}</a></li>
+                    {% endif %}
+                    {% if block.settings.subcategory_5 != blank %}
+                      <li><a href="{{ block.settings.subcategory_5_link | default: '#' }}">{{ block.settings.subcategory_5 }}</a></li>
+                    {% endif %}
+                    {% if block.settings.subcategory_6 != blank %}
+                      <li><a href="{{ block.settings.subcategory_6_link | default: '#' }}">{{ block.settings.subcategory_6 }}</a></li>
+                    {% endif %}
+                  </ul>
+                  
+                  <!-- Request Quote Button -->
+                  <a href="{{ block.settings.quote_link | default: section.settings.quote_link | default: '#' }}" class="gls-header__mega-quote-btn">
+                    Request Quote
+                  </a>
+                </div>
               {% endfor %}
-            </div>
+            {% else %}
+              <!-- Fallback when no categories are configured -->
+              <div class="gls-header__mega-empty">
+                <p>No categories configured. Add "Mega Menu Category" blocks in the theme editor.</p>
+              </div>
+            {% endif %}
           </div>
         </div>
-
-        <!-- Main Menu -->
-        <ul class="gls-header__menu">
-          {% for link in linklists[section.settings.main_menu].links %}
-            <li class="gls-header__menu-item">
-              <a href="{{ link.url }}" class="gls-header__menu-link {% if link.active %}gls-header__menu-link--active{% endif %}">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
       </div>
 
-      <!-- Request Quote Button -->
-      <a href="{{ section.settings.quote_link }}" class="gls-header__quote-btn">
+      <!-- Main Menu Items -->
+      <ul class="gls-header__menu">
+        {% for link in linklists[section.settings.main_menu].links %}
+          <li class="gls-header__menu-item">
+            <a href="{{ link.url }}" class="gls-header__menu-link {% if link.active %}gls-header__menu-link--active{% endif %}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Request Quote Button (Right Side) -->
+      <a href="{{ section.settings.quote_link | default: '#' }}" class="gls-header__quote-btn">
         {{ section.settings.quote_text }}
       </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="gls-header__mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="gls-header__mobile-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="gls-header__mobile-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu Toggle (hidden on desktop) -->
-  <button class="gls-header__mobile-toggle" aria-label="Toggle menu">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
+  <!-- Mobile Menu Drawer -->
+  <div class="gls-header__mobile-menu">
+    <div class="gls-header__mobile-menu-inner">
+      <ul class="gls-header__mobile-nav">
+        {% for link in linklists[section.settings.main_menu].links %}
+          <li>
+            <a href="{{ link.url }}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <a href="{{ section.settings.quote_link | default: '#' }}" class="gls-header__mobile-quote-btn">
+        {{ section.settings.quote_text }}
+      </a>
+    </div>
+  </div>
 </header>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // ========================================
+    // Mega Menu Functionality
+    // ========================================
     const catalogDropdown = document.querySelector('.gls-header__catalog-dropdown');
     const catalogBtn = document.querySelector('.gls-header__catalog-btn');
     const megaMenu = document.querySelector('.gls-header__mega-menu');
@@ -219,19 +248,20 @@
     if (catalogBtn && megaMenu && catalogDropdown) {
       let hoverTimeout;
       let isMenuOpen = false;
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-      // Function to open mega menu
       function openMegaMenu() {
         clearTimeout(hoverTimeout);
         catalogBtn.setAttribute('aria-expanded', 'true');
         megaMenu.classList.add('is-open');
+        catalogDropdown.classList.add('is-active');
         isMenuOpen = true;
       }
 
-      // Function to close mega menu
       function closeMegaMenu() {
         catalogBtn.setAttribute('aria-expanded', 'false');
         megaMenu.classList.remove('is-open');
+        catalogDropdown.classList.remove('is-active');
         isMenuOpen = false;
       }
 
@@ -246,27 +276,28 @@
         }
       });
 
-      // Hover handlers for desktop
-      catalogDropdown.addEventListener('mouseenter', function() {
-        openMegaMenu();
-      });
+      // Hover handlers for desktop (non-touch devices)
+      if (!isTouchDevice) {
+        catalogDropdown.addEventListener('mouseenter', function() {
+          openMegaMenu();
+        });
 
-      catalogDropdown.addEventListener('mouseleave', function() {
-        hoverTimeout = setTimeout(function() {
-          closeMegaMenu();
-        }, 150);
-      });
+        catalogDropdown.addEventListener('mouseleave', function() {
+          hoverTimeout = setTimeout(function() {
+            closeMegaMenu();
+          }, 200);
+        });
 
-      // Keep menu open when hovering over mega menu
-      megaMenu.addEventListener('mouseenter', function() {
-        clearTimeout(hoverTimeout);
-      });
+        megaMenu.addEventListener('mouseenter', function() {
+          clearTimeout(hoverTimeout);
+        });
 
-      megaMenu.addEventListener('mouseleave', function() {
-        hoverTimeout = setTimeout(function() {
-          closeMegaMenu();
-        }, 150);
-      });
+        megaMenu.addEventListener('mouseleave', function() {
+          hoverTimeout = setTimeout(function() {
+            closeMegaMenu();
+          }, 200);
+        });
+      }
 
       // Close on outside click
       document.addEventListener('click', function(e) {
@@ -279,6 +310,51 @@
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           closeMegaMenu();
+        }
+      });
+    }
+
+    // ========================================
+    // Mobile Menu Functionality
+    // ========================================
+    const mobileToggle = document.querySelector('.gls-header__mobile-toggle');
+    const mobileMenu = document.querySelector('.gls-header__mobile-menu');
+    const openIcon = document.querySelector('.gls-header__mobile-toggle-open');
+    const closeIcon = document.querySelector('.gls-header__mobile-toggle-close');
+
+    if (mobileToggle && mobileMenu) {
+      let isMobileMenuOpen = false;
+
+      function openMobileMenu() {
+        mobileMenu.classList.add('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        if (openIcon) openIcon.style.display = 'none';
+        if (closeIcon) closeIcon.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        isMobileMenuOpen = true;
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        if (openIcon) openIcon.style.display = 'block';
+        if (closeIcon) closeIcon.style.display = 'none';
+        document.body.style.overflow = '';
+        isMobileMenuOpen = false;
+      }
+
+      mobileToggle.addEventListener('click', function() {
+        if (isMobileMenuOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      // Close mobile menu on window resize to desktop
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 991 && isMobileMenuOpen) {
+          closeMobileMenu();
         }
       });
     }
