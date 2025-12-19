@@ -17,13 +17,15 @@
         "menu_shop": {
           "type": "menu",
           "settings": {
-            "heading": "Shop Categories"
+            "heading": "Shop Categories",
+            "menu": "footer"
           }
         },
         "menu_support": {
           "type": "menu",
           "settings": {
-            "heading": "Customer Support"
+            "heading": "Customer Support",
+            "menu": "footer"
           }
         },
         "contact": {
@@ -37,20 +39,32 @@
           }
         }
       },
-      "block_order": ["menu_shop", "menu_support", "contact"],
+      "block_order": [
+        "menu_shop",
+        "menu_support",
+        "contact"
+      ],
       "settings": {
         "newsletter_enable": true,
         "newsletter_title": "Join our Green Business Network",
         "newsletter_description": "Get sustainability tips and exclusive B2B offers.",
         "newsletter_placeholder": "Enter your email",
         "newsletter_button_text": "Subscribe",
+        "newsletter_success_message": "Thanks for subscribing!",
+        "logo": "shopify://shop_images/gls-logo-primary.webp",
+        "logo_width": 200,
         "brand_description": "Industrial-grade packaging solutions designed for the circular economy. We help businesses scale without the waste.",
         "show_social": true,
-        "show_payment_icons": true,
         "copyright_text": "All rights reserved.",
+        "privacy_link": "",
+        "terms_link": "",
+        "sitemap_link": "",
+        "show_payment_icons": true,
         "margin_top": 0
       }
     }
   },
-  "order": ["gls-footer"]
+  "order": [
+    "gls-footer"
+  ]
 }
