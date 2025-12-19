@@ -51,8 +51,9 @@
   opacity: 0;
 }
 
-.gls-header-section.is-hidden {
-  transform: translateY(-100%);
+/* Smooth transition for sticky header */
+.gls-header-section {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gls-header__top-bar {

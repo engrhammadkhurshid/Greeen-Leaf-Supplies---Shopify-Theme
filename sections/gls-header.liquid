@@ -364,32 +364,25 @@
     // ========================================
     const headerSection = document.querySelector('.gls-header-section');
     if (headerSection) {
-      let lastScrollY = window.scrollY;
       let ticking = false;
-      const scrollThreshold = 100;
+      const scrollThreshold = 50; // Collapse top bar after 50px scroll
 
       function updateHeader() {
         const currentScrollY = window.scrollY;
 
         // Add scrolled class when scrolled past threshold
+        // This collapses the top bar and adds shadow for compact sticky header
         if (currentScrollY > scrollThreshold) {
           headerSection.classList.add('is-scrolled');
         } else {
           headerSection.classList.remove('is-scrolled');
         }
 
-        // Hide header when scrolling down, show when scrolling up
-        if (currentScrollY > lastScrollY && currentScrollY > 200) {
-          // Scrolling down & past 200px
-          headerSection.classList.add('is-hidden');
-        } else {
-          // Scrolling up
-          headerSection.classList.remove('is-hidden');
-        }
-
-        lastScrollY = currentScrollY;
         ticking = false;
       }
+
+      // Run on load to handle page refresh at scrolled position
+      updateHeader();
 
       window.addEventListener('scroll', function() {
         if (!ticking) {
