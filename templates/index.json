@@ -172,7 +172,7 @@
           "settings": {
             "title": "Food Packaging",
             "subtitle": "4 Subcategories",
-            "link": ""
+            "link": "shopify://collections/food-packaging"
           }
         },
         "cat_2": {
@@ -180,7 +180,7 @@
           "settings": {
             "title": "Disposable Tableware",
             "subtitle": "4 Subcategories",
-            "link": ""
+            "link": "shopify://collections/disposable-tableware"
           }
         },
         "cat_3": {
@@ -188,7 +188,7 @@
           "settings": {
             "title": "Napkins & Sanitary",
             "subtitle": "5 Subcategories",
-            "link": ""
+            "link": "shopify://collections/napkins-sanitary"
           }
         },
         "cat_4": {
@@ -196,7 +196,7 @@
           "settings": {
             "title": "Food & Liquid",
             "subtitle": "3 Subcategories",
-            "link": ""
+            "link": "shopify://collections/food-liquid"
           }
         }
       },
