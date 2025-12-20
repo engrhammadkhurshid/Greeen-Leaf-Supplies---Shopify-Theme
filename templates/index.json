@@ -218,7 +218,7 @@
       "settings": {
         "heading": "Best Sellers",
         "subheading": "Our most popular packaging solutions.",
-        "collection": "",
+        "collection": "beverage-cups",
         "products_to_show": 8,
         "quote_link": "/pages/contact",
         "padding_top": 80,
