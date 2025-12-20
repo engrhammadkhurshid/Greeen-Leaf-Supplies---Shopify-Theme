@@ -42,6 +42,42 @@
     },
     {
       "type": "header",
+      "content": "Typography & Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Tagline/CTA Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Size (Desktop)",
+      "default": 24
+    },
+    {
+      "type": "header",
       "content": "Global Button Settings"
     },
     {
@@ -93,6 +129,19 @@
           "id": "heading",
           "label": "Heading",
           "default": "Premium Sustainable Packaging"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag (SEO)",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" }
+          ],
+          "default": "h2"
         },
         {
           "type": "textarea",
@@ -182,6 +231,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 0; /* Ensure behind overlay */
   }
 
   /* Overlay */
@@ -192,7 +242,8 @@
     width: 100%;
     height: 100%;
     background-color: #000;
-    z-index: 1;
+    z-index: 1; /* Ensure on top of image */
+    pointer-events: none; /* Allow clicks to pass through if needed */
   }
 
   /* Content */
@@ -209,17 +260,17 @@
   }
 
   .gls-heading {
-    font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 1rem;
     line-height: 1.1;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
   }
 
   .gls-subheading {
-    font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 2.5rem;
     opacity: 0;
@@ -228,6 +279,8 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
   }
 
   .gls-slide.active .gls-heading,
@@ -333,8 +386,12 @@
 
   /* Responsive */
   @media (max-width: 768px) {
-    .gls-heading { font-size: 2.5rem; }
-    .gls-subheading { font-size: 1.1rem; }
+    .gls-heading { 
+      font-size: calc({{ section.settings.heading_size }}px * 0.6); 
+    }
+    .gls-subheading { 
+      font-size: calc({{ section.settings.subheading_size }}px * 0.8); 
+    }
     .gls-btn-wrapper { flex-direction: column; gap: 1rem; align-items: center; }
     .gls-btn { width: 100%; max-width: 280px; text-align: center; }
   }
@@ -358,7 +415,8 @@
         <!-- Content -->
         <div class="gls-slide-content">
           {% if block.settings.heading != blank %}
-            <h2 class="gls-heading">{{ block.settings.heading }}</h2>
+            {% assign heading_tag = block.settings.heading_tag | default: 'h2' %}
+            <{{ heading_tag }} class="gls-heading">{{ block.settings.heading }}</{{ heading_tag }}>
           {% endif %}
           
           {% if block.settings.subheading != blank %}
