@@ -14,6 +14,8 @@
               margin-top: {{ block.settings.margin_top }}px;
               margin-bottom: {{ block.settings.margin_bottom }}px;
               background-color: #ffffff;
+              border-radius: {{ block.settings.corner_radius }}px;
+              overflow: hidden;
             }
             #Block-{{ block.id }} .media img {
               object-fit: {{ block.settings.image_fit }};
@@ -412,6 +414,16 @@
             { "value": "contain", "label": "Contain" }
           ],
           "default": "cover"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Corner Radius",
+          "default": 0
         },
         {
           "type": "range",
