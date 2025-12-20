@@ -9,59 +9,7 @@
  */
 {
   "sections": {
-    "gls_hero": {
-      "type": "gls-hero",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "bg_image": "shopify://shop_images/GLS_Hero_Slider_Image_1.webp",
-            "overlay": 50,
-            "badge": "Nationwide Delivery",
-            "title": "Premium Sustainable",
-            "title_highlight": "Food Packaging Nationwide",
-            "text": "Highest-quality food packaging products for the U.S. market. We support businesses with safety, durability, and performance.",
-            "btn1_text": "Shop Now",
-            "btn1_link": "shopify://collections/all",
-            "btn2_text": "Request a Quote",
-            "btn2_link": "/pages/contact"
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "overlay": 50,
-            "badge": "Eco-Friendly",
-            "title": "Sustainable Packaging",
-            "title_highlight": "For Modern Businesses",
-            "text": "Reduce your environmental footprint without compromising on quality or performance.",
-            "btn1_text": "View Products",
-            "btn1_link": "shopify://collections/all",
-            "btn2_text": "Learn More",
-            "btn2_link": "/pages/about-us"
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "overlay": 50,
-            "badge": "Bulk Orders",
-            "title": "Wholesale Pricing",
-            "title_highlight": "For Every Business Size",
-            "text": "From small cafes to large restaurant chains, we have packaging solutions tailored to your needs.",
-            "btn1_text": "Get a Quote",
-            "btn1_link": "/pages/request-a-quote",
-            "btn2_text": "Contact Us",
-            "btn2_link": "/pages/contact"
-          }
-        }
-      },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
-      "settings": {
-        "autoplay": true,
-        "autoplay_speed": 5000
-      }
-    },
+
     "gls_value_props": {
       "type": "gls-value-props",
       "blocks": {
@@ -275,7 +223,6 @@
     }
   },
   "order": [
-    "gls_hero",
     "gls_value_props",
     "gls_about",
     "gls_trusted_brands",
