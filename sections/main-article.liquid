@@ -9,8 +9,26 @@
         </div>
       {%- when 'featured_image' -%}
         {%- if article.image -%}
+          {%- style -%}
+            #Block-{{ block.id }} {
+              margin-top: {{ block.settings.margin_top }}px;
+              margin-bottom: {{ block.settings.margin_bottom }}px;
+            }
+            #Block-{{ block.id }} .media img {
+              object-fit: {{ block.settings.image_fit }};
+            }
+          {%- endstyle -%}
+
+          {%- assign width_class = 'page-width page-width--narrow' -%}
+          {%- if block.settings.image_width == 'full' -%}
+            {%- assign width_class = '' -%}
+          {%- elsif block.settings.image_width == 'page_width' -%}
+            {%- assign width_class = 'page-width' -%}
+          {%- endif -%}
+
           <div
-            class="article-template__hero-container page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            id="Block-{{ block.id }}"
+            class="article-template__hero-container {{ width_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             {{ block.shopify_attributes }}
           >
             <div
@@ -329,6 +347,47 @@
           ],
           "default": "adapt",
           "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label"
+        },
+        {
+          "type": "select",
+          "id": "image_width",
+          "label": "Image Width",
+          "options": [
+            { "value": "narrow", "label": "Content Width (Narrow)" },
+            { "value": "page_width", "label": "Page Width" },
+            { "value": "full", "label": "Full Width" }
+          ],
+          "default": "narrow"
+        },
+        {
+          "type": "select",
+          "id": "image_fit",
+          "label": "Image Fit",
+          "options": [
+            { "value": "cover", "label": "Cover" },
+            { "value": "contain", "label": "Contain" }
+          ],
+          "default": "cover"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Top Margin",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "unit": "px",
+          "label": "Bottom Margin",
+          "default": 0
         }
       ]
     },
