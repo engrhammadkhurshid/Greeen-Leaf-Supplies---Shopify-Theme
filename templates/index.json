@@ -291,6 +291,55 @@
         "padding_bottom": 80
       }
     },
+    "features_grid": {
+      "type": "features-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "sustainability",
+            "heading": "Certified Sustainable",
+            "text": "100% biodegradable materials that meet industrial standards."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "affordability",
+            "heading": "Factory-Direct Pricing",
+            "text": "Market-beating rates on bulk orders to boost your bottom line."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "delivery",
+            "heading": "Predictable Delivery",
+            "text": "Fast nationwide shipping ensures you never run out of stock."
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "durability",
+            "heading": "Industrial Durability",
+            "text": "Grease-resistant and microwave-safe for commercial use."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "settings": {
+        "background_color": "#F9FAFB",
+        "text_color": "#060316",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "gls_cta_banner": {
       "type": "gls-cta-banner",
       "settings": {
@@ -310,6 +359,7 @@
     "gls_trusted_brands",
     "gls_categories",
     "gls_featured_products",
+    "features_grid",
     "gls_cta_banner"
   ]
 }
