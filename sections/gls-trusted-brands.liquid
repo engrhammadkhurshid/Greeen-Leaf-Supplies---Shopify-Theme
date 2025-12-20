@@ -4,6 +4,9 @@
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    --heading-size: {{ section.settings.heading_size }}px;
+    --heading-color: {{ section.settings.heading_color }};
+    --brand-size: {{ section.settings.brand_size }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -17,7 +20,7 @@
 <section class="gls-trusted-brands section-{{ section.id }}-padding">
   {%- if section.settings.heading != blank -%}
     <div class="gls-trusted-brands__header page-width">
-      <h3 class="gls-trusted-brands__heading">{{ section.settings.heading }}</h3>
+      <{{ section.settings.heading_tag }} class="gls-trusted-brands__heading">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
     </div>
   {%- endif -%}
 
@@ -55,6 +58,45 @@
       "id": "heading",
       "label": "Heading",
       "default": "Trusted by Major Food & Restaurant Businesses"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "default": 16,
+      "unit": "px",
+      "label": "Heading Size"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#9ca3af"
+    },
+    {
+      "type": "range",
+      "id": "brand_size",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "default": 40,
+      "unit": "px",
+      "label": "Brand Item Size"
     },
     {
       "type": "range",

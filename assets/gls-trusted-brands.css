@@ -12,11 +12,11 @@
 }
 
 .gls-trusted-brands__heading {
-  font-size: 0.75rem;
+  font-size: var(--heading-size, 1rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #9ca3af;
+  color: var(--heading-color, #9ca3af);
   margin: 0;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .gls-trusted-brands__brand {
-  font-size: 1.5rem;
+  font-size: var(--brand-size, 2.5rem);
   font-weight: 900;
   color: #d1d5db;
   text-transform: uppercase;
@@ -60,7 +60,7 @@
 
 @media screen and (min-width: 750px) {
   .gls-trusted-brands__brand {
-    font-size: 1.875rem;
+    font-size: var(--brand-size, 3rem);
     padding: 0 3rem;
   }
 }
