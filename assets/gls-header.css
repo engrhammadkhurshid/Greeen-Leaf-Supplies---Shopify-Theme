@@ -201,9 +201,11 @@
   display: flex;
   align-items: center;
   border: 2px solid var(--gls-primary);
-  border-radius: 6px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--gls-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 4px;
 }
 
 .gls-header__search-icon {
@@ -250,16 +252,17 @@
   background-color: var(--gls-primary);
   color: var(--gls-white);
   border: none;
-  padding: 0 28px;
+  padding: 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background-color 0.2s;
   white-space: nowrap;
-  align-self: stretch;
+  align-self: center;
   display: flex;
   align-items: center;
+  border-radius: 4px;
 }
 
 .gls-header__search-btn:hover {
@@ -387,7 +390,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: var(--gls-primary);
+  background-color: transparent;
   color: var(--gls-white);
   border: none;
   padding: 8px 20px;
@@ -399,10 +402,14 @@
   white-space: nowrap;
 }
 
+.gls-header__catalog-btn svg {
+  color: var(--gls-primary);
+}
+
 .gls-header__catalog-btn:hover,
 .gls-header__catalog-dropdown.is-active .gls-header__catalog-btn {
-  background-color: var(--gls-accent);
-  color: var(--gls-dark);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--gls-white);
 }
 
 .gls-header__catalog-arrow {
@@ -457,14 +464,14 @@
   background-color: var(--gls-primary);
   color: var(--gls-white);
   text-decoration: none;
-  padding: 10px 24px;
+  padding: 0 24px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  border-radius: 4px;
+  border-radius: 0;
   transition: all 0.2s;
   margin-left: auto;
-  align-self: center;
+  align-self: stretch;
   white-space: nowrap;
 }
 
