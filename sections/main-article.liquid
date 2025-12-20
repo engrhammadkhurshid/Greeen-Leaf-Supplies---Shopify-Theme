@@ -17,6 +17,14 @@
             #Block-{{ block.id }} .media img {
               object-fit: {{ block.settings.image_fit }};
             }
+            {%- if block.settings.image_width == 'fixed' -%}
+              #Block-{{ block.id }} {
+                max-width: {{ block.settings.fixed_width }}px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+              }
+            {%- endif -%}
           {%- endstyle -%}
 
           {%- assign width_class = 'page-width page-width--narrow' -%}
@@ -24,6 +32,8 @@
             {%- assign width_class = '' -%}
           {%- elsif block.settings.image_width == 'page_width' -%}
             {%- assign width_class = 'page-width' -%}
+          {%- elsif block.settings.image_width == 'fixed' -%}
+            {%- assign width_class = '' -%}
           {%- endif -%}
 
           <div
@@ -355,9 +365,21 @@
           "options": [
             { "value": "narrow", "label": "Content Width (Narrow)" },
             { "value": "page_width", "label": "Page Width" },
-            { "value": "full", "label": "Full Width" }
+            { "value": "full", "label": "Full Width" },
+            { "value": "fixed", "label": "Fixed Width" }
           ],
           "default": "narrow"
+        },
+        {
+          "type": "range",
+          "id": "fixed_width",
+          "min": 200,
+          "max": 1200,
+          "step": 20,
+          "unit": "px",
+          "label": "Fixed Width",
+          "default": 800,
+          "info": "Only applies when 'Fixed Width' is selected"
         },
         {
           "type": "select",
