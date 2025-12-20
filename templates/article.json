@@ -1,1 +1,78 @@
-{"sections":{"main":{"type":"main-article","blocks":{"featured_image":{"type":"featured_image","settings":{"image_height":"adapt"}},"title":{"type":"title","settings":{"blog_show_date":true,"blog_show_author":false}},"share":{"type":"share","settings":{"share_label":"Share"}},"content":{"type":"content","settings":{}}},"block_order":["featured_image","title","share","content"],"settings":{}},"article-footer-cta":{"type":"article-footer-cta","settings":{}}},"order":["main","article-footer-cta"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": "adapt"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": false
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "title",
+        "share",
+        "content"
+      ],
+      "settings": {}
+    },
+    "article-footer-cta": {
+      "type": "article-footer-cta",
+      "settings": {
+        "heading": "Ready to Upgrade Your Packaging?",
+        "heading_size": 36,
+        "heading_color": "#1a1a1a",
+        "tagline": "Choose the option that fits your needs.",
+        "tagline_size": 18,
+        "text_color": "#4a4a4a",
+        "bg_color": "#ffffff",
+        "option_a_title": "Browse the Catalog",
+        "option_a_desc": "Explore our full range of Kraft, Bagasse, and MFPP products available for immediate shipping.",
+        "option_a_btn_label": "Shop All Collections",
+        "option_a_link": "",
+        "option_a_btn_bg": "#7aae5c",
+        "option_a_btn_text": "#ffffff",
+        "option_b_title": "Bulk & Wholesale Orders",
+        "option_b_desc": "Need more than 500 units? Get a custom factory-direct quote within 24 hours.",
+        "option_b_btn_label": "Request a Bulk Quote",
+        "option_b_link": "",
+        "option_b_btn_bg": "#1a1a1a",
+        "option_b_btn_text": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "article-footer-cta"
+  ]
+}
