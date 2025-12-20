@@ -1,0 +1,150 @@
+/* GLS Account Page Styles */
+.gls-account-page {
+  padding: 4rem 0;
+  background-color: rgb(var(--color-background));
+}
+
+.gls-account-container {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .gls-account-container {
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Sidebar Styles */
+.gls-account-sidebar {
+  background-color: rgb(var(--color-background));
+  border-radius: var(--card-corner-radius);
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  padding: 2rem;
+  height: fit-content;
+}
+
+.gls-account-user-info {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.gls-account-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(var(--color-foreground), 0.05);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(var(--color-foreground));
+}
+
+.gls-account-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.gls-account-email {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.75);
+  margin-top: 0.5rem;
+}
+
+.gls-account-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gls-account-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  border-radius: var(--buttons-radius);
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+}
+
+.gls-account-nav-link:hover,
+.gls-account-nav-link.active {
+  background-color: rgba(var(--color-foreground), 0.05);
+}
+
+.gls-account-nav-link svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.gls-account-nav-link.logout {
+  color: #ef4444;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  padding-top: 1.5rem;
+}
+
+.gls-account-nav-link.logout:hover {
+  background-color: #fef2f2;
+}
+
+/* Content Area Styles */
+.gls-account-content h1,
+.gls-account-content h2 {
+  margin-top: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.gls-account-card {
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: var(--card-corner-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.gls-account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Override default customer styles */
+.customer:not(.account):not(.order) {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.customer.account,
+.customer.order,
+.customer.addresses {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.customer tbody td:first-of-type {
+  padding-left: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .customer tbody td:first-of-type {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,39 @@
+<div class="gls-account-user-info">
+  <div class="gls-account-avatar">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+  </div>
+  <h3 class="gls-account-name">{{ customer.first_name }} {{ customer.last_name }}</h3>
+  <p class="gls-account-email">{{ customer.email }}</p>
+</div>
+
+<nav class="gls-account-nav">
+  <a href="{{ routes.account_url }}" class="gls-account-nav-link {% if request.path == routes.account_url %}active{% endif %}">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    {{ 'customer.account.title' | t }}
+  </a>
+
+  <a href="{{ routes.account_addresses_url }}" class="gls-account-nav-link {% if request.path == routes.account_addresses_url %}active{% endif %}">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+    {{ 'customer.addresses.title' | t }}
+  </a>
+
+  <a href="{{ routes.account_logout_url }}" class="gls-account-nav-link logout">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+      <polyline points="16 17 21 12 16 7"></polyline>
+      <line x1="21" y1="12" x2="9" y2="12"></line>
+    </svg>
+    {{ 'customer.log_out' | t }}
+  </a>
+</nav>
