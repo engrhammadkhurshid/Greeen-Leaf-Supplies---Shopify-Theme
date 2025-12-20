@@ -16,8 +16,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/GLS_Hero_Slider_Image_1.webp",
-            "overlay_opacity": 50,
+            "overlay_color": "#060316",
+            "overlay_opacity": 90,
             "heading": "Premium Sustainable Packaging",
+            "heading_tag": "h2",
             "subheading": "High-quality food packaging solutions for businesses nationwide."
           }
         },
@@ -25,8 +27,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/GLS_Hero_Section_Image_2.webp",
+            "overlay_color": "#000000",
             "overlay_opacity": 50,
             "heading": "Eco-Friendly Solutions",
+            "heading_tag": "h2",
             "subheading": "Reduce your environmental footprint without compromising on quality."
           }
         },
@@ -34,8 +38,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/GLS_Hero_Section_Image_3.webp",
+            "overlay_color": "#000000",
             "overlay_opacity": 50,
             "heading": "Wholesale Pricing Available",
+            "heading_tag": "h2",
             "subheading": "From small cafes to large restaurant chains, we have solutions for you."
           }
         }
@@ -50,6 +56,10 @@
         "animation_type": "fade",
         "show_arrows": true,
         "show_dots": true,
+        "heading_color": "#7aae5c",
+        "heading_size": 56,
+        "subheading_color": "#ffffff",
+        "subheading_size": 24,
         "btn_primary_text": "Shop Catalog",
         "btn_primary_link": "shopify://collections/all",
         "btn_secondary_text": "Request A Quote",
