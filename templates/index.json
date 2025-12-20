@@ -279,7 +279,12 @@
       "settings": {
         "heading": "Best Sellers",
         "subheading": "Our most popular packaging solutions.",
-        "collection": "beverage-cups",
+        "heading_tag": "h2",
+        "heading_size": 40,
+        "heading_color": "#7aae5c",
+        "subheading_size": 18,
+        "subheading_color": "#666666",
+        "collection": "featured",
         "products_to_show": 8,
         "quote_link": "/pages/contact",
         "padding_top": 80,
