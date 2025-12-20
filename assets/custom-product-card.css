@@ -88,7 +88,7 @@
 
 /* Content Area */
 .card__content {
-  padding: 15px;
+  padding: 15px 5%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -163,7 +163,7 @@
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
-  color: var(--color-button); /* Primary Color */
+  color: #7AAE5C; /* Primary Color */
 }
 
 .card__heading a {
@@ -202,8 +202,8 @@
 
 .card__button {
   width: 100%;
-  background-color: var(--color-button); /* Primary Color */
-  color: var(--color-button-text);
+  background-color: #7AAE5C; /* Primary Color */
+  color: #fff;
   border: none;
   padding: 10px;
   font-size: 14px;
