@@ -12,6 +12,36 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Custom Colors & Typography */
+  #shopify-section-{{ section.id }} .gls-blog-hero__title {
+    color: {{ section.settings.hero_text_color }};
+    font-size: {{ section.settings.hero_title_size }}px;
+  }
+  #shopify-section-{{ section.id }} .gls-blog-hero__tagline {
+    color: {{ section.settings.hero_text_color }};
+    font-size: {{ section.settings.hero_tagline_size }}px;
+  }
+  
+  #shopify-section-{{ section.id }} .gls-blog-sidebar {
+    background-color: {{ section.settings.sidebar_bg_color }};
+  }
+  #shopify-section-{{ section.id }} .gls-blog-sidebar__title {
+    color: {{ section.settings.sidebar_title_color }};
+    font-size: {{ section.settings.sidebar_title_size }}px;
+  }
+  
+  #shopify-section-{{ section.id }} .gls-article-card__title {
+    font-size: {{ section.settings.article_title_size }}px;
+    color: {{ section.settings.article_title_color }};
+  }
+  #shopify-section-{{ section.id }} .gls-article-card__button {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+  }
+  #shopify-section-{{ section.id }} .gls-article-card__button:hover {
+    background-color: {{ section.settings.button_bg_color | color_darken: 10 }};
+  }
 {%- endstyle -%}
 
 <div class="gls-blog-page section-{{ section.id }}-padding">
@@ -52,24 +82,26 @@
         </div>
       {% endif %}
 
-      <div class="gls-blog-sidebar__section">
-        <h3 class="gls-blog-sidebar__title">Categories</h3>
-        <ul class="gls-blog-categories-list">
-          <li>
-            <a href="{{ blog.url }}" class="{% unless current_tags %}active{% endunless %}">
-              All Posts
-              <span>{{ blog.articles_count }}</span>
-            </a>
-          </li>
-          {% for tag in blog.all_tags %}
+      {% if section.settings.show_categories %}
+        <div class="gls-blog-sidebar__section">
+          <h3 class="gls-blog-sidebar__title">Categories</h3>
+          <ul class="gls-blog-categories-list">
             <li>
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="{% if current_tags contains tag %}active{% endif %}">
-                {{ tag }}
+              <a href="{{ blog.url }}" class="{% unless current_tags %}active{% endunless %}">
+                All Posts
+                <span>{{ blog.articles_count }}</span>
               </a>
             </li>
-          {% endfor %}
-        </ul>
-      </div>
+            {% for tag in blog.all_tags %}
+              <li>
+                <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="{% if current_tags contains tag %}active{% endif %}">
+                  {{ tag }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     </aside>
 
     <!-- Main Content -->
@@ -173,6 +205,32 @@
       "default": "Explore our latest news, tips, and updates."
     },
     {
+      "type": "color",
+      "id": "hero_text_color",
+      "label": "Hero Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "hero_title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Hero Title Size",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "hero_tagline_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Hero Tagline Size",
+      "default": 18
+    },
+    {
       "type": "header",
       "content": "Sidebar Settings"
     },
@@ -181,6 +239,66 @@
       "id": "show_search",
       "label": "Show Search Bar",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_categories",
+      "label": "Show Categories List",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "sidebar_bg_color",
+      "label": "Sidebar Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_title_color",
+      "label": "Sidebar Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "sidebar_title_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Sidebar Title Size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Article Card Settings"
+    },
+    {
+      "type": "color",
+      "id": "article_title_color",
+      "label": "Article Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "article_title_size",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Article Title Size",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
