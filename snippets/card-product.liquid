@@ -204,7 +204,13 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            {% if card_product.price == 0 %}
+              <a href="/pages/contact?product={{ card_product.title | url_encode }}" class="button button--primary button--small" style="margin-top: 0.5rem;">
+                Request a Quote
+              </a>
+            {% else %}
+              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            {% endif %}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                 {% liquid
@@ -289,6 +295,7 @@
           </div>
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
+        {% if card_product.price > 0 %}
         {% if quick_add == 'standard' %}
           <div class="quick-add no-js-hidden">
             {%- liquid
@@ -547,6 +554,7 @@
               </modal-dialog>
             </div>
           {% endif %}
+        {% endif %}
         {% endif %}
         <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
