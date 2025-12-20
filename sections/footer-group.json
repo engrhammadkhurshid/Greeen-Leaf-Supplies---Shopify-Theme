@@ -71,8 +71,7 @@
           "settings": {
             "icon": "phone",
             "text": "+1 862-237-7067",
-            "link": "tel:+18622377067",
-            "color": "#3b82f6"
+            "link": "tel:+18622377067"
           }
         },
         "email": {
@@ -80,8 +79,7 @@
           "settings": {
             "icon": "email",
             "text": "sales@greenleafsupplies.com",
-            "link": "mailto:sales@greenleafsupplies.com",
-            "color": "#ef4444"
+            "link": "mailto:sales@greenleafsupplies.com"
           }
         },
         "whatsapp": {
@@ -89,8 +87,7 @@
           "settings": {
             "icon": "whatsapp",
             "text": "Chat on WhatsApp",
-            "link": "https://wa.me/18622377067",
-            "color": "#22c55e"
+            "link": "https://wa.me/18622377067"
           }
         },
         "quote": {
@@ -98,8 +95,7 @@
           "settings": {
             "icon": "quote",
             "text": "Get A Quote",
-            "link": "/pages/get-a-quote",
-            "color": "#f59e0b"
+            "link": "/pages/get-a-quote"
           }
         }
       },
