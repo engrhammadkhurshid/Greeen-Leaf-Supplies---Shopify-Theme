@@ -38,8 +38,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 0.5rem;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  opacity: 0;
+  animation: slideInRight 0.8s ease-out forwards;
 }
 
 .gls-value-props__icon {
@@ -47,24 +49,40 @@
   flex-shrink: 0;
 }
 
-.gls-value-props__icon svg {
-  width: 24px;
-  height: 24px;
+.gls-value-props__icon svg,
+.gls-value-props__custom-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .gls-value-props__content {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
 }
 
 .gls-value-props__title {
   display: block;
   color: #060316;
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 1.1rem;
+  line-height: 1.2;
 }
 
 .gls-value-props__subtitle {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
