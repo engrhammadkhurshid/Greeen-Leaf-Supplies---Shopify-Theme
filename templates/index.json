@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/GLS_Hero_Slider_Image_1.webp",
-            "overlay_color": "#060316",
+            "overlay_color": "#2a00ff",
             "overlay_opacity": 90,
             "heading": "Premium Sustainable Packaging",
             "heading_tag": "h1",
