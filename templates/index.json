@@ -299,7 +299,12 @@
           "settings": {
             "icon": "sustainability",
             "heading": "Certified Sustainable",
-            "text": "100% biodegradable materials that meet industrial standards."
+            "heading_tag": "h3",
+            "heading_size": 20,
+            "heading_color": "#060316",
+            "text": "100% biodegradable materials that meet industrial standards.",
+            "text_size": 16,
+            "text_color": "#060316"
           }
         },
         "feature_2": {
@@ -307,7 +312,12 @@
           "settings": {
             "icon": "affordability",
             "heading": "Factory-Direct Pricing",
-            "text": "Market-beating rates on bulk orders to boost your bottom line."
+            "heading_tag": "h3",
+            "heading_size": 20,
+            "heading_color": "#060316",
+            "text": "Market-beating rates on bulk orders to boost your bottom line.",
+            "text_size": 16,
+            "text_color": "#060316"
           }
         },
         "feature_3": {
@@ -315,7 +325,12 @@
           "settings": {
             "icon": "delivery",
             "heading": "Predictable Delivery",
-            "text": "Fast nationwide shipping ensures you never run out of stock."
+            "heading_tag": "h3",
+            "heading_size": 20,
+            "heading_color": "#060316",
+            "text": "Fast nationwide shipping ensures you never run out of stock.",
+            "text_size": 16,
+            "text_color": "#060316"
           }
         },
         "feature_4": {
@@ -323,7 +338,12 @@
           "settings": {
             "icon": "durability",
             "heading": "Industrial Durability",
-            "text": "Grease-resistant and microwave-safe for commercial use."
+            "heading_tag": "h3",
+            "heading_size": 20,
+            "heading_color": "#060316",
+            "text": "Grease-resistant and microwave-safe for commercial use.",
+            "text_size": 16,
+            "text_color": "#060316"
           }
         }
       },
@@ -334,21 +354,10 @@
         "feature_4"
       ],
       "settings": {
-        "background_color": "#F9FAFB",
+        "background_color": "#f9fafb",
         "text_color": "#060316",
         "padding_top": 60,
         "padding_bottom": 60
-      }
-    },
-    "gls_cta_banner": {
-      "type": "gls-cta-banner",
-      "settings": {
-        "heading": "Partner with Green Leaf Supplies",
-        "text": "We fulfill all packaging and tableware requirements for our clients, providing dependable, durable, and premium solutions.",
-        "button_label": "Get a Custom Quote",
-        "button_link": "/pages/contact",
-        "padding_top": 65,
-        "padding_bottom": 65
       }
     }
   },
@@ -359,7 +368,6 @@
     "gls_trusted_brands",
     "gls_categories",
     "gls_featured_products",
-    "features_grid",
-    "gls_cta_banner"
+    "features_grid"
   ]
 }
