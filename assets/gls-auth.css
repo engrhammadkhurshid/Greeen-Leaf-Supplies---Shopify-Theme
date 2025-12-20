@@ -1,0 +1,124 @@
+.gls-auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  background-color: #f8f9fa;
+  padding: 6rem 2rem;
+}
+
+.gls-auth-card {
+  background: #ffffff;
+  padding: 4rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.gls-auth-card h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2.8rem;
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-heading-family);
+}
+
+.gls-auth-card p {
+  color: rgba(var(--color-foreground), 0.75);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.gls-auth-card .field {
+  margin-bottom: 1.5rem;
+  text-align: left;
+  position: relative;
+}
+
+.gls-auth-card .field input {
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 6px;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+}
+
+.gls-auth-card .field input:focus {
+  border-color: rgb(var(--color-foreground));
+  outline: none;
+  box-shadow: 0 0 0 1px rgb(var(--color-foreground));
+}
+
+.gls-auth-card .field label {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(var(--color-foreground), 0.6);
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.gls-auth-card .field input:focus ~ label,
+.gls-auth-card .field input:not(:placeholder-shown) ~ label {
+  top: 0.5rem;
+  font-size: 1rem;
+  transform: none;
+}
+
+.gls-auth-card .field input:focus,
+.gls-auth-card .field input:not(:placeholder-shown) {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.gls-auth-card button {
+  width: 100%;
+  margin-top: 1.5rem;
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  border: none;
+  padding: 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  font-size: 1.6rem;
+}
+
+.gls-auth-card button:hover {
+  opacity: 0.9;
+}
+
+.gls-auth-card a {
+  display: inline-block;
+  margin-top: 2rem;
+  color: rgb(var(--color-link));
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.gls-auth-card a:hover {
+  color: rgb(var(--color-link-hover));
+}
+
+.gls-auth-card .form__message {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+/* Recover Password View */
+.gls-auth-card .recover-password-view {
+  display: none;
+}
+
+.gls-auth-card .recover-password-view:target {
+  display: block;
+}
+
+.gls-auth-card .login-view:has(~ .recover-password-view:target) {
+  display: none;
+}

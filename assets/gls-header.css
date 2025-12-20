@@ -250,13 +250,16 @@
   background-color: var(--gls-primary);
   color: var(--gls-white);
   border: none;
-  padding: 12px 28px;
+  padding: 0 28px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background-color 0.2s;
   white-space: nowrap;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
 
 .gls-header__search-btn:hover {
