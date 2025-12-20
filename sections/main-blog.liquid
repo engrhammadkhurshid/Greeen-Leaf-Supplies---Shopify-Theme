@@ -1,5 +1,12 @@
 {{ 'gls-blog.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign target_blog = blog
+  if section.settings.blog_source == 'specific' and section.settings.selected_blog != blank
+    assign target_blog = blogs[section.settings.selected_blog]
+  endif
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -130,7 +137,7 @@
           {% if section.settings.heading_text != blank %}
             {{ section.settings.heading_text }}
           {% else %}
-            {{ blog.title }}
+            {{ target_blog.title }}
           {% endif %}
         </{{ HeadingTag }}>
         
@@ -167,14 +174,14 @@
           <h3 class="gls-blog-sidebar__title">Categories</h3>
           <ul class="gls-blog-categories-list">
             <li>
-              <a href="{{ blog.url }}" class="{% unless current_tags %}active{% endunless %}">
+              <a href="{{ target_blog.url }}" class="{% unless current_tags %}active{% endunless %}">
                 All Posts
-                <span>{{ blog.articles_count }}</span>
+                <span>{{ target_blog.articles_count }}</span>
               </a>
             </li>
-            {% for tag in blog.all_tags %}
+            {% for tag in target_blog.all_tags %}
               <li>
-                <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="{% if current_tags contains tag %}active{% endif %}">
+                <a href="{{ target_blog.url }}/tagged/{{ tag | handle }}" class="{% if current_tags contains tag %}active{% endif %}">
                   {{ tag }}
                 </a>
               </li>
@@ -192,7 +199,7 @@
         <div class="gls-blog-featured-cats">
           {% for block in section.blocks %}
             {% if block.type == 'category' %}
-              <a href="{{ blog.url }}/tagged/{{ block.settings.tag | handle }}" class="gls-blog-cat-card" {{ block.shopify_attributes }}>
+              <a href="{{ target_blog.url }}/tagged/{{ block.settings.tag | handle }}" class="gls-blog-cat-card" {{ block.shopify_attributes }}>
                 {% if block.settings.image != blank %}
                   <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.tag }}" loading="lazy">
                 {% else %}
@@ -207,9 +214,9 @@
       {% endif %}
 
       <!-- Blog Posts Grid -->
-      {% paginate blog.articles by section.settings.posts_per_page %}
+      {% paginate target_blog.articles by section.settings.posts_per_page %}
         <div class="gls-blog-grid">
-          {% for article in blog.articles %}
+          {% for article in target_blog.articles %}
             <article class="gls-article-card">
               <a href="{{ article.url }}" class="gls-article-card__image-wrapper">
                 {% if article.image %}
@@ -264,6 +271,26 @@
 {
   "name": "Blog Page",
   "settings": [
+    {
+      "type": "header",
+      "content": "Blog Source"
+    },
+    {
+      "type": "radio",
+      "id": "blog_source",
+      "label": "Source",
+      "options": [
+        { "value": "current", "label": "Current Blog (Default)" },
+        { "value": "specific", "label": "Specific Blog" }
+      ],
+      "default": "current"
+    },
+    {
+      "type": "blog",
+      "id": "selected_blog",
+      "label": "Select Blog",
+      "info": "Used when 'Specific Blog' is selected"
+    },
     {
       "type": "header",
       "content": "Header / Icon Box"
