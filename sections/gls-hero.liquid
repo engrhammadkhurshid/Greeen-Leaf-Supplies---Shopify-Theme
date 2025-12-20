@@ -249,6 +249,8 @@
     height: 100%;
     z-index: 2; /* Middle layer */
     pointer-events: none;
+    background-color: var(--overlay-color, #000000);
+    opacity: var(--overlay-opacity, 0.5);
   }
 
   /* Content */
@@ -405,7 +407,7 @@
 <div class="gls-hero-section" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}" data-animation="{{ section.settings.animation_type }}">
   <div class="gls-hero-slider">
     {% for block in section.blocks %}
-      <div class="gls-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+      <div class="gls-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" style="--overlay-color: {{ block.settings.overlay_color | default: '#000000' }}; --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};">
         
         <!-- Background Image -->
         {% if block.settings.image != blank %}
@@ -415,7 +417,7 @@
         {% endif %}
 
         <!-- Overlay -->
-        <div class="gls-slide-overlay" style="background-color: {{ block.settings.overlay_color | default: '#000000' }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+        <div class="gls-slide-overlay"></div>
 
         <!-- Content -->
         <div class="gls-slide-content">
