@@ -217,7 +217,10 @@
             "image": "shopify://shop_images/GLS_Food_Packaging_Category_Featured_Image.webp",
             "title": "Food Packaging",
             "subtitle": "4 Subcategories",
-            "link": "shopify://collections/food-packaging"
+            "link": "shopify://collections/food-packaging",
+            "heading_tag": "h3",
+            "heading_size": 16,
+            "heading_color": "#7aae5c"
           }
         },
         "cat_2": {
@@ -226,7 +229,10 @@
             "image": "shopify://shop_images/GLS_Disposable_Tableware_Category_Featured_Image.webp",
             "title": "Disposable Tableware",
             "subtitle": "4 Subcategories",
-            "link": "shopify://collections/disposable-tableware"
+            "link": "shopify://collections/disposable-tableware",
+            "heading_tag": "h3",
+            "heading_size": 16,
+            "heading_color": "#7aae5c"
           }
         },
         "cat_3": {
@@ -235,7 +241,10 @@
             "image": "shopify://shop_images/GLS_Napkins_Sanitary_Category_Featured_Image.webp",
             "title": "Napkins & Sanitary",
             "subtitle": "5 Subcategories",
-            "link": "shopify://collections/napkins-sanitary"
+            "link": "shopify://collections/napkins-sanitary",
+            "heading_tag": "h3",
+            "heading_size": 16,
+            "heading_color": "#7aae5c"
           }
         },
         "cat_4": {
@@ -244,7 +253,10 @@
             "image": "shopify://shop_images/GLS_Food_Liquid_Category_Featured_Image.webp",
             "title": "Food & Liquid",
             "subtitle": "3 Subcategories",
-            "link": "shopify://collections/food-liquid"
+            "link": "shopify://collections/food-liquid",
+            "heading_tag": "h3",
+            "heading_size": 16,
+            "heading_color": "#7aae5c"
           }
         }
       },
