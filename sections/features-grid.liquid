@@ -14,92 +14,132 @@
   .features-grid {
     background-color: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features-grid__header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .features-grid__heading {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0 0 1rem;
+    line-height: 1.1;
+  }
+
+  .features-grid__subheading {
+    font-size: 18px;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .features-grid__curve-bg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .features-grid__curve-bg svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.1;
   }
 
   .features-grid__container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .features-grid__container {
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 4rem;
-      row-gap: 3rem;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
   }
 
   @media screen and (min-width: 990px) {
     .features-grid__container {
-      grid-template-columns: repeat(4, 1fr);
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      padding-top: 2rem;
     }
   }
 
   .feature-item {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    transition: transform 0.3s ease;
-    height: auto;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    max-width: 280px;
     opacity: 0;
     animation: fadeUp 0.8s ease-out forwards;
+    position: relative;
+  }
+
+  /* Arc positioning for desktop */
+  @media screen and (min-width: 990px) {
+    .feature-item:nth-child(1) { margin-top: 0; } /* High */
+    .feature-item:nth-child(2) { margin-top: 40px; } /* Mid */
+    .feature-item:nth-child(4) { margin-top: 40px; } /* Mid */
+    .feature-item:nth-child(5) { margin-top: 0; } /* High */
+    
+    /* Center Brand Image is child 3 */
+    .features-grid__brand-center {
+      margin-top: 80px; /* Low */
+    }
   }
   
   .feature-icon-wrapper {
-    flex: 0 0 auto;
-    width: auto;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0;
-    margin-right: 1.5rem;
-    background-color: transparent;
-  }
-
-  .feature-content {
-    flex: 1;
-    width: 100%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-  }
-  
-  .feature-item:nth-child(1) { animation-delay: 0.1s; }
-  .feature-item:nth-child(2) { animation-delay: 0.2s; }
-  .feature-item:nth-child(3) { animation-delay: 0.3s; }
-  .feature-item:nth-child(4) { animation-delay: 0.4s; }
-  
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .feature-item:hover {
-    transform: translateY(-4px);
-  }
-
-  .feature-icon {
-    margin-bottom: 0;
-    color: #2E8B57; /* SeaGreen */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+  
+  /* Partial border effect using pseudo-element */
+  .feature-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #8B3D49; /* Accent color from image */
+    border-right-color: #8B3D49;
+    transform: rotate(-45deg);
+    opacity: 0.8;
+  }
+
+  .feature-item:hover .feature-icon-wrapper {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.02);
+  }
+
+  .feature-icon {
+    width: 50%;
+    height: 50%;
+    color: #8B3D49;
   }
   
   .feature-icon svg, .feature-icon img {
@@ -108,70 +148,163 @@
     object-fit: contain;
   }
 
-  .feature-icon svg {
-    stroke-width: 1.5;
+  .feature-content {
+    width: 100%;
   }
 
   .feature-heading {
     font-weight: 700;
     margin-bottom: 0.5rem;
     line-height: 1.2;
-    margin-top: 0;
+    color: #333;
   }
 
   .feature-text {
+    font-size: 14px;
     line-height: 1.5;
-    opacity: 0.85;
+    opacity: 0.7;
     margin: 0;
   }
+
+  .features-grid__brand-center {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    animation: zoomIn 1s ease-out forwards;
+  }
+
+  .features-grid__brand-img {
+    width: {{ section.settings.brand_image_width }}px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    transition: transform 0.5s ease;
+  }
+  
+  .features-grid__brand-center:hover .features-grid__brand-img {
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .feature-item:nth-child(1) { animation-delay: 0.1s; }
+  .feature-item:nth-child(2) { animation-delay: 0.2s; }
+  .features-grid__brand-center { animation-delay: 0.3s; }
+  .feature-item:nth-child(4) { animation-delay: 0.4s; }
+  .feature-item:nth-child(5) { animation-delay: 0.5s; }
+
 {%- endstyle -%}
 
 <div class="features-grid section-{{ section.id }}-padding">
+  
+  <!-- Curved Background Line (SVG) -->
+  <div class="features-grid__curve-bg">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="none" stroke="#000" stroke-width="2" stroke-dasharray="10,10" d="M0,0 C480,200 960,200 1440,0"></path>
+    </svg>
+  </div>
+
   <div class="page-width">
+    
+    <div class="features-grid__header">
+      {%- if section.settings.main_heading != blank -%}
+        <h2 class="features-grid__heading">{{ section.settings.main_heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.sub_heading != blank -%}
+        <p class="features-grid__subheading">{{ section.settings.sub_heading }}</p>
+      {%- endif -%}
+    </div>
+
     <div class="features-grid__container">
-      {%- for block in section.blocks -%}
+      
+      {%- assign blocks_size = section.blocks.size -%}
+      {%- assign half_blocks = 2 -%} 
+      
+      <!-- First 2 Features -->
+      {%- for block in section.blocks limit: 2 -%}
         <div class="feature-item" {{ block.shopify_attributes }}>
           <div class="feature-icon-wrapper">
-            <div class="feature-icon" style="width: {{ block.settings.icon_size }}px; height: {{ block.settings.icon_size }}px;">
+            <div class="feature-icon">
               {%- if block.settings.custom_icon != blank -%}
-                {{ block.settings.custom_icon | image_url: width: 256 | image_tag: loading: 'lazy', style: 'object-fit: ' | append: block.settings.icon_fit }}
+                {{ block.settings.custom_icon | image_url: width: 100 | image_tag: loading: 'lazy' }}
               {%- else -%}
                 {%- case block.settings.icon -%}
                   {%- when 'sustainability' -%}
-                    <!-- Leaf Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.318a2.267 2.267 0 01-1.243-1.064l-.529-1.058a.413.413 0 00-.602-.145 1.304 1.304 0 01-1.442-.106l-2.452-1.84A1.697 1.697 0 007.14 4.87 1.69 1.69 0 005.23 6.08l-.653 2.613a1.69 1.69 0 00.78 1.928l2.962 1.48c.27.136.586.213.889.213h.16c.212 0 .416-.059.607-.155.267-.135.523-.288.768-.456l.793-.555a.414.414 0 00.153-.483 1.68 1.68 0 01-.128-.643v-.233c0-.44.17-.86.474-1.165l.97-.97a.413.413 0 00.066-.461.83.83 0 01.066-.823l.254-.38c.253-.38.758-.49 1.139-.248l.436.276a.413.413 0 00.403.028l.386-.193a.413.413 0 00.144-.588l-.303-.454a.827.827 0 01.154-.966l.494-.494a.827.827 0 01.966-.154l.454.303a.413.413 0 00.588-.144l.193-.386a.413.413 0 00-.028-.403l-.276-.436a.827.827 0 01.248-1.139l.38-.254a.83.83 0 01.823-.066l.461.066a.413.413 0 00.461-.066l.97-.97a1.65 1.65 0 00.474-1.165v-.233a1.68 1.68 0 01.128-.643l.555-.793c.168-.245.321-.501.456-.768.096-.191.155-.395.155-.607v-.16a1.69 1.69 0 00-1.69-1.69h-3.23" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.318a2.267 2.267 0 01-1.243-1.064l-.529-1.058a.413.413 0 00-.602-.145 1.304 1.304 0 01-1.442-.106l-2.452-1.84A1.697 1.697 0 007.14 4.87 1.69 1.69 0 005.23 6.08l-.653 2.613a1.69 1.69 0 00.78 1.928l2.962 1.48c.27.136.586.213.889.213h.16c.212 0 .416-.059.607-.155.267-.135.523-.288.768-.456l.793-.555a.414.414 0 00.153-.483 1.68 1.68 0 01-.128-.643v-.233c0-.44.17-.86.474-1.165l.97-.97a.413.413 0 00.066-.461.83.83 0 01.066-.823l.254-.38c.253-.38.758-.49 1.139-.248l.436.276a.413.413 0 00.403.028l.386-.193a.413.413 0 00.144-.588l-.303-.454a.827.827 0 01.154-.966l.494-.494a.827.827 0 01.966-.154l.454.303a.413.413 0 00.588-.144l.193-.386a.413.413 0 00-.028-.403l-.276-.436a.827.827 0 01.248-1.139l.38-.254a.83.83 0 01.823-.066l.461.066a.413.413 0 00.461-.066l.97-.97a1.65 1.65 0 00.474-1.165v-.233a1.68 1.68 0 01.128-.643l.555-.793c.168-.245.321-.501.456-.768.096-.191.155-.395.155-.607v-.16a1.69 1.69 0 00-1.69-1.69h-3.23" /></svg>
                   {%- when 'affordability' -%}
-                    <!-- Dollar Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   {%- when 'delivery' -%}
-                    <!-- Truck Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
                   {%- when 'durability' -%}
-                    <!-- Shield Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
                 {%- endcase -%}
               {%- endif -%}
             </div>
           </div>
           <div class="feature-content">
-            {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
-            <{{ heading_tag }} class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
+            <h3 class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
               {{ block.settings.heading }}
-            </{{ heading_tag }}>
-            <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }}; text-align: {{ block.settings.text_alignment }};">
+            </h3>
+            <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }};">
               {{ block.settings.text }}
             </p>
           </div>
         </div>
       {%- endfor -%}
+
+      <!-- Center Brand Image -->
+      <div class="features-grid__brand-center">
+        {%- if section.settings.brand_image != blank -%}
+          {{ section.settings.brand_image | image_url: width: 600 | image_tag: class: 'features-grid__brand-img', loading: 'lazy' }}
+        {%- else -%}
+          <div class="features-grid__brand-img" style="width: {{ section.settings.brand_image_width }}px; height: {{ section.settings.brand_image_width }}px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #999;">
+            Brand Image
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Remaining Features -->
+      {%- for block in section.blocks offset: 2 -%}
+        <div class="feature-item" {{ block.shopify_attributes }}>
+          <div class="feature-icon-wrapper">
+            <div class="feature-icon">
+              {%- if block.settings.custom_icon != blank -%}
+                {{ block.settings.custom_icon | image_url: width: 100 | image_tag: loading: 'lazy' }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'sustainability' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.318a2.267 2.267 0 01-1.243-1.064l-.529-1.058a.413.413 0 00-.602-.145 1.304 1.304 0 01-1.442-.106l-2.452-1.84A1.697 1.697 0 007.14 4.87 1.69 1.69 0 005.23 6.08l-.653 2.613a1.69 1.69 0 00.78 1.928l2.962 1.48c.27.136.586.213.889.213h.16c.212 0 .416-.059.607-.155.267-.135.523-.288.768-.456l.793-.555a.414.414 0 00.153-.483 1.68 1.68 0 01-.128-.643v-.233c0-.44.17-.86.474-1.165l.97-.97a.413.413 0 00.066-.461.83.83 0 01.066-.823l.254-.38c.253-.38.758-.49 1.139-.248l.436.276a.413.413 0 00.403.028l.386-.193a.413.413 0 00.144-.588l-.303-.454a.827.827 0 01.154-.966l.494-.494a.827.827 0 01.966-.154l.454.303a.413.413 0 00.588-.144l.193-.386a.413.413 0 00-.028-.403l-.276-.436a.827.827 0 01.248-1.139l.38-.254a.83.83 0 01.823-.066l.461.066a.413.413 0 00.461-.066l.97-.97a1.65 1.65 0 00.474-1.165v-.233a1.68 1.68 0 01.128-.643l.555-.793c.168-.245.321-.501.456-.768.096-.191.155-.395.155-.607v-.16a1.69 1.69 0 00-1.69-1.69h-3.23" /></svg>
+                  {%- when 'affordability' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {%- when 'delivery' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+                  {%- when 'durability' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
+              {{ block.settings.heading }}
+            </h3>
+            <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }};">
+              {{ block.settings.text }}
+            </p>
+          </div>
+        </div>
+      {%- endfor -%}
+
     </div>
   </div>
 </div>
@@ -182,6 +315,33 @@
   "tag": "section",
   "class": "section-features-grid",
   "settings": [
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Our Features"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading",
+      "default": "Everything you need."
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Brand Center Image"
+    },
+    {
+      "type": "range",
+      "id": "brand_image_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Image Width",
+      "default": 150
+    },
     {
       "type": "color",
       "id": "background_color",
@@ -226,28 +386,6 @@
           "label": "Custom Icon (Image)"
         },
         {
-          "type": "range",
-          "id": "icon_size",
-          "min": 24,
-          "max": 120,
-          "step": 4,
-          "unit": "px",
-          "label": "Icon Size",
-          "default": 60
-        },
-        {
-          "type": "select",
-          "id": "icon_fit",
-          "label": "Icon Fit",
-          "options": [
-            { "value": "contain", "label": "Contain (Fit)" },
-            { "value": "cover", "label": "Cover (Fill)" },
-            { "value": "fill", "label": "Stretch" },
-            { "value": "scale-down", "label": "Scale Down" }
-          ],
-          "default": "contain"
-        },
-        {
           "type": "select",
           "id": "icon",
           "label": "Default Icon (SVG)",
@@ -271,20 +409,6 @@
           "default": "Feature Heading"
         },
         {
-          "type": "select",
-          "id": "heading_tag",
-          "label": "Heading Tag",
-          "options": [
-            { "value": "h1", "label": "H1" },
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" },
-            { "value": "h4", "label": "H4" },
-            { "value": "h5", "label": "H5" },
-            { "value": "h6", "label": "H6" }
-          ],
-          "default": "h3"
-        },
-        {
           "type": "range",
           "id": "heading_size",
           "min": 16,
@@ -292,7 +416,7 @@
           "step": 1,
           "unit": "px",
           "label": "Heading Font Size",
-          "default": 20
+          "default": 18
         },
         {
           "type": "color",
@@ -311,17 +435,6 @@
           "default": "Feature description goes here."
         },
         {
-          "type": "select",
-          "id": "text_alignment",
-          "label": "Text Alignment",
-          "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Center" },
-            { "value": "justify", "label": "Justify" }
-          ],
-          "default": "left"
-        },
-        {
           "type": "range",
           "id": "text_size",
           "min": 12,
@@ -329,7 +442,7 @@
           "step": 1,
           "unit": "px",
           "label": "Text Font Size",
-          "default": 16
+          "default": 14
         },
         {
           "type": "color",
@@ -349,7 +462,7 @@
           "settings": {
             "icon": "sustainability",
             "heading": "Certified Sustainable",
-            "text": "100% biodegradable materials that meet industrial standards."
+            "text": "100% biodegradable materials."
           }
         },
         {
@@ -357,7 +470,7 @@
           "settings": {
             "icon": "affordability",
             "heading": "Factory-Direct Pricing",
-            "text": "Market-beating rates on bulk orders to boost your bottom line."
+            "text": "Market-beating rates on bulk orders."
           }
         },
         {
@@ -365,7 +478,7 @@
           "settings": {
             "icon": "delivery",
             "heading": "Predictable Delivery",
-            "text": "Fast nationwide shipping ensures you never run out of stock."
+            "text": "Fast nationwide shipping."
           }
         },
         {
@@ -373,7 +486,7 @@
           "settings": {
             "icon": "durability",
             "heading": "Industrial Durability",
-            "text": "Grease-resistant and microwave-safe for commercial use."
+            "text": "Grease-resistant and microwave-safe."
           }
         }
       ]
