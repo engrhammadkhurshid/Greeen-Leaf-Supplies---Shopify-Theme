@@ -67,7 +67,7 @@
           "type": "mega_category",
           "settings": {
             "category_image": "shopify://shop_images/GLS_Disposable_Tableware_Category_Featured_Image.webp",
-            "image_fit": "cover",
+            "image_fit": "contain",
             "category_title": "Disposable Tableware",
             "category_link": "",
             "subcategory_1": "Plates",
@@ -91,7 +91,8 @@
         "mega-cat-3": {
           "type": "mega_category",
           "settings": {
-            "image_fit": "cover",
+            "category_image": "shopify://shop_images/GLS_Napkins_Sanitary_Category_Featured_Image.webp",
+            "image_fit": "contain",
             "category_title": "Napkins & Sanitary",
             "category_link": "",
             "subcategory_1": "Paper napkins",
