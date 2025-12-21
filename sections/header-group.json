@@ -116,7 +116,8 @@
         "mega-cat-4": {
           "type": "mega_category",
           "settings": {
-            "image_fit": "cover",
+            "category_image": "shopify://shop_images/GLS_Food_Liquid_Category_Featured_Image.webp",
+            "image_fit": "contain",
             "category_title": "Food & Liquid",
             "category_link": "",
             "subcategory_1": "Sauces",
@@ -131,7 +132,7 @@
             "subcategory_5_link": "",
             "subcategory_6": "",
             "subcategory_6_link": "",
-            "show_view_all": false,
+            "show_view_all": true,
             "view_all_text": "View All",
             "quote_text": "Request Quote",
             "quote_link": ""
