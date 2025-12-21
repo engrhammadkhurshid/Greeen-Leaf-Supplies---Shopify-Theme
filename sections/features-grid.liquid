@@ -26,14 +26,16 @@
   }
 
   .features-grid__heading {
-    font-size: 48px;
+    font-size: {{ section.settings.main_heading_size }}px;
+    color: {{ section.settings.main_heading_color }};
     font-weight: 800;
     margin: 0 0 1rem;
     line-height: 1.1;
   }
 
   .features-grid__subheading {
-    font-size: 18px;
+    font-size: {{ section.settings.tagline_size }}px;
+    color: {{ section.settings.tagline_color }};
     opacity: 0.7;
     margin: 0;
   }
@@ -225,8 +227,8 @@
       {%- if section.settings.main_heading != blank -%}
         <h2 class="features-grid__heading">{{ section.settings.main_heading }}</h2>
       {%- endif -%}
-      {%- if section.settings.sub_heading != blank -%}
-        <p class="features-grid__subheading">{{ section.settings.sub_heading }}</p>
+      {%- if section.settings.tagline != blank -%}
+        <p class="features-grid__subheading">{{ section.settings.tagline }}</p>
       {%- endif -%}
     </div>
 
@@ -342,16 +344,60 @@
       "info": "Leave empty to use the theme's button color."
     },
     {
-      "type": "text",
-      "id": "main_heading",
-      "label": "Main Heading",
-      "default": "Our Features"
+      "type": "header",
+      "content": "Section Headline"
     },
     {
       "type": "text",
-      "id": "sub_heading",
-      "label": "Sub Heading",
+      "id": "main_heading",
+      "label": "Headline Text",
+      "default": "Our Features"
+    },
+    {
+      "type": "range",
+      "id": "main_heading_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline Font Size",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "main_heading_color",
+      "label": "Headline Color",
+      "default": "#060316"
+    },
+    {
+      "type": "header",
+      "content": "Section Tagline"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline Text",
       "default": "Everything you need."
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Font Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#060316"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
     },
     {
       "type": "color",
