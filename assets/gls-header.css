@@ -200,11 +200,11 @@
 .gls-header__search-wrapper {
   display: flex;
   align-items: center;
-  border: 2px solid var(--gls-primary);
-  border-radius: 0;
+  border: none;
+  border-radius: 6px;
   overflow: hidden;
   background: var(--gls-white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 4px;
 }
 
