@@ -66,6 +66,7 @@
         "mega-cat-2": {
           "type": "mega_category",
           "settings": {
+            "category_image": "shopify://shop_images/GLS_Disposable_Tableware_Category_Featured_Image.webp",
             "image_fit": "cover",
             "category_title": "Disposable Tableware",
             "category_link": "",
