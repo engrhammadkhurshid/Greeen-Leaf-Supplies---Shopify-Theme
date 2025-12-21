@@ -40,17 +40,37 @@
     flex-direction: column;
     align-items: center;
     padding: 2.5rem 2rem;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     height: 100%;
     min-height: 320px;
-    justify-content: center;
+    justify-content: flex-start;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+  
+  .feature-item:nth-child(1) { animation-delay: 0.1s; }
+  .feature-item:nth-child(2) { animation-delay: 0.2s; }
+  .feature-item:nth-child(3) { animation-delay: 0.3s; }
+  .feature-item:nth-child(4) { animation-delay: 0.4s; }
+  
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .feature-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.15);
   }
 
   .feature-icon {
@@ -123,7 +143,7 @@
           <{{ heading_tag }} class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
             {{ block.settings.heading }}
           </{{ heading_tag }}>
-          <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }};">
+          <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }}; text-align: {{ block.settings.text_alignment }};">
             {{ block.settings.text }}
           </p>
         </div>
@@ -243,6 +263,17 @@
           "id": "text",
           "label": "Text",
           "default": "Feature description goes here."
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "justify", "label": "Justify" }
+          ],
+          "default": "center"
         },
         {
           "type": "range",
