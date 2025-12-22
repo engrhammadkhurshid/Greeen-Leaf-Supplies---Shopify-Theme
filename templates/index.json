@@ -32,6 +32,7 @@
         "btn_secondary_link": "/pages/contact",
         "btn_secondary_border": "#ffffff",
         "btn_secondary_text": "#ffffff",
+        "right_image": "shopify://shop_images/GLS_Hero_Section_Image_Right.webp",
         "right_image_width": 100,
         "right_image_fit": "contain",
         "padding_top": 0,
