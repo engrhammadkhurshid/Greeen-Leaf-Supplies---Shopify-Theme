@@ -248,6 +248,10 @@
   color: #999;
 }
 
+.gls-header__mobile-search-toggle {
+  display: none;
+}
+
 .gls-header__search-btn {
   background-color: var(--gls-primary);
   color: var(--gls-white);
@@ -701,6 +705,21 @@
 .gls-header__mobile-menu.is-open {
   opacity: 1;
   visibility: visible;
+}
+
+.gls-header__mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--gls-white);
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gls-header__mobile-menu-inner {

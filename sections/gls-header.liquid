@@ -258,6 +258,12 @@
 
   <!-- Mobile Menu Drawer -->
   <div class="gls-header__mobile-menu">
+    <button class="gls-header__mobile-menu-close" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
     <div class="gls-header__mobile-menu-inner">
       <ul class="gls-header__mobile-nav">
         {% for link in linklists[section.settings.main_menu].links %}
@@ -389,6 +395,14 @@
           openMobileMenu();
         }
       });
+
+      const menuCloseBtn = document.querySelector('.gls-header__mobile-menu-close');
+      if (menuCloseBtn) {
+        menuCloseBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileMenu();
+        });
+      }
 
       // Close mobile menu on window resize to desktop
       window.addEventListener('resize', function() {
