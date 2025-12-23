@@ -14,7 +14,7 @@
       "settings": {
         "bg_image": "shopify://shop_images/GLS_Hero_Slider_Image_1.webp",
         "bg_overlay_color": "#000000",
-        "bg_overlay_opacity": 95,
+        "bg_overlay_opacity": 85,
         "badge_text": "NATIONWIDE DELIVERY",
         "badge_bg_color": "#7aae5c",
         "badge_text_color": "#ffffff",
