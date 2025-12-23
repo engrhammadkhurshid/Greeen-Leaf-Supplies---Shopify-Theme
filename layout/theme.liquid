@@ -53,6 +53,8 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ settings.type_header_secondary_font | font_face: font_display: 'swap' }}
+      {{ settings.type_button_font | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -108,6 +110,14 @@
         --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
+
+        --font-heading-secondary-family: {{ settings.type_header_secondary_font.family }}, {{ settings.type_header_secondary_font.fallback_families }};
+        --font-heading-secondary-style: {{ settings.type_header_secondary_font.style }};
+        --font-heading-secondary-weight: {{ settings.type_header_secondary_font.weight }};
+
+        --font-button-family: {{ settings.type_button_font.family }}, {{ settings.type_button_font.fallback_families }};
+        --font-button-style: {{ settings.type_button_font.style }};
+        --font-button-weight: {{ settings.type_button_font.weight }};
 
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};

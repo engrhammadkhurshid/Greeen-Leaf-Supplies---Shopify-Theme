@@ -115,6 +115,12 @@
         "label": "t:settings_schema.typography.settings.type_header_font.label"
       },
       {
+        "type": "font_picker",
+        "id": "type_header_secondary_font",
+        "default": "montserrat_n6",
+        "label": "Secondary Heading Font (H3-H5)"
+      },
+      {
         "type": "range",
         "id": "heading_scale",
         "min": 100,
@@ -133,6 +139,12 @@
         "id": "type_body_font",
         "default": "assistant_n4",
         "label": "t:settings_schema.typography.settings.type_body_font.label"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_button_font",
+        "default": "montserrat_n5",
+        "label": "Button & Link Font"
       },
       {
         "type": "range",
