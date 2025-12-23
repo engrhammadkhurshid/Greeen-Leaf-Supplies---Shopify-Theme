@@ -57,8 +57,8 @@
       <button class="gls-header__mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
         <svg class="gls-header__mobile-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="12" x2="15" y2="12"/>
+          <line x1="3" y1="18" x2="19" y2="18"/>
         </svg>
         <svg class="gls-header__mobile-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -356,10 +356,10 @@
     // ========================================
     const mobileToggle = document.querySelector('.gls-header__mobile-toggle');
     const mobileMenu = document.querySelector('.gls-header__mobile-menu');
-    const openIcon = document.querySelector('.gls-header__mobile-toggle-open');
-    const closeIcon = document.querySelector('.gls-header__mobile-toggle-close');
 
     if (mobileToggle && mobileMenu) {
+      const openIcon = mobileToggle.querySelector('.gls-header__mobile-toggle-open');
+      const closeIcon = mobileToggle.querySelector('.gls-header__mobile-toggle-close');
       let isMobileMenuOpen = false;
 
       function openMobileMenu() {
@@ -380,7 +380,9 @@
         isMobileMenuOpen = false;
       }
 
-      mobileToggle.addEventListener('click', function() {
+      mobileToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         if (isMobileMenuOpen) {
           closeMobileMenu();
         } else {
