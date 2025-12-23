@@ -43,10 +43,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: {{ section.settings.bg_overlay_color }};
-    opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};
-    z-index: 1;
-    display: block;
+    background-color: {{ section.settings.bg_overlay_color }} !important;
+    opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }} !important;
+    z-index: 1 !important;
+    display: block !important;
+    pointer-events: none;
   }
 
   .gls-hero-split__content-wrapper {
