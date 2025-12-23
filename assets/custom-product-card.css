@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* Removed min-height to avoid stretching */
   position: relative;
 }
 
@@ -18,11 +17,15 @@
   border-color: var(--gls-primary, #7AAE5C);
 }
 
+/* Image Area - 50% Split Logic */
+/* We use flex-basis or a fixed aspect ratio that approximates 50% of a typical card */
 .card__inner {
   position: relative;
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
+  /* Changed from 100% (Square) to 75% (4:3 Landscape) to reduce height */
+  padding-top: 75% !important; 
   background-color: #f9fafb;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .card__media {
@@ -34,7 +37,6 @@
   border-radius: 0 !important;
 }
 
-/* Fix for nested media div */
 .card__media .media {
   position: absolute;
   top: 0;
@@ -47,10 +49,10 @@
 }
 
 .card__media img {
-  object-fit: contain !important; /* Force contain */
+  object-fit: contain !important;
   height: 100% !important;
   width: 100% !important;
-  padding: 20px;
+  padding: 16px; /* Reduced padding slightly */
   transition: transform 0.5s ease;
 }
 
@@ -63,7 +65,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: var(--gls-accent, #FDC15F); /* Accent Color */
+  background-color: var(--gls-accent, #FDC15F);
   color: var(--gls-dark, #000);
   font-size: 11px;
   font-weight: 700;
@@ -73,7 +75,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Badges (Sale/Sold Out) */
+/* Badges */
 .card__badge {
   position: absolute;
   top: 12px !important;
@@ -95,26 +97,26 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: none;
-  background-color: var(--gls-accent, #FDC15F); /* Accent Color */
+  background-color: var(--gls-accent, #FDC15F);
   color: var(--gls-dark, #000);
 }
 
 /* Content Area */
 .card__content {
-  padding: 20px !important; /* Force padding */
+  padding: 20px !important;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1; /* Take remaining space */
   background-color: #fff;
   text-align: left;
+  justify-content: space-between; /* Distribute content */
 }
 
 .card__information {
   display: flex;
   flex-direction: column;
-  height: 100%;
   gap: 8px;
-  padding: 0 !important; /* Reset internal padding */
+  padding: 0 !important;
 }
 
 /* Category */
@@ -161,16 +163,15 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex-grow: 1;
 }
 
-/* Footer Row (MOQ + Button) */
+/* Footer Row */
 .card__footer-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: auto;
+  margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #f3f4f6;
 }
@@ -184,20 +185,21 @@
 
 /* Button */
 a.card__button {
-  background-color: var(--gls-primary, #7AAE5C); /* Primary Color */
+  background-color: var(--gls-primary, #7AAE5C);
   color: #fff;
   border: none;
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 6px;
-  text-decoration: none;
+  text-decoration: none !important; /* Remove underline */
   transition: all 0.2s;
   white-space: nowrap;
 }
 
 a.card__button:hover {
-  background-color: var(--gls-primary-dark, #6a9d4d); /* Darker Primary */
+  background-color: var(--gls-primary-dark, #6a9d4d);
   color: #fff;
   transform: translateY(-1px);
+  text-decoration: none !important; /* Ensure no underline on hover */
 }
