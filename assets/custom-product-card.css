@@ -28,7 +28,7 @@
   height: 260px !important; /* Strict fixed height */
   min-height: 260px !important;
   padding: 0 !important; 
-  background-color: #f9fafb;
+  background-color: transparent !important; /* Match website background (transparent/white) */
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 0 !important;
@@ -167,13 +167,14 @@
 }
 
 .card__heading a {
-  text-decoration: none;
+  text-decoration: none !important; /* Remove underline */
   color: inherit;
   transition: color 0.2s;
 }
 
 .card__heading a:hover {
   color: var(--gls-primary, #7AAE5C);
+  text-decoration: none !important; /* Ensure no underline on hover */
 }
 
 /* Description - Fixed Height (3 lines) */
