@@ -1,19 +1,24 @@
 .mega-menu {
-  position: static;
+  position: relative;
 }
 
 .mega-menu__content {
   background-color: rgb(var(--color-background));
   border-left: 0;
-  border-radius: 0;
+  border-radius: 12px;
   border-right: 0;
   left: 0;
   overflow-y: auto;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
   position: absolute;
-  right: 0;
+  right: auto;
   top: 100%;
+  width: max-content;
+  min-width: 200px;
+  max-width: calc(100vw - 4rem);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 1px solid rgba(var(--color-foreground), 0.08);
 }
 
 .shopify-section-header-sticky .mega-menu__content {
@@ -35,10 +40,16 @@
 }
 
 .mega-menu__list {
-  display: grid;
-  gap: 1.8rem 4rem;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
+  gap: 3rem;
   list-style: none;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+.mega-menu__list > li {
+  width: 220px; /* Fixed width for cards */
+  flex-shrink: 0;
 }
 
 .mega-menu__link {
@@ -58,14 +69,14 @@
 
 .header--top-center .mega-menu__list {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  column-gap: 0;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  column-gap: 3rem;
 }
 
 .header--top-center .mega-menu__list > li {
-  width: 16%;
-  padding-right: 2.4rem;
+  width: 220px;
+  padding-right: 0;
 }
 
 .mega-menu__link:hover,

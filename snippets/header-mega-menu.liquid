@@ -44,6 +44,18 @@
                           aria-current="page"
                         {% endif %}
                       >
+                        {%- if childlink.type == 'collection_link' and childlink.object.image != blank -%}
+                          <div class="media media--landscape" style="margin-bottom: 1rem; border-radius: 8px; overflow: hidden; aspect-ratio: 3/2;">
+                            <img
+                              src="{{ childlink.object.image | image_url: width: 400 }}"
+                              alt="{{ childlink.object.image.alt | escape }}"
+                              loading="lazy"
+                              width="{{ childlink.object.image.width }}"
+                              height="{{ childlink.object.image.height }}"
+                              style="width: 100%; height: 100%; object-fit: cover;"
+                            >
+                          </div>
+                        {%- endif -%}
                         {{ childlink.title | escape }}
                       </a>
                       {%- if childlink.links != blank -%}
