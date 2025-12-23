@@ -1,4 +1,6 @@
 /* Custom Product Card Styles */
+
+/* 1. Card Container & Layout */
 .product-card-wrapper .card {
   background-color: #fff;
   border: 1px solid #e5e7eb;
@@ -9,6 +11,8 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+  /* Ensure the card has a background to cover anything behind it */
+  z-index: 1;
 }
 
 .product-card-wrapper .card:hover {
@@ -17,32 +21,31 @@
   border-color: var(--gls-primary, #7AAE5C);
 }
 
-/* Remove default Shopify card shadows/borders on inner elements */
+/* 2. Image Area (Fixed Height) */
+.card__inner {
+  position: relative;
+  width: 100%;
+  height: 260px !important; /* Strict fixed height */
+  min-height: 260px !important;
+  padding: 0 !important; 
+  background-color: #f9fafb;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: block !important; /* Force display */
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove default Shopify pseudo-elements that might mess up layout */
+.card__inner:after,
+.card__inner:before,
 .card--card:after,
 .card--standard .card__inner:after {
   display: none !important;
   content: none !important;
-  box-shadow: none !important;
-}
-
-.card__inner {
-  position: relative;
-  width: 100%;
-  height: 260px; /* Fixed height */
-  padding-top: 0 !important; 
-  padding-bottom: 0 !important;
-  background-color: #f9fafb;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 0 !important; /* Ensure no internal radius */
-  border: none !important; /* Remove any default borders */
-  box-shadow: none !important; /* Remove any default shadows */
-}
-
-/* Disable ratio pseudo-element if it exists */
-.card__inner:before {
-  display: none !important;
-  padding-bottom: 0 !important;
 }
 
 .card__media {
@@ -52,8 +55,11 @@
   width: 100%;
   height: 100%;
   border-radius: 0 !important;
-  margin: 0 !important; /* Reset default margins */
+  margin: 0 !important;
   z-index: 1;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .card__media .media {
@@ -67,14 +73,10 @@
   justify-content: center;
   background-color: transparent !important;
   border: none !important;
-  padding-bottom: 0 !important; /* Override any ratio padding */
+  padding: 0 !important;
 }
 
-.card__media .media:before {
-  display: none !important; /* Disable ratio pseudo-element */
-}
-
-/* General Image Styles */
+/* Images */
 .card__media img {
   object-fit: contain !important;
   height: 100% !important;
@@ -87,6 +89,7 @@
   top: 0;
   left: 0;
   visibility: visible !important;
+  display: block !important;
 }
 
 /* Primary Image */
@@ -95,7 +98,7 @@
   z-index: 1;
 }
 
-/* Secondary Image (Hover Image) */
+/* Secondary Image (Hover) */
 .card__media .media > img + img {
   opacity: 0 !important;
   z-index: 2;
@@ -111,53 +114,12 @@
   transform: scale(1.05);
 }
 
-/* Disable default hover effects that might hide the image */
+/* Disable default hover effects */
 .media--hover-effect > img:first-child:only-child {
   opacity: 1 !important;
 }
 
-/* SKU Badge */
-.card__sku-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: var(--gls-accent, #FDC15F);
-  color: var(--gls-dark, #000);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 2;
-  letter-spacing: 0.5px;
-}
-
-/* Badges */
-.card__badge {
-  position: absolute;
-  top: 12px !important;
-  right: 12px !important;
-  bottom: auto !important;
-  left: auto !important;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: flex-end;
-}
-
-.badge {
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: none;
-  background-color: var(--gls-accent, #FDC15F);
-  color: var(--gls-dark, #000);
-}
-
-/* Content Area */
+/* 3. Content Area (Fixed Layout) */
 .card__content {
   padding: 20px !important;
   display: flex;
@@ -165,14 +127,16 @@
   flex: 1;
   background-color: #fff;
   text-align: left;
-  justify-content: space-between;
+  justify-content: flex-start; /* Align to top */
+  position: relative;
+  z-index: 2;
 }
 
 .card__information {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   padding: 0 !important;
+  width: 100%;
 }
 
 /* Category */
@@ -183,19 +147,23 @@
   color: var(--gls-primary, #7AAE5C);
   letter-spacing: 0.8px;
   margin-bottom: 4px;
+  height: 16px; /* Fixed height */
+  overflow: hidden;
+  line-height: 16px;
 }
 
-/* Title */
+/* Title - Fixed Height (2 lines) */
 .card__heading {
   font-size: 16px;
   font-weight: 700;
-  margin: 0;
-  line-height: 1.4;
+  margin: 0 0 8px 0;
+  line-height: 1.4; /* 16 * 1.4 = 22.4px */
   color: #111;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 46px; /* Fixed height for 2 lines */
 }
 
 .card__heading a {
@@ -206,30 +174,32 @@
 
 .card__heading a:hover {
   color: var(--gls-primary, #7AAE5C);
-  text-decoration: none;
 }
 
-/* Description */
+/* Description - Fixed Height (3 lines) */
 .card__description {
   font-size: 13px;
   color: #666;
-  line-height: 1.5;
+  line-height: 1.5; /* 13 * 1.5 = 19.5px */
   margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 60px; /* Fixed height for 3 lines */
 }
 
-/* Footer Row */
+/* 4. Footer Area (Fixed Height) */
 .card__footer-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: auto; /* Push to bottom if there's extra space, but heights are fixed so this is just safety */
   padding-top: 16px;
   border-top: 1px solid #f3f4f6;
+  height: 54px; /* Fixed height container */
+  box-sizing: border-box;
 }
 
 .card__moq-label {
@@ -252,16 +222,58 @@ a.card__button {
   transition: all 0.2s;
   white-space: nowrap;
   box-shadow: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px; /* Fixed button height */
 }
 
 a.card__button:hover {
   background-color: var(--gls-primary-dark, #6a9d4d);
   color: #fff;
   transform: translateY(-1px);
-  text-decoration: none !important;
-  box-shadow: none !important;
 }
 
 a.card__button:after {
   display: none !important;
+}
+
+/* Badges */
+.card__sku-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--gls-accent, #FDC15F);
+  color: var(--gls-dark, #000);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 10; /* High z-index */
+  letter-spacing: 0.5px;
+}
+
+.card__badge {
+  position: absolute;
+  top: 12px !important;
+  right: 12px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.badge {
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  background-color: var(--gls-accent, #FDC15F);
+  color: var(--gls-dark, #000);
 }
