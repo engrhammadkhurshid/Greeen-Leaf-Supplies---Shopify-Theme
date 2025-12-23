@@ -17,15 +17,15 @@
   border-color: var(--gls-primary, #7AAE5C);
 }
 
-/* Image Area - 50% Split Logic */
-/* We use flex-basis or a fixed aspect ratio that approximates 50% of a typical card */
+/* Image Area - Fixed Height */
 .card__inner {
   position: relative;
   width: 100%;
-  /* Changed from 100% (Square) to 75% (4:3 Landscape) to reduce height */
-  padding-top: 75% !important; 
+  height: 260px; /* Fixed height to prevent stretching on large screens */
+  padding-top: 0 !important; 
   background-color: #f9fafb;
-  flex-shrink: 0; /* Prevent image from shrinking */
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .card__media {
@@ -52,7 +52,9 @@
   object-fit: contain !important;
   height: 100% !important;
   width: 100% !important;
-  padding: 16px; /* Reduced padding slightly */
+  max-height: 100%;
+  max-width: 100%;
+  padding: 16px;
   transition: transform 0.5s ease;
 }
 
@@ -106,10 +108,10 @@
   padding: 20px !important;
   display: flex;
   flex-direction: column;
-  flex: 1; /* Take remaining space */
+  flex: 1;
   background-color: #fff;
   text-align: left;
-  justify-content: space-between; /* Distribute content */
+  justify-content: space-between;
 }
 
 .card__information {
@@ -192,14 +194,20 @@ a.card__button {
   font-size: 13px;
   font-weight: 600;
   border-radius: 6px;
-  text-decoration: none !important; /* Remove underline */
+  text-decoration: none !important;
   transition: all 0.2s;
   white-space: nowrap;
+  box-shadow: none !important;
 }
 
 a.card__button:hover {
   background-color: var(--gls-primary-dark, #6a9d4d);
   color: #fff;
   transform: translateY(-1px);
-  text-decoration: none !important; /* Ensure no underline on hover */
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+a.card__button:after {
+  display: none !important; /* Remove any pseudo-element underlines */
 }
