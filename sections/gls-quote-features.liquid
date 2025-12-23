@@ -1,0 +1,101 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .gls-feature-title {
+    color: rgb(var(--color-button));
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section gls-quote-section--features">
+  <div class="gls-quote-container">
+    
+    <!-- Why Request A Quote Grid -->
+    <div class="gls-quote-features">
+      <h2 class="gls-features-heading">{{ section.settings.features_heading | default: 'Why Request A Quote?' }}</h2>
+      <div class="gls-features-grid">
+        {%- for block in section.blocks -%}
+          <div class="gls-feature-card">
+            <div class="gls-feature-icon">
+              {%- if block.settings.icon_svg != blank -%}
+                {{ block.settings.icon_svg }}
+              {%- else -%}
+                {% render 'icon-check' %} 
+              {%- endif -%}
+            </div>
+            <h3 class="gls-feature-title">{{ block.settings.title }}</h3>
+            <p class="gls-feature-text">{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote Page Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "features_heading",
+      "label": "Features Heading",
+      "default": "Why Request A Quote?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Icon SVG Code",
+          "info": "Paste SVG code here. If empty, a default checkmark will be used."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Feature description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Page Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Best Price Guarantee",
+            "text": "We match or beat any competitor pricing."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Fast Turnaround",
+            "text": "Get your custom packaging faster than ever."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Quality",
+            "text": "Top-tier materials for your brand."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

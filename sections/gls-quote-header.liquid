@@ -1,0 +1,138 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .gls-quote-header__image {
+    width: {{ section.settings.header_image_width }}px;
+    height: {{ section.settings.header_image_width }}px;
+  }
+  .gls-quote-header__title {
+    font-size: {{ section.settings.header_title_size }}px;
+    color: {{ section.settings.header_title_color }};
+  }
+  .gls-quote-header__tagline {
+    font-size: {{ section.settings.header_tagline_size }}px;
+    color: {{ section.settings.header_tagline_color }};
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section gls-quote-section--header">
+  <div class="gls-quote-container">
+    
+    <!-- Breadcrumbs -->
+    <nav class="gls-breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>/</span>
+      <span aria-current="page">{{ page.title }}</span>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="gls-quote-header">
+      {%- if section.settings.header_image != blank -%}
+        <img 
+          src="{{ section.settings.header_image | image_url: width: section.settings.header_image_width }}" 
+          alt="{{ section.settings.header_title | escape }}"
+          class="gls-quote-header__image"
+          width="{{ section.settings.header_image_width }}"
+          height="{{ section.settings.header_image_width }}"
+          loading="eager"
+        >
+      {%- endif -%}
+      
+      <{{ section.settings.header_heading_tag }} class="gls-quote-header__title">
+        {{ section.settings.header_title | default: page.title }}
+      </{{ section.settings.header_heading_tag }}>
+      
+      {%- if section.settings.header_tagline != blank -%}
+        <p class="gls-quote-header__tagline">{{ section.settings.header_tagline }}</p>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote Page Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Page Header"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Header Image/Icon"
+    },
+    {
+      "type": "range",
+      "id": "header_image_width",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Width",
+      "default": 120
+    },
+    {
+      "type": "text",
+      "id": "header_title",
+      "label": "Page Title",
+      "default": "Request A Quote"
+    },
+    {
+      "type": "color",
+      "id": "header_title_color",
+      "label": "Title Color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "header_title_size",
+      "min": 16,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "header_heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "textarea",
+      "id": "header_tagline",
+      "label": "Tagline",
+      "default": "Get a personalized quote for your bulk packaging needs within 24 hours."
+    },
+    {
+      "type": "color",
+      "id": "header_tagline_color",
+      "label": "Tagline Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "header_tagline_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Font Size",
+      "default": 18
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Page Header"
+    }
+  ]
+}
+{% endschema %}

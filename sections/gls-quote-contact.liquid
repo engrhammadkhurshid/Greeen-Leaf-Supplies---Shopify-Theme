@@ -1,0 +1,68 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .gls-contact-heading {
+    color: rgb(var(--color-button));
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section gls-quote-section--contact">
+  <div class="gls-quote-container">
+    
+    <!-- Prefer to Talk? -->
+    <div class="gls-quote-contact">
+      <h2 class="gls-contact-heading">{{ section.settings.contact_heading | default: 'Prefer to Talk?' }}</h2>
+      <p class="gls-contact-text">{{ section.settings.contact_text | default: 'Give us a call or email us directly.' }}</p>
+      <div class="gls-contact-actions">
+        {%- if section.settings.phone_number != blank -%}
+          <a href="tel:{{ section.settings.phone_number }}" class="gls-btn gls-btn--outline">
+            {% render 'icon-phone' %} {{ section.settings.phone_number }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.email_address != blank -%}
+          <a href="mailto:{{ section.settings.email_address }}" class="gls-btn gls-btn--outline">
+            {% render 'icon-mail' %} {{ section.settings.email_address }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote Page Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact Heading",
+      "default": "Prefer to Talk?"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "Give us a call or email us directly."
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Email Address",
+      "default": "sales@greenleafsupplies.com"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Page Contact"
+    }
+  ]
+}
+{% endschema %}

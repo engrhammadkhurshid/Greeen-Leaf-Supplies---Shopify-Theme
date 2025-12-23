@@ -1,0 +1,113 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .gls-form-label {
+    color: rgb(var(--color-button));
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section gls-quote-section--form">
+  <div class="gls-quote-container">
+    
+    <!-- Request Quote Form -->
+    <div class="gls-quote-form-wrapper">
+      {%- form 'contact', id: 'RequestQuoteForm', class: 'gls-quote-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="gls-form-group gls-form-group--full">
+            <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
+              {% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}
+            </div>
+          </div>
+        {%- elsif form.errors -%}
+          <div class="gls-form-group gls-form-group--full">
+            <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
+              {% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Name">Full Name *</label>
+          <input class="gls-form-input" autocomplete="name" type="text" id="ContactForm-Name" name="contact[Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="John Doe" required>
+        </div>
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Email">Email Address *</label>
+          <input class="gls-form-input" autocomplete="email" type="email" id="ContactForm-Email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" placeholder="john@example.com" required>
+        </div>
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Phone">Phone Number *</label>
+          <input class="gls-form-input" autocomplete="tel" type="tel" id="ContactForm-Phone" name="contact[Phone]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="+1 (555) 000-0000" required>
+        </div>
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Company">Company / Business Name</label>
+          <input class="gls-form-input" autocomplete="organization" type="text" id="ContactForm-Company" name="contact[Company]" placeholder="Your Company Ltd.">
+        </div>
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Product">Required Products *</label>
+          <select class="gls-form-select" id="ContactForm-Product" name="contact[Product_Category]" required>
+            <option value="" disabled selected>Select a category...</option>
+            {%- assign categories = section.settings.product_categories | split: ',' -%}
+            {%- for category in categories -%}
+              <option value="{{ category | strip }}">{{ category | strip }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+
+        <div class="gls-form-group">
+          <label class="gls-form-label" for="ContactForm-Quantity">Estimated Quantity</label>
+          <input class="gls-form-input" type="text" id="ContactForm-Quantity" name="contact[Quantity]" placeholder="e.g. 1000 units">
+        </div>
+
+        <div class="gls-form-group gls-form-group--full">
+          <label class="gls-form-label" for="ContactForm-Date">Expected Delivery Date</label>
+          <input class="gls-form-input" type="date" id="ContactForm-Date" name="contact[Expected_Date]">
+        </div>
+
+        <div class="gls-form-group gls-form-group--full">
+          <label class="gls-form-label" for="ContactForm-Body">Comments / Specific Requirements</label>
+          <textarea class="gls-form-textarea" id="ContactForm-Body" name="contact[body]" placeholder="Please describe your project requirements, specific dimensions, or any other details...">{{ form.body }}</textarea>
+        </div>
+
+        <div class="gls-form-submit">
+          <button type="submit" class="gls-btn">
+            {{ section.settings.submit_button_text | default: 'Request A Quote' }}
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote Page Form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Form Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "product_categories",
+      "label": "Product Categories (Comma Separated)",
+      "default": "Mylar Bags, Jars & Containers, Pre-Roll Packaging, Custom Branding, Other"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit Button Text",
+      "default": "Request A Quote"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Page Form"
+    }
+  ]
+}
+{% endschema %}
