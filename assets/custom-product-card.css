@@ -17,15 +17,32 @@
   border-color: var(--gls-primary, #7AAE5C);
 }
 
-/* Image Area - Fixed Height */
+/* Remove default Shopify card shadows/borders on inner elements */
+.card--card:after,
+.card--standard .card__inner:after {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+}
+
 .card__inner {
   position: relative;
   width: 100%;
-  height: 260px; /* Fixed height to prevent stretching on large screens */
+  height: 260px; /* Fixed height */
   padding-top: 0 !important; 
+  padding-bottom: 0 !important;
   background-color: #f9fafb;
   flex-shrink: 0;
   overflow: hidden;
+  border-radius: 0 !important; /* Ensure no internal radius */
+  border: none !important; /* Remove any default borders */
+  box-shadow: none !important; /* Remove any default shadows */
+}
+
+/* Disable ratio pseudo-element if it exists */
+.card__inner:before {
+  display: none !important;
+  padding-bottom: 0 !important;
 }
 
 .card__media {
@@ -35,6 +52,8 @@
   width: 100%;
   height: 100%;
   border-radius: 0 !important;
+  margin: 0 !important; /* Reset default margins */
+  z-index: 1;
 }
 
 .card__media .media {
@@ -46,8 +65,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent !important;
+  border: none !important;
+  padding-bottom: 0 !important; /* Override any ratio padding */
 }
 
+.card__media .media:before {
+  display: none !important; /* Disable ratio pseudo-element */
+}
+
+/* General Image Styles */
 .card__media img {
   object-fit: contain !important;
   height: 100% !important;
@@ -55,11 +82,38 @@
   max-height: 100%;
   max-width: 100%;
   padding: 16px;
-  transition: transform 0.5s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  visibility: visible !important;
 }
 
-.product-card-wrapper .card:hover .card__media img {
+/* Primary Image */
+.card__media .media > img:first-child {
+  opacity: 1 !important;
+  z-index: 1;
+}
+
+/* Secondary Image (Hover Image) */
+.card__media .media > img + img {
+  opacity: 0 !important;
+  z-index: 2;
+}
+
+/* Hover Effects */
+.product-card-wrapper .card:hover .card__media .media > img + img {
+  opacity: 1 !important;
   transform: scale(1.05);
+}
+
+.product-card-wrapper .card:hover .card__media .media > img:first-child {
+  transform: scale(1.05);
+}
+
+/* Disable default hover effects that might hide the image */
+.media--hover-effect > img:first-child:only-child {
+  opacity: 1 !important;
 }
 
 /* SKU Badge */
@@ -209,5 +263,5 @@ a.card__button:hover {
 }
 
 a.card__button:after {
-  display: none !important; /* Remove any pseudo-element underlines */
+  display: none !important;
 }
