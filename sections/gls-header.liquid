@@ -53,6 +53,19 @@
   <!-- Main Header -->
   <div class="gls-header__main">
     <div class="gls-header__container">
+      <!-- Mobile Menu Toggle -->
+      <button class="gls-header__mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="gls-header__mobile-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="gls-header__mobile-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
       <!-- Logo -->
       <a href="{{ routes.root_url }}" class="gls-header__logo-link">
         {% if section.settings.logo != blank %}
@@ -94,6 +107,14 @@
 
       <!-- Account & Cart -->
       <div class="gls-header__actions">
+        <!-- Mobile Search Toggle -->
+        <button class="gls-header__mobile-search-toggle" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+
         <!-- Account -->
         <a href="{{ routes.account_url }}" class="gls-header__account">
           <div class="gls-header__account-text">
@@ -232,19 +253,6 @@
       <a href="{{ section.settings.quote_link | default: '#' }}" class="gls-header__quote-btn">
         {{ section.settings.quote_text }}
       </a>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="gls-header__mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <svg class="gls-header__mobile-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-        <svg class="gls-header__mobile-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
     </div>
   </nav>
 
@@ -419,6 +427,30 @@
           ticking = true;
         }
       }, { passive: true });
+    }
+
+    // ========================================
+    // Mobile Search Toggle
+    // ========================================
+    const searchToggle = document.querySelector('.gls-header__mobile-search-toggle');
+    const searchBar = document.querySelector('.gls-header__search');
+    
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchBar.classList.toggle('is-active');
+        if (searchBar.classList.contains('is-active')) {
+          const input = searchBar.querySelector('input[type="search"]');
+          if (input) setTimeout(() => input.focus(), 100);
+        }
+      });
+
+      // Close search when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!searchBar.contains(e.target) && !searchToggle.contains(e.target) && searchBar.classList.contains('is-active')) {
+          searchBar.classList.remove('is-active');
+        }
+      });
     }
   });
 </script>

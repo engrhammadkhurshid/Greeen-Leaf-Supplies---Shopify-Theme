@@ -447,46 +447,78 @@
 /* Mobile (768px and below) */
 @media screen and (max-width: 768px) {
   .gls-footer-newsletter {
-    padding: 24px 0;
+    padding: 32px 0;
   }
 
   .gls-footer-newsletter__container {
-    padding: 0 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+    padding: 0 20px;
+  }
+
+  .gls-footer-newsletter__content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gls-footer-newsletter__icon {
+    display: none; /* Hide icon for minimal look */
   }
 
   .gls-footer-newsletter__title {
-    font-size: 16px;
+    font-size: 20px;
+  }
+  
+  .gls-footer-newsletter__description {
+    font-size: 14px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .gls-footer-newsletter__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .gls-newsletter-form__wrapper {
     flex-direction: column;
     gap: 12px;
     width: 100%;
-    max-width: 320px;
+    max-width: 100%;
   }
 
   .gls-newsletter-form__input {
     width: 100%;
-    border-radius: 6px;
+    height: 44px;
+    border-radius: 4px;
   }
 
   .gls-newsletter-form__button {
     width: 100%;
-    border-radius: 6px;
+    height: 44px;
+    border-radius: 4px;
   }
 
   .gls-footer-main {
-    padding: 40px 0;
+    padding: 40px 0 20px;
   }
 
   .gls-footer-main__container {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 0 16px;
+    gap: 40px;
+    padding: 0 20px;
   }
 
   .gls-footer-column--brand {
     text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 32px;
+  }
+  
+  .gls-footer-brand {
+    justify-content: center;
   }
 
   .gls-footer-column--menu,
@@ -495,15 +527,25 @@
   }
 
   .gls-footer-column__title {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
   }
 
   .gls-footer-menu {
-    gap: 10px;
+    gap: 16px;
+  }
+  
+  .gls-footer-menu__link {
+    padding: 4px 0;
+    display: block;
   }
 
   .gls-footer-contact {
     align-items: center;
+    gap: 16px;
   }
 
   .gls-footer-contact__item {
@@ -511,22 +553,27 @@
   }
 
   .gls-footer-bottom {
-    padding: 20px 0;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   .gls-footer-bottom__container {
-    padding: 0 16px;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 20px;
+    text-align: center;
   }
 
   .gls-footer-bottom__links {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 20px;
   }
 
   .gls-footer-payment-icons {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
   }
 }
 
