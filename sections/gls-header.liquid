@@ -1,5 +1,27 @@
 {{ 'gls-header.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  .gls-header__top-bar {
+    font-size: {{ section.settings.top_bar_font_size }}px;
+    color: {{ section.settings.top_bar_text_color }};
+  }
+  .gls-header__top-bar a {
+    color: {{ section.settings.top_bar_text_color }};
+  }
+  .gls-header__nav-link {
+    font-size: {{ section.settings.nav_link_font_size }}px;
+    color: {{ section.settings.nav_link_color }};
+  }
+  .gls-header__mega-menu-title {
+    font-size: {{ section.settings.mega_menu_heading_size }}px;
+    color: {{ section.settings.mega_menu_heading_color }};
+  }
+  .gls-header__mega-menu-link {
+    font-size: {{ section.settings.mega_menu_link_size }}px;
+    color: {{ section.settings.mega_menu_link_color }};
+  }
+{%- endstyle -%}
+
 <header class="gls-header" data-section-id="{{ section.id }}">
   <!-- Top Bar -->
   <div class="gls-header__top-bar">
@@ -493,6 +515,74 @@
       "type": "url",
       "id": "quote_link",
       "label": "Quote Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "top_bar_font_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Bar Font Size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text_color",
+      "label": "Top Bar Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "nav_link_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Navigation Link Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "nav_link_color",
+      "label": "Navigation Link Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "mega_menu_heading_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Mega Menu Heading Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "mega_menu_heading_color",
+      "label": "Mega Menu Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "mega_menu_link_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mega Menu Link Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "mega_menu_link_color",
+      "label": "Mega Menu Link Color",
+      "default": "#666666"
     }
   ],
   "blocks": [

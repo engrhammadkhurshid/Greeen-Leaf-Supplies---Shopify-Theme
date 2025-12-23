@@ -6,6 +6,7 @@
     --social-details-bg: {{ section.settings.details_bg_color }};
     --social-icon-color: {{ section.settings.icon_color }};
     --social-text-color: {{ section.settings.text_color }};
+    --social-text-size: {{ section.settings.text_size }}px;
   }
 {%- endstyle -%}
 
@@ -31,7 +32,7 @@
             {%- endcase -%}
           {%- endif -%}
         </div>
-        <div class="gls-sticky-socials__details">
+        <div class="gls-sticky-socials__details" style="font-size: var(--social-text-size);">
           {{ block.settings.text }}
         </div>
       </a>
@@ -68,6 +69,16 @@
       "id": "text_color",
       "label": "Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size",
+      "default": 14
     }
   ],
   "blocks": [

@@ -225,10 +225,10 @@
     
     <div class="features-grid__header">
       {%- if section.settings.main_heading != blank -%}
-        <h2 class="features-grid__heading">{{ section.settings.main_heading }}</h2>
+        <{{ section.settings.main_heading_tag }} class="features-grid__heading">{{ section.settings.main_heading }}</{{ section.settings.main_heading_tag }}>
       {%- endif -%}
       {%- if section.settings.tagline != blank -%}
-        <p class="features-grid__subheading">{{ section.settings.tagline }}</p>
+        <{{ section.settings.tagline_tag }} class="features-grid__subheading">{{ section.settings.tagline }}</{{ section.settings.tagline_tag }}>
       {%- endif -%}
     </div>
 
@@ -259,10 +259,10 @@
             </div>
           </div>
           <div class="feature-content">
-            <h3 class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
+            <{{ section.settings.feature_heading_tag }} class="feature-heading" style="font-size: {{ section.settings.feature_heading_size }}px; color: {{ section.settings.feature_heading_color }};">
               {{ block.settings.heading }}
-            </h3>
-            <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }};">
+            </{{ section.settings.feature_heading_tag }}>
+            <p class="feature-text" style="font-size: {{ section.settings.feature_text_size }}px; color: {{ section.settings.feature_text_color }};">
               {{ block.settings.text }}
             </p>
           </div>
@@ -302,10 +302,10 @@
             </div>
           </div>
           <div class="feature-content">
-            <h3 class="feature-heading" style="font-size: {{ block.settings.heading_size }}px; color: {{ block.settings.heading_color }};">
+            <{{ section.settings.feature_heading_tag }} class="feature-heading" style="font-size: {{ section.settings.feature_heading_size }}px; color: {{ section.settings.feature_heading_color }};">
               {{ block.settings.heading }}
-            </h3>
-            <p class="feature-text" style="font-size: {{ block.settings.text_size }}px; color: {{ block.settings.text_color }};">
+            </{{ section.settings.feature_heading_tag }}>
+            <p class="feature-text" style="font-size: {{ section.settings.feature_text_size }}px; color: {{ section.settings.feature_text_color }};">
               {{ block.settings.text }}
             </p>
           </div>
@@ -354,6 +354,22 @@
       "default": "Our Features"
     },
     {
+      "type": "select",
+      "id": "main_heading_tag",
+      "label": "Headline Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h2"
+    },
+    {
       "type": "range",
       "id": "main_heading_size",
       "min": 24,
@@ -380,6 +396,22 @@
       "default": "Everything you need."
     },
     {
+      "type": "select",
+      "id": "tagline_tag",
+      "label": "Tagline Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "p"
+    },
+    {
       "type": "range",
       "id": "tagline_size",
       "min": 12,
@@ -394,6 +426,56 @@
       "id": "tagline_color",
       "label": "Tagline Color",
       "default": "#060316"
+    },
+    {
+      "type": "header",
+      "content": "Feature Item Typography"
+    },
+    {
+      "type": "range",
+      "id": "feature_heading_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature Heading Size",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "feature_heading_tag",
+      "label": "Feature Heading Tag",
+      "options": [
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "color",
+      "id": "feature_heading_color",
+      "label": "Feature Heading Color",
+      "default": "#060316"
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature Text Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature Text Color",
+      "default": "#4b5563"
     },
     {
       "type": "header",

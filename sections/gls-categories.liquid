@@ -12,13 +12,17 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  #shopify-section-{{ section.id }} .gls-categories__heading {
+    color: {{ section.settings.heading_color }};
+    font-size: clamp({{ section.settings.heading_size | times: 0.6 }}px, 4vw, {{ section.settings.heading_size }}px);
+  }
 {%- endstyle -%}
 
 <section class="gls-categories section-{{ section.id }}-padding">
   <div class="gls-categories__container page-width">
     <div class="gls-categories__header">
       {%- if section.settings.heading != blank -%}
-        <h2 class="gls-categories__heading">{{ section.settings.heading }}</h2>
+        <{{ section.settings.heading_tag }} class="gls-categories__heading">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
       {%- endif -%}
       {%- if section.settings.view_all_link != blank -%}
         <a href="{{ section.settings.view_all_link }}" class="gls-categories__view-all">
@@ -57,7 +61,13 @@
               </{{ heading_tag }}>
             {%- endif -%}
             {%- if block.settings.subtitle != blank -%}
-              <p class="gls-categories__subtitle">{{ block.settings.subtitle }}</p>
+              {%- assign subtitle_tag = block.settings.subtitle_tag | default: 'p' -%}
+              <{{ subtitle_tag }} 
+                class="gls-categories__subtitle"
+                style="font-size: {{ block.settings.subtitle_size }}px; color: {{ block.settings.subtitle_color }};"
+              >
+                {{ block.settings.subtitle }}
+              </{{ subtitle_tag }}>
             {%- endif -%}
           </div>
         </a>
@@ -77,6 +87,38 @@
       "id": "heading",
       "label": "Heading",
       "default": "Featured Categories"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#060316"
     },
     {
       "type": "text",
@@ -170,6 +212,38 @@
           "type": "color",
           "id": "heading_color",
           "label": "Heading Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_tag",
+          "label": "Subtitle Tag",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "p", "label": "Paragraph" },
+            { "value": "span", "label": "Span" }
+          ],
+          "default": "p"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Subtitle Size",
+          "default": 16
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Subtitle Color",
           "default": "#FFFFFF"
         }
       ]

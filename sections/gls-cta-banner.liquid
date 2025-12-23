@@ -12,16 +12,25 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  #shopify-section-{{ section.id }} .gls-cta-banner__heading {
+    color: {{ section.settings.heading_color }};
+    font-size: clamp({{ section.settings.heading_size | times: 0.6 }}px, 4vw, {{ section.settings.heading_size }}px);
+  }
+
+  #shopify-section-{{ section.id }} .gls-cta-banner__text {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+  }
 {%- endstyle -%}
 
 <section class="gls-cta-banner section-{{ section.id }}-padding">
   <div class="gls-cta-banner__container page-width">
     <div class="gls-cta-banner__content">
       {%- if section.settings.heading != blank -%}
-        <h2 class="gls-cta-banner__heading">{{ section.settings.heading }}</h2>
+        <{{ section.settings.heading_tag }} class="gls-cta-banner__heading">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
       {%- endif -%}
       {%- if section.settings.text != blank -%}
-        <p class="gls-cta-banner__text">{{ section.settings.text }}</p>
+        <{{ section.settings.text_tag }} class="gls-cta-banner__text">{{ section.settings.text }}</{{ section.settings.text_tag }}>
       {%- endif -%}
     </div>
     {%- if section.settings.button_label != blank -%}
@@ -45,10 +54,74 @@
       "default": "Partner with Green Leaf Supplies"
     },
     {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
       "type": "textarea",
       "id": "text",
       "label": "Text",
       "default": "We fulfill all packaging and tableware requirements for our clients, providing dependable, durable, and premium solutions."
+    },
+    {
+      "type": "select",
+      "id": "text_tag",
+      "label": "Text Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "p"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
     },
     {
       "type": "text",

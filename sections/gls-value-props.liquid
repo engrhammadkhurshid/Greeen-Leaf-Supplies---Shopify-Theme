@@ -12,6 +12,16 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #shopify-section-{{ section.id }} .gls-value-props__title {
+    color: {{ section.settings.title_color }};
+    font-size: clamp({{ section.settings.title_size | times: 0.8 }}px, 2vw, {{ section.settings.title_size }}px);
+  }
+
+  #shopify-section-{{ section.id }} .gls-value-props__subtitle {
+    color: {{ section.settings.subtitle_color }};
+    font-size: clamp({{ section.settings.subtitle_size | times: 0.8 }}px, 2vw, {{ section.settings.subtitle_size }}px);
+  }
 {%- endstyle -%}
 
 <section class="gls-value-props section-{{ section.id }}-padding">
@@ -41,10 +51,10 @@
           </div>
           <div class="gls-value-props__content">
             {%- if block.settings.title != blank -%}
-              <strong class="gls-value-props__title">{{ block.settings.title }}</strong>
+              <{{ section.settings.title_tag }} class="gls-value-props__title">{{ block.settings.title }}</{{ section.settings.title_tag }}>
             {%- endif -%}
             {%- if block.settings.subtitle != blank -%}
-              <span class="gls-value-props__subtitle">{{ block.settings.subtitle }}</span>
+              <{{ section.settings.subtitle_tag }} class="gls-value-props__subtitle">{{ block.settings.subtitle }}</{{ section.settings.subtitle_tag }}>
             {%- endif -%}
           </div>
         </div>
@@ -78,6 +88,74 @@
       "default": 25,
       "unit": "px",
       "label": "Padding Bottom"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Title Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Size (Desktop)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#060316"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_tag",
+      "label": "Subtitle Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "span"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#6b7280"
     }
   ],
   "blocks": [

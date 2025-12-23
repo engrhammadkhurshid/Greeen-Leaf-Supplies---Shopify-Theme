@@ -15,6 +15,31 @@
       margin-top: {{ section.settings.margin_top }}px;
     }
   }
+
+  .gls-footer-newsletter__title {
+    color: {{ section.settings.newsletter_title_color }};
+    font-size: {{ section.settings.newsletter_title_size }}px;
+  }
+
+  .gls-footer-newsletter__description {
+    color: {{ section.settings.newsletter_desc_color }};
+    font-size: {{ section.settings.newsletter_desc_size }}px;
+  }
+
+  .gls-footer-brand__description {
+    color: {{ section.settings.brand_desc_color }};
+    font-size: {{ section.settings.brand_desc_size }}px;
+  }
+
+  .gls-footer-column__heading {
+    color: {{ section.settings.column_heading_color }};
+    font-size: {{ section.settings.column_heading_size }}px;
+  }
+
+  .gls-footer-menu__link, .gls-footer-contact__item {
+    color: {{ section.settings.link_color }};
+    font-size: {{ section.settings.link_size }}px;
+  }
 {%- endstyle -%}
 
 <footer class="gls-footer-section">
@@ -30,7 +55,7 @@
           </svg>
         </div>
         <div class="gls-footer-newsletter__text">
-          <h3 class="gls-footer-newsletter__title">{{ section.settings.newsletter_title }}</h3>
+          <{{ section.settings.newsletter_title_tag }} class="gls-footer-newsletter__title">{{ section.settings.newsletter_title }}</{{ section.settings.newsletter_title_tag }}>
           <p class="gls-footer-newsletter__description">{{ section.settings.newsletter_description }}</p>
         </div>
       </div>
@@ -294,6 +319,58 @@
     },
     {
       "type": "header",
+      "content": "Newsletter Typography"
+    },
+    {
+      "type": "range",
+      "id": "newsletter_heading_size",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Newsletter Heading Size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "newsletter_heading_tag",
+      "label": "Newsletter Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_heading_color",
+      "label": "Newsletter Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "newsletter_text_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Newsletter Text Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "newsletter_text_color",
+      "label": "Newsletter Text Color",
+      "default": "#e2e8f0"
+    },
+    {
+      "type": "header",
       "content": "Brand"
     },
     {
@@ -318,10 +395,80 @@
       "default": "Industrial-grade packaging solutions designed for the circular economy. We help businesses scale without the waste."
     },
     {
+      "type": "header",
+      "content": "Brand Typography"
+    },
+    {
+      "type": "range",
+      "id": "brand_text_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Brand Description Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "brand_text_color",
+      "label": "Brand Description Color",
+      "default": "#cbd5e1"
+    },
+    {
       "type": "checkbox",
       "id": "show_social",
       "label": "Show social icons",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Column Typography"
+    },
+    {
+      "type": "range",
+      "id": "column_heading_size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Column Heading Size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "column_heading_tag",
+      "label": "Column Heading Tag",
+      "options": [
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "color",
+      "id": "column_heading_color",
+      "label": "Column Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "column_link_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Column Link Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "column_link_color",
+      "label": "Column Link Color",
+      "default": "#cbd5e1"
     },
     {
       "type": "header",

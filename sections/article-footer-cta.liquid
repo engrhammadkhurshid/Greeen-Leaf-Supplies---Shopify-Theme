@@ -64,16 +64,17 @@
     align-items: center;
   }
 
-  .article-cta-option h3 {
-    font-size: 22px;
+  .article-cta-option-title {
+    font-size: {{ section.settings.option_title_size }}px;
     margin: 0 0 15px 0;
-    color: {{ section.settings.heading_color }};
+    color: {{ section.settings.option_title_color }};
   }
 
-  .article-cta-option p {
+  .article-cta-option-desc {
     margin: 0 0 25px 0;
     line-height: 1.6;
-    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.option_desc_size }}px;
+    color: {{ section.settings.option_desc_color }};
   }
 
   .article-cta-btn {
@@ -95,15 +96,15 @@
 <div class="page-width section-{{ section.id }}-padding">
   <div class="article-cta-container">
     <div class="article-cta-header">
-      <h2 class="article-cta-title">{{ section.settings.heading }}</h2>
-      <p class="article-cta-tagline">{{ section.settings.tagline }}</p>
+      <{{ section.settings.heading_tag }} class="article-cta-title">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
+      <{{ section.settings.tagline_tag }} class="article-cta-tagline">{{ section.settings.tagline }}</{{ section.settings.tagline_tag }}>
     </div>
 
     <div class="article-cta-options">
       <!-- Option A -->
       <div class="article-cta-option">
-        <h3>{{ section.settings.option_a_title }}</h3>
-        <p>{{ section.settings.option_a_desc }}</p>
+        <{{ section.settings.option_title_tag }} class="article-cta-option-title">{{ section.settings.option_a_title }}</{{ section.settings.option_title_tag }}>
+        <p class="article-cta-option-desc">{{ section.settings.option_a_desc }}</p>
         <a href="{{ section.settings.option_a_link }}" class="article-cta-btn" style="background-color: {{ section.settings.option_a_btn_bg }}; color: {{ section.settings.option_a_btn_text }};">
           {{ section.settings.option_a_btn_label }}
         </a>
@@ -111,8 +112,8 @@
 
       <!-- Option B -->
       <div class="article-cta-option">
-        <h3>{{ section.settings.option_b_title }}</h3>
-        <p>{{ section.settings.option_b_desc }}</p>
+        <{{ section.settings.option_title_tag }} class="article-cta-option-title">{{ section.settings.option_b_title }}</{{ section.settings.option_title_tag }}>
+        <p class="article-cta-option-desc">{{ section.settings.option_b_desc }}</p>
         <a href="{{ section.settings.option_b_link }}" class="article-cta-btn" style="background-color: {{ section.settings.option_b_btn_bg }}; color: {{ section.settings.option_b_btn_text }};">
           {{ section.settings.option_b_btn_label }}
         </a>
@@ -138,6 +139,22 @@
       "default": "Ready to Upgrade Your Packaging?"
     },
     {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h2"
+    },
+    {
       "type": "range",
       "id": "heading_size",
       "min": 20,
@@ -160,6 +177,22 @@
       "default": "Choose the option that fits your needs."
     },
     {
+      "type": "select",
+      "id": "tagline_tag",
+      "label": "Tagline Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "p"
+    },
+    {
       "type": "range",
       "id": "tagline_size",
       "min": 14,
@@ -168,6 +201,56 @@
       "unit": "px",
       "label": "Tagline Size",
       "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Option Typography"
+    },
+    {
+      "type": "range",
+      "id": "option_title_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Option Title Size",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "option_title_tag",
+      "label": "Option Title Tag",
+      "options": [
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph" },
+        { "value": "span", "label": "Span" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "color",
+      "id": "option_title_color",
+      "label": "Option Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "option_desc_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Option Description Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "option_desc_color",
+      "label": "Option Description Color",
+      "default": "#4a4a4a"
     },
     {
       "type": "color",
