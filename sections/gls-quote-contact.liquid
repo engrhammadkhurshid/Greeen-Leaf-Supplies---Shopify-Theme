@@ -50,9 +50,9 @@
     border-radius: {{ section.settings.image_border_radius }}px;
     width: 100%;
     max-width: {{ section.settings.image_max_width }}px;
-    height: {{ section.settings.image_height }}px;
-    object-fit: {{ section.settings.image_object_fit }};
-    object-position: {{ section.settings.image_object_position }};
+    height: {{ section.settings.image_height | default: 350 }}px;
+    object-fit: {{ section.settings.image_object_fit | default: 'cover' }};
+    object-position: {{ section.settings.image_object_position | default: 'center' }};
     display: block;
   }
 {%- endstyle -%}
@@ -123,7 +123,7 @@
 
 {% schema %}
 {
-  "name": "Quote - Contact Section",
+  "name": "Quote - Contact (v2)",
   "settings": [
     {
       "type": "header",
