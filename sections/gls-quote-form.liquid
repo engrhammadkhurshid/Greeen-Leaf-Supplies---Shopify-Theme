@@ -14,14 +14,16 @@
       {%- form 'contact', id: 'RequestQuoteForm', class: 'gls-quote-form' -%}
         {%- if form.posted_successfully? -%}
           <div class="gls-form-group gls-form-group--full">
-            <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
-              {% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}
+            <div class="form-status form-status-list form__message form__message--success" tabindex="-1" autofocus>
+              <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 4.5L6.5 11.5L3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ 'templates.contact.form.post_success' | t }}
             </div>
           </div>
         {%- elsif form.errors -%}
           <div class="gls-form-group gls-form-group--full">
-            <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
-              {% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}
+            <div class="form-status form-status-list form__message form__message--error" tabindex="-1" autofocus>
+              <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="0.75" fill="currentColor"/></svg>
+              {{ 'templates.contact.form.error_heading' | t }}
             </div>
           </div>
         {%- endif -%}
