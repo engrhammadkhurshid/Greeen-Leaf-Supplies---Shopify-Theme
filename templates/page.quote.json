@@ -12,6 +12,9 @@
     "header": {
       "type": "gls-quote-header",
       "settings": {
+        "section_width": 800,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
         "header_image": "shopify://shop_images/GLS_Get_A_Quote_Page_Featured_Image.webp",
         "header_image_width": 200,
         "heading": "Request A Quote",
