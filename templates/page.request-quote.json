@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "header": {
@@ -11,6 +20,7 @@
         "vertical_alignment": "center",
         "content_horizontal_alignment": "flex-start",
         "text_alignment": "left",
+        "image": "shopify://shop_images/GLS_Get_A_Quote_Page_Featured_Image.webp",
         "image_width": 300,
         "image_height": 0,
         "image_object_fit": "cover",
@@ -18,11 +28,11 @@
         "image_border_radius": 0,
         "heading": "Request A Quote",
         "heading_tag": "h1",
-        "heading_font_size": 32,
-        "heading_color": "#000000",
+        "heading_font_size": 36,
+        "heading_color": "#7aae5c",
         "tagline": "Get the best prices for your bulk orders.",
-        "tagline_tag": "p",
-        "tagline_font_size": 16,
+        "tagline_tag": "h2",
+        "tagline_font_size": 15,
         "tagline_color": "#666666"
       }
     }
