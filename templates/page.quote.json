@@ -113,7 +113,11 @@
         "button_icon_size": 20,
         "image_column_width": 60,
         "contact_image": "shopify://shop_images/GLS_Customer_Support_Team_Photo.webp",
+        "image_alt": "",
         "image_max_width": 600,
+        "image_height": 350,
+        "image_object_fit": "cover",
+        "image_object_position": "center",
         "image_border_radius": 10
       }
     }

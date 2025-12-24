@@ -48,7 +48,12 @@
   }
   .gls-quote-section--contact .gls-contact-image {
     border-radius: {{ section.settings.image_border_radius }}px;
+    width: 100%;
     max-width: {{ section.settings.image_max_width }}px;
+    height: {{ section.settings.image_height }}px;
+    object-fit: {{ section.settings.image_object_fit }};
+    object-position: {{ section.settings.image_object_position }};
+    display: block;
   }
 {%- endstyle -%}
 
@@ -98,12 +103,12 @@
       <!-- Right Column: Image -->
       <div class="gls-contact-image-column">
         {%- if section.settings.contact_image != blank -%}
-          <img 
-            src="{{ section.settings.contact_image | image_url: width: section.settings.image_max_width | times: 2 }}"
-            alt="{{ section.settings.contact_heading | escape }}"
-            class="gls-contact-image"
-            loading="lazy"
-          >
+          {{ section.settings.contact_image | image_url: width: 1200 | image_tag:
+            class: 'gls-contact-image',
+            loading: 'lazy',
+            alt: section.settings.image_alt | default: section.settings.contact_heading | escape,
+            widths: '200, 300, 400, 500, 600, 800, 1000, 1200'
+          }}
         {%- else -%}
           <div class="gls-contact-image-placeholder">
             {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -471,14 +476,60 @@
       "label": "Contact Image"
     },
     {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "info": "Describe the image for accessibility. Leave blank to use heading text."
+    },
+    {
       "type": "range",
       "id": "image_max_width",
       "min": 200,
-      "max": 600,
+      "max": 800,
       "step": 20,
       "unit": "px",
       "label": "Image Max Width",
       "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Image Height",
+      "default": 350
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image Scaling",
+      "options": [
+        { "value": "cover", "label": "Cover (fill area, crop if needed)" },
+        { "value": "contain", "label": "Contain (fit whole image)" },
+        { "value": "fill", "label": "Fill (stretch to fit)" },
+        { "value": "none", "label": "None (original size)" },
+        { "value": "scale-down", "label": "Scale Down (smaller of contain/none)" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "image_object_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" },
+        { "value": "top left", "label": "Top Left" },
+        { "value": "top right", "label": "Top Right" },
+        { "value": "bottom left", "label": "Bottom Left" },
+        { "value": "bottom right", "label": "Bottom Right" }
+      ],
+      "default": "center"
     },
     {
       "type": "range",
