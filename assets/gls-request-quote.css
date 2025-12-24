@@ -122,6 +122,27 @@
   opacity: 0.9;
 }
 
+.gls-form-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.gls-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: gls-spin 1s ease-in-out infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes gls-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* Form Message Styles */
 .form__message {
   margin-bottom: 20px;

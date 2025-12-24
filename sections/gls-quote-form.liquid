@@ -106,45 +106,45 @@
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-name">
               {{ section.settings.label_name }}
-              {%- if section.settings.required_name -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_name == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <input class="gls-form-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ section.settings.placeholder_name }}" {% if section.settings.required_name %}required{% endif %}>
+            <input class="gls-form-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ section.settings.placeholder_name }}" {% unless section.settings.required_name == false %}required{% endunless %}>
           </div>
 
           <!-- Email -->
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-email">
               {{ section.settings.label_email }}
-              {%- if section.settings.required_email -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_email == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <input class="gls-form-input" autocomplete="email" type="email" id="ContactForm-email" name="contact[email]" spellcheck="false" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" aria-required="true" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactForm-email-error"{% endif %} placeholder="{{ section.settings.placeholder_email }}" {% if section.settings.required_email %}required{% endif %}>
+            <input class="gls-form-input" autocomplete="email" type="email" id="ContactForm-email" name="contact[email]" spellcheck="false" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" aria-required="true" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactForm-email-error"{% endif %} placeholder="{{ section.settings.placeholder_email }}" {% unless section.settings.required_email == false %}required{% endunless %}>
           </div>
 
           <!-- Phone -->
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-phone">
               {{ section.settings.label_phone }}
-              {%- if section.settings.required_phone -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_phone == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <input class="gls-form-input" autocomplete="tel" type="tel" id="ContactForm-phone" name="contact[Phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ section.settings.placeholder_phone }}" {% if section.settings.required_phone %}required{% endif %}>
+            <input class="gls-form-input" autocomplete="tel" type="tel" id="ContactForm-phone" name="contact[Phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ section.settings.placeholder_phone }}" {% unless section.settings.required_phone == false %}required{% endunless %}>
           </div>
 
           <!-- Company -->
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-company">
               {{ section.settings.label_company }}
-              {%- if section.settings.required_company -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_company == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <input class="gls-form-input" type="text" id="ContactForm-company" name="contact[Company]" placeholder="{{ section.settings.placeholder_company }}" {% if section.settings.required_company %}required{% endif %}>
+            <input class="gls-form-input" type="text" id="ContactForm-company" name="contact[Company]" placeholder="{{ section.settings.placeholder_company }}" {% unless section.settings.required_company == false %}required{% endunless %}>
           </div>
 
           <!-- Product Category -->
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-category">
               {{ section.settings.label_category }}
-              {%- if section.settings.required_category -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_category == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <select class="gls-form-select" id="ContactForm-category" name="contact[Product Category]" {% if section.settings.required_category %}required{% endif %}>
+            <select class="gls-form-select" id="ContactForm-category" name="contact[Product Category]" {% unless section.settings.required_category == false %}required{% endunless %}>
               {%- assign categories = section.settings.product_categories | split: ',' -%}
               {%- for category in categories -%}
                 <option value="{{ category | strip }}">{{ category | strip }}</option>
@@ -156,26 +156,32 @@
           <div class="gls-form-group">
             <label class="gls-form-label" for="ContactForm-quantity">
               {{ section.settings.label_quantity }}
-              {%- if section.settings.required_quantity -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_quantity == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <input class="gls-form-input" type="text" id="ContactForm-quantity" name="contact[Quantity]" placeholder="{{ section.settings.placeholder_quantity }}" {% if section.settings.required_quantity %}required{% endif %}>
+            <input class="gls-form-input" type="text" id="ContactForm-quantity" name="contact[Quantity]" placeholder="{{ section.settings.placeholder_quantity }}" {% unless section.settings.required_quantity == false %}required{% endunless %}>
           </div>
 
           <!-- Message -->
           <div class="gls-form-group gls-form-group--full">
             <label class="gls-form-label" for="ContactForm-body">
               {{ section.settings.label_message }}
-              {%- if section.settings.required_message -%}<span aria-hidden="true">*</span>{%- endif -%}
+              {%- unless section.settings.required_message == false -%}<span aria-hidden="true">*</span>{%- endunless -%}
             </label>
-            <textarea class="gls-form-textarea" rows="10" id="ContactForm-body" name="contact[body]" placeholder="{{ section.settings.placeholder_message }}" {% if section.settings.required_message %}required{% endif %}>
+            <textarea class="gls-form-textarea" rows="10" id="ContactForm-body" name="contact[body]" placeholder="{{ section.settings.placeholder_message }}" {% unless section.settings.required_message == false %}required{% endunless %}>
               {{- form.body -}}
             </textarea>
           </div>
 
           <!-- Submit -->
           <div class="gls-form-submit">
-            <button type="submit" class="gls-form-btn">
-              {{ section.settings.submit_text }}
+            <button type="submit" class="gls-form-btn" id="QuoteFormSubmit" {% if form.posted_successfully? %}disabled{% endif %}>
+              <span class="gls-form-btn-text">
+                {%- if form.posted_successfully? -%}
+                  Quote Submitted
+                {%- else -%}
+                  {{ section.settings.submit_text }}
+                {%- endif -%}
+              </span>
             </button>
           </div>
         </div>
@@ -183,6 +189,35 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('QuoteForm');
+    var button = document.getElementById('QuoteFormSubmit');
+    
+    if (form && button) {
+      var buttonText = button.querySelector('.gls-form-btn-text');
+      
+      form.addEventListener('submit', function(e) {
+        // Explicitly check validity just in case
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          return;
+        }
+
+        // Only show loading state if form is valid (browser validation usually handles this before submit event)
+        button.setAttribute('disabled', 'disabled');
+        if (buttonText) {
+          buttonText.textContent = 'Sending...';
+        }
+        
+        var spinner = document.createElement('span');
+        spinner.className = 'gls-spinner';
+        button.appendChild(spinner);
+      });
+    }
+  });
+</script>
 
 {% schema %}
 {
