@@ -1,0 +1,601 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+
+  .section-{{ section.id }} .gls-quote-container {
+    max-width: {{ section.settings.section_max_width }}px;
+  }
+
+  .section-{{ section.id }} .gls-quote-form-wrapper {
+    background-color: {{ section.settings.form_bg_color }};
+    border-radius: {{ section.settings.form_border_radius }}px;
+    padding: {{ section.settings.form_padding }}px;
+    max-width: {{ section.settings.form_max_width }}px;
+    {% if section.settings.form_border_width > 0 %}
+      border: {{ section.settings.form_border_width }}px solid {{ section.settings.form_border_color }};
+    {% endif %}
+    {% if section.settings.form_shadow %}
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    {% endif %}
+  }
+
+  .section-{{ section.id }} .gls-quote-form-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    color: {{ section.settings.title_color }};
+    margin-bottom: {{ section.settings.title_margin_bottom }}px;
+    text-align: {{ section.settings.title_alignment }};
+  }
+
+  .section-{{ section.id }} .gls-form-label {
+    color: {{ section.settings.label_color }};
+    font-size: {{ section.settings.label_font_size }}px;
+  }
+
+  .section-{{ section.id }} .gls-form-input,
+  .section-{{ section.id }} .gls-form-select,
+  .section-{{ section.id }} .gls-form-textarea {
+    background-color: {{ section.settings.input_bg_color }};
+    border: {{ section.settings.input_border_width }}px solid {{ section.settings.input_border_color }};
+    border-radius: {{ section.settings.input_border_radius }}px;
+    padding: {{ section.settings.input_padding }}px;
+    font-size: {{ section.settings.input_font_size }}px;
+    color: {{ section.settings.input_text_color }};
+  }
+
+  .section-{{ section.id }} .gls-form-input:focus,
+  .section-{{ section.id }} .gls-form-select:focus,
+  .section-{{ section.id }} .gls-form-textarea:focus {
+    border-color: {{ section.settings.input_focus_border_color }};
+  }
+
+  .section-{{ section.id }} .gls-form-btn {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: bold;
+  }
+
+  .section-{{ section.id }} .gls-form-btn:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section section-{{ section.id }}-padding section-{{ section.id }}">
+  <div class="gls-quote-container">
+    
+    <div class="gls-quote-form-wrapper">
+      {%- if section.settings.title != blank -%}
+        <{{ section.settings.title_tag }} class="gls-quote-form-title">
+          {{ section.settings.title }}
+        </{{ section.settings.title_tag }}>
+      {%- endif -%}
+
+      {%- form 'contact', id: 'QuoteForm', class: 'gls-quote-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form__message form__message--success" tabindex="-1" autofocus>
+            <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13" width="13" height="13">
+              <path d="M6.5 12.35C9.73087 12.35 12.35 9.73087 12.35 6.5C12.35 3.26913 9.73087 0.65 6.5 0.65C3.26913 0.65 0.65 3.26913 0.65 6.5C0.65 9.73087 3.26913 12.35 6.5 12.35Z" fill="#4285f4" stroke="white" stroke-width="0.7"/>
+              <path d="M5.53271 8.66357L9.25213 4.68197" stroke="white"/>
+              <path d="M4.10645 6.7688L6.13766 8.62553" stroke="white"/>
+            </svg>
+            <span>{{ 'templates.contact.form.post_success' | t }}</span>
+          </div>
+        {%- elsif form.errors -%}
+          <div class="form__message form__message--error">
+            <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13" width="13" height="13">
+              <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+              <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+              <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+              <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413Z" fill="white"/>
+            </svg>
+            <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="gls-quote-form-grid">
+          <!-- Full Name -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-name">{{ section.settings.label_name }}</label>
+            <input class="gls-form-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ section.settings.placeholder_name }}">
+          </div>
+
+          <!-- Email -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-email">{{ section.settings.label_email }}</label>
+            <input class="gls-form-input" autocomplete="email" type="email" id="ContactForm-email" name="contact[email]" spellcheck="false" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" aria-required="true" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactForm-email-error"{% endif %} placeholder="{{ section.settings.placeholder_email }}" required>
+          </div>
+
+          <!-- Phone -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-phone">{{ section.settings.label_phone }}</label>
+            <input class="gls-form-input" autocomplete="tel" type="tel" id="ContactForm-phone" name="contact[Phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ section.settings.placeholder_phone }}">
+          </div>
+
+          <!-- Company -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-company">{{ section.settings.label_company }}</label>
+            <input class="gls-form-input" type="text" id="ContactForm-company" name="contact[Company]" placeholder="{{ section.settings.placeholder_company }}">
+          </div>
+
+          <!-- Product Category -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-category">{{ section.settings.label_category }}</label>
+            <select class="gls-form-select" id="ContactForm-category" name="contact[Product Category]">
+              {%- assign categories = section.settings.product_categories | split: ',' -%}
+              {%- for category in categories -%}
+                <option value="{{ category | strip }}">{{ category | strip }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+
+          <!-- Quantity -->
+          <div class="gls-form-group">
+            <label class="gls-form-label" for="ContactForm-quantity">{{ section.settings.label_quantity }}</label>
+            <input class="gls-form-input" type="text" id="ContactForm-quantity" name="contact[Quantity]" placeholder="{{ section.settings.placeholder_quantity }}">
+          </div>
+
+          <!-- Message -->
+          <div class="gls-form-group gls-form-group--full">
+            <label class="gls-form-label" for="ContactForm-body">{{ section.settings.label_message }}</label>
+            <textarea class="gls-form-textarea" rows="10" id="ContactForm-body" name="contact[body]" placeholder="{{ section.settings.placeholder_message }}">
+              {{- form.body -}}
+            </textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="gls-form-submit">
+            <button type="submit" class="gls-form-btn">
+              {{ section.settings.submit_text }}
+            </button>
+          </div>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote - Form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 400,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Max Width",
+      "default": 1000
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Form Container"
+    },
+    {
+      "type": "range",
+      "id": "form_max_width",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Form Max Width",
+      "default": 800
+    },
+    {
+      "type": "color",
+      "id": "form_bg_color",
+      "label": "Form Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "form_padding",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Form Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "form_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Form Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "form_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Form Border Width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "form_border_color",
+      "label": "Form Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "checkbox",
+      "id": "form_shadow",
+      "label": "Enable Shadow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title Text",
+      "default": "Fill Out Your Quote Request"
+    },
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Title Tag",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Font Size",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Title Margin Bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Labels & Inputs"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Label Font Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "input_bg_color",
+      "label": "Input Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input Border Color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_border_color",
+      "label": "Input Focus Border Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "range",
+      "id": "input_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Input Border Width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Input Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "input_padding",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Input Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Input Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Button Text",
+      "default": "Request A Quote"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button Hover Background",
+      "default": "#FDC15F"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Vertical Padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Horizontal Padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Field Labels & Placeholders"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Name Label",
+      "default": "Full Name"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_name",
+      "label": "Name Placeholder",
+      "default": "Enter your full name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Email Label",
+      "default": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_email",
+      "label": "Email Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "label_phone",
+      "label": "Phone Label",
+      "default": "Phone Number"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_phone",
+      "label": "Phone Placeholder",
+      "default": "Enter your phone number"
+    },
+    {
+      "type": "text",
+      "id": "label_company",
+      "label": "Company Label",
+      "default": "Company Name"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_company",
+      "label": "Company Placeholder",
+      "default": "Enter your company name"
+    },
+    {
+      "type": "text",
+      "id": "label_category",
+      "label": "Category Label",
+      "default": "Product Category"
+    },
+    {
+      "type": "textarea",
+      "id": "product_categories",
+      "label": "Product Categories (Comma Separated)",
+      "default": "Food Packaging, Disposable Tableware, Napkins & Sanitary, Food & Liquid"
+    },
+    {
+      "type": "text",
+      "id": "label_quantity",
+      "label": "Quantity Label",
+      "default": "Estimated Quantity"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_quantity",
+      "label": "Quantity Placeholder",
+      "default": "e.g., 1000 units"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "Message Label",
+      "default": "Additional Details"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_message",
+      "label": "Message Placeholder",
+      "default": "Tell us more about your requirements..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote - Form"
+    }
+  ]
+}
+{% endschema %}

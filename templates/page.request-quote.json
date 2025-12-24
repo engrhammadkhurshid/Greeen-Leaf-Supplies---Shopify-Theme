@@ -35,9 +35,66 @@
         "tagline_font_size": 15,
         "tagline_color": "#666666"
       }
+    },
+    "form": {
+      "type": "gls-quote-form",
+      "settings": {
+        "section_max_width": 1000,
+        "margin_top": 0,
+        "margin_bottom": 60,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "form_max_width": 800,
+        "form_bg_color": "#ffffff",
+        "form_padding": 40,
+        "form_border_radius": 16,
+        "form_border_width": 1,
+        "form_border_color": "#e5e5e5",
+        "form_shadow": true,
+        "title": "Fill Out Your Quote Request",
+        "title_tag": "h2",
+        "title_font_size": 28,
+        "title_color": "#7AAE5C",
+        "title_alignment": "center",
+        "title_margin_bottom": 30,
+        "label_color": "#333333",
+        "label_font_size": 14,
+        "input_bg_color": "#ffffff",
+        "input_text_color": "#333333",
+        "input_border_color": "#dddddd",
+        "input_focus_border_color": "#7AAE5C",
+        "input_border_width": 1,
+        "input_border_radius": 8,
+        "input_padding": 12,
+        "input_font_size": 16,
+        "submit_text": "Request A Quote",
+        "button_bg_color": "#7AAE5C",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#FDC15F",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_y": 16,
+        "button_padding_x": 32,
+        "button_border_radius": 8,
+        "button_font_size": 16,
+        "label_name": "Full Name",
+        "placeholder_name": "Enter your full name",
+        "label_email": "Email Address",
+        "placeholder_email": "Enter your email",
+        "label_phone": "Phone Number",
+        "placeholder_phone": "Enter your phone number",
+        "label_company": "Company Name",
+        "placeholder_company": "Enter your company name",
+        "label_category": "Product Category",
+        "product_categories": "Food Packaging, Disposable Tableware, Napkins & Sanitary, Food & Liquid",
+        "label_quantity": "Estimated Quantity",
+        "placeholder_quantity": "e.g., 1000 units",
+        "label_message": "Additional Details",
+        "placeholder_message": "Tell us more about your requirements..."
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "form"
   ]
 }
