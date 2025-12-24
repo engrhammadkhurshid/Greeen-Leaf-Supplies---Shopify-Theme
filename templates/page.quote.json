@@ -1,10 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "header": {
       "type": "gls-quote-header",
       "settings": {
-        "heading": "Request A Quote",
-        "tagline": "Get a personalized quote for your bulk packaging needs within 24 hours."
+        "header_image": "shopify://shop_images/GLS_Get_A_Quote_Page_Featured_Image.webp",
+        "header_image_width": 200,
+        "heading": "",
+        "heading_color": "#7aae5c",
+        "heading_size": 36,
+        "heading_tag": "h1",
+        "tagline": "Get a personalized quote for your bulk packaging needs within 24 hours.",
+        "tagline_color": "#666666",
+        "tagline_size": 18
       }
     },
     "form": {
@@ -20,6 +36,7 @@
         "feature_1": {
           "type": "feature",
           "settings": {
+            "icon_svg": "",
             "title": "Best Price Guarantee",
             "text": "We match or beat any competitor pricing on bulk orders."
           }
@@ -27,6 +44,7 @@
         "feature_2": {
           "type": "feature",
           "settings": {
+            "icon_svg": "",
             "title": "Fast Turnaround",
             "text": "Get your custom quote within 24 business hours."
           }
@@ -34,6 +52,7 @@
         "feature_3": {
           "type": "feature",
           "settings": {
+            "icon_svg": "",
             "title": "Expert Support",
             "text": "Dedicated account manager for all your packaging needs."
           }
