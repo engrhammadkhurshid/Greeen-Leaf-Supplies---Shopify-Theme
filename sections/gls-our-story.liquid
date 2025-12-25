@@ -73,20 +73,7 @@
 <div class="gls-our-story section-{{ section.id }}-padding">
   <div class="gls-our-story__grid">
     
-    <!-- Left Column: Image -->
-    <div class="gls-our-story__column gls-our-story__image-column" id="ImageColumn-{{ section.id }}">
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1500 | image_tag:
-          loading: 'lazy',
-          widths: '165, 360, 535, 750, 1070, 1500',
-          class: 'gls-our-story__image'
-        }}
-      {%- else -%}
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-      {%- endif -%}
-    </div>
-
-    <!-- Right Column: Content -->
+    <!-- Left Column: Content -->
     <div class="gls-our-story__column gls-our-story__content-column" id="ContentColumn-{{ section.id }}">
       {%- if section.settings.headline_text != blank -%}
         <{{ section.settings.headline_tag }} class="gls-our-story__headline {{ section.settings.headline_size }}">
@@ -104,6 +91,19 @@
         <a href="{{ section.settings.button_link }}" class="button button--primary">
           {{ section.settings.button_label }}
         </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: Image -->
+    <div class="gls-our-story__column gls-our-story__image-column" id="ImageColumn-{{ section.id }}">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          widths: '165, 360, 535, 750, 1070, 1500',
+          class: 'gls-our-story__image'
+        }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     </div>
 
@@ -172,7 +172,7 @@
     },
     {
       "type": "header",
-      "content": "Left Column (Image) Settings"
+      "content": "Right Column (Image) Settings"
     },
     {
       "type": "image_picker",
@@ -282,7 +282,7 @@
     },
     {
       "type": "header",
-      "content": "Right Column (Content) Settings"
+      "content": "Left Column (Content) Settings"
     },
     {
       "type": "text",

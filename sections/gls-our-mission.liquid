@@ -59,7 +59,7 @@
     color: {{ section.settings.headline_color }};
     text-align: {{ section.settings.headline_alignment }};
     line-height: {{ section.settings.headline_line_height }};
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
   }
 
   .gls-our-mission-{{ section.id }} .gls-our-mission__content {
@@ -80,6 +80,7 @@
     padding: {{ section.settings.right_column_padding }}px;
     justify-content: {{ section.settings.right_column_vertical_align }};
     text-align: {{ section.settings.right_column_horizontal_align }};
+    gap: {{ section.settings.right_column_row_gap }}px;
   }
 {%- endstyle -%}
 
@@ -288,6 +289,16 @@
       "step": 4,
       "unit": "px",
       "label": "Right Column Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "right_column_row_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Right Column Row Gap",
       "default": 20
     },
     {
