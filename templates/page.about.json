@@ -50,66 +50,53 @@
       }
     },
     "values": {
-      "type": "multicolumn",
+      "type": "gls-core-values",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "value_1": {
+          "type": "value_block",
           "settings": {
             "title": "Quality First",
-            "text": "<p>We source only the finest materials and maintain rigorous quality control standards to ensure every product meets our high expectations.</p>",
-            "link_label": "",
-            "link": ""
+            "text": "We source only the finest materials and maintain rigorous quality control standards to ensure every product meets our high expectations.",
+            "icon_name": "star"
           }
         },
-        "column2": {
-          "type": "column",
+        "value_2": {
+          "type": "value_block",
           "settings": {
             "title": "Sustainability",
-            "text": "<p>Our eco-friendly packaging solutions help businesses reduce their environmental footprint without compromising on performance.</p>",
-            "link_label": "",
-            "link": ""
+            "text": "Our eco-friendly packaging solutions help businesses reduce their environmental footprint without compromising on performance.",
+            "icon_name": "leaf"
           }
         },
-        "column3": {
-          "type": "column",
+        "value_3": {
+          "type": "value_block",
           "settings": {
             "title": "Customer Focus",
-            "text": "<p>Your success is our priority. We work closely with each client to understand their unique needs and deliver tailored solutions.</p>",
-            "link_label": "",
-            "link": ""
+            "text": "Your success is our priority. We work closely with each client to understand their unique needs and deliver tailored solutions.",
+            "icon_name": "heart"
           }
         },
-        "column4": {
-          "type": "column",
+        "value_4": {
+          "type": "value_block",
           "settings": {
             "title": "Innovation",
-            "text": "<p>We continuously explore new materials and technologies to bring you the most advanced packaging solutions available.</p>",
-            "link_label": "",
-            "link": ""
+            "text": "We continuously explore new materials and technologies to bring you the most advanced packaging solutions available.",
+            "icon_name": "box"
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3",
-        "column4"
+        "value_1",
+        "value_2",
+        "value_3",
+        "value_4"
       ],
       "settings": {
-        "title": "Our Core Values",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Our Core Values",
+        "heading_size": 48,
+        "heading_column_width": 30,
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "cta": {
