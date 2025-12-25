@@ -1,0 +1,364 @@
+{{ 'gls-prefer-to-talk.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .section-{{ section.id }} .gls-talk-container {
+    max-width: {{ section.settings.section_max_width }}px;
+  }
+
+  .section-{{ section.id }} .gls-talk-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    color: {{ section.settings.title_color }};
+  }
+
+  .section-{{ section.id }} .gls-talk-text {
+    font-size: {{ section.settings.text_font_size }}px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .section-{{ section.id }} .gls-talk-content {
+    font-size: {{ section.settings.content_font_size }}px;
+    color: {{ section.settings.content_color }};
+  }
+
+  .section-{{ section.id }} .gls-talk-btn {
+    font-size: {{ section.settings.btn_font_size }}px;
+  }
+
+  /* Phone Button Styles */
+  .section-{{ section.id }} .gls-talk-btn-phone {
+    background-color: {{ section.settings.phone_btn_bg }};
+    color: {{ section.settings.phone_btn_text }};
+    border-color: {{ section.settings.phone_btn_border }};
+  }
+  .section-{{ section.id }} .gls-talk-btn-phone:hover {
+    background-color: {{ section.settings.phone_btn_hover_bg }};
+    color: {{ section.settings.phone_btn_hover_text }};
+  }
+
+  /* Email Button Styles */
+  .section-{{ section.id }} .gls-talk-btn-email {
+    background-color: {{ section.settings.email_btn_bg }};
+    color: {{ section.settings.email_btn_text }};
+    border-color: {{ section.settings.email_btn_border }};
+  }
+  .section-{{ section.id }} .gls-talk-btn-email:hover {
+    background-color: {{ section.settings.email_btn_hover_bg }};
+    color: {{ section.settings.email_btn_hover_text }};
+  }
+{%- endstyle -%}
+
+<div class="gls-talk-section section-{{ section.id }}-padding section-{{ section.id }}">
+  <div class="gls-talk-container">
+    
+    <div class="gls-talk-header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="gls-talk-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="gls-talk-text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+    
+    <div class="gls-talk-grid">
+      <div class="gls-talk-left">
+        {%- if section.settings.left_content != blank -%}
+          <div class="gls-talk-content">{{ section.settings.left_content }}</div>
+        {%- endif -%}
+        
+        <div class="gls-talk-buttons">
+          {%- if section.settings.phone_number != blank -%}
+            <a href="tel:{{ section.settings.phone_number }}" class="gls-talk-btn gls-talk-btn-phone">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1.01A11.36 11.36 0 018.59 3.99C8.59 3.44 8.14 3 7.59 3H4.03C3.48 3 3 3.45 3 4.01 3 13.42 10.58 21 19.99 21c.56 0 1.01-.45 1.01-1v-3.61c0-.56-.45-1.01-1-1.01zM5.21 5h1.65c.18 1.13.37 2.24.59 3.32l-1.17 1.17C5.96 8.11 5.6 6.6 5.21 5zm13.79 13.79c-1.6 -.39-3.11-.75-4.49-1.08l1.17-1.17c1.08.22 2.19.41 3.32.59v1.66z"/></svg>
+              {{ section.settings.phone_label | default: section.settings.phone_number }}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.email_address != blank -%}
+            <a href="mailto:{{ section.settings.email_address }}" class="gls-talk-btn gls-talk-btn-email">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              {{ section.settings.email_label | default: section.settings.email_address }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <div class="gls-talk-right">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 800 | image_tag: class: 'gls-talk-image', loading: 'lazy' }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'gls-talk-image' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prefer to Talk",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 400,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Max Width",
+      "default": 1200
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "Prefer to talk to someone?"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline Font Size",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Headline Color",
+      "default": "#333333"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body Text",
+      "default": "<p>Our team is here to help you with any questions you may have.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Body Text Font Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Left Column Content"
+    },
+    {
+      "type": "richtext",
+      "id": "left_content",
+      "label": "Left Column Text",
+      "default": "<p>Give us a call or send us an email and we'll get back to you as soon as possible.</p>"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Content Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Phone Button"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Button Label",
+      "default": "Call Us"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_bg",
+      "label": "Background Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_text",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_border",
+      "label": "Border Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_hover_bg",
+      "label": "Hover Background",
+      "default": "#68964e"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_hover_text",
+      "label": "Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Email Button"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Email Address",
+      "default": "info@example.com"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Button Label",
+      "default": "Email Us"
+    },
+    {
+      "type": "color",
+      "id": "email_btn_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "email_btn_text",
+      "label": "Text Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "email_btn_border",
+      "label": "Border Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "email_btn_hover_bg",
+      "label": "Hover Background",
+      "default": "#f0f9eb"
+    },
+    {
+      "type": "color",
+      "id": "email_btn_hover_text",
+      "label": "Hover Text Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "range",
+      "id": "btn_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Right Column Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prefer to Talk"
+    }
+  ]
+}
+{% endschema %}
