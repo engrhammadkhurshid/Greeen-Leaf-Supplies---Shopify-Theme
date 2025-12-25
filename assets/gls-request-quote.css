@@ -47,8 +47,32 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Header Mobile Styles */
   .gls-quote-header-grid {
     grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .gls-quote-header-content-col {
+    align-items: center;
+  }
+
+  .gls-quote-header-image-col {
+    justify-content: center;
+  }
+
+  /* Form Mobile Styles */
+  .gls-quote-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gls-quote-form-wrapper {
+    padding: 20px !important;
+  }
+  
+  .gls-country-code {
+    width: 90px !important;
   }
 }
 
