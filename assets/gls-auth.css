@@ -122,3 +122,14 @@
 .gls-auth-card .login-view:has(~ .recover-password-view:target) {
   display: none;
 }
+
+.gls-auth-logo {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.gls-auth-logo img {
+  display: block;
+  height: auto;
+}
