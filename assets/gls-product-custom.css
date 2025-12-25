@@ -92,3 +92,15 @@
   border-color: #7AAE5C;
   box-shadow: 0 0 0 1px #7AAE5C;
 }
+
+/* Product Title Adjustment */
+.product__title h1 {
+  font-size: 2.4rem !important; /* Reduced from default */
+  line-height: 1.3;
+}
+
+@media screen and (min-width: 750px) {
+  .product__title h1 {
+    font-size: 3rem !important; /* Reduced from default desktop size */
+  }
+}
