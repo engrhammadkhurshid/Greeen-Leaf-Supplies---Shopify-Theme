@@ -1,0 +1,48 @@
+.gls-our-story {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.gls-our-story__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .gls-our-story__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.gls-our-story__column {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gls-our-story__image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gls-our-story__headline {
+  margin: 0 0 1.5rem;
+  line-height: 1.2;
+}
+
+.gls-our-story__text {
+  margin: 0 0 2rem;
+  line-height: 1.6;
+}
+
+.gls-our-story__text p {
+  margin-bottom: 1rem;
+}
+
+.gls-our-story__text p:last-child {
+  margin-bottom: 0;
+}

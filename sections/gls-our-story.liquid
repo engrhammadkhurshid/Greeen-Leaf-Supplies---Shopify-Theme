@@ -1,0 +1,380 @@
+{{ 'gls-our-story.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Left Column (Image) Custom Styles */
+  #ImageColumn-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.image_vertical_alignment }};
+    align-items: {{ section.settings.image_horizontal_alignment }};
+    padding: {{ section.settings.image_padding }}px;
+    background-color: {{ section.settings.image_bg_color }};
+    overflow: hidden;
+    height: 100%;
+    min-height: {{ section.settings.image_min_height }}px;
+  }
+
+  #ImageColumn-{{ section.id }} img,
+  #ImageColumn-{{ section.id }} svg {
+    width: {{ section.settings.image_scale }}%;
+    {% if section.settings.image_height_mode == 'fixed' %}
+      height: {{ section.settings.image_fixed_height }}px;
+    {% else %}
+      height: auto;
+    {% endif %}
+    object-fit: {{ section.settings.image_object_fit }};
+    display: block;
+  }
+
+  /* Right Column (Content) Custom Styles */
+  #ContentColumn-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.content_vertical_alignment }};
+    align-items: {{ section.settings.content_horizontal_alignment }};
+    text-align: {{ section.settings.text_alignment }};
+    padding: {{ section.settings.content_padding }}px;
+    background-color: {{ section.settings.content_bg_color }};
+  }
+
+  #ContentColumn-{{ section.id }} .gls-our-story__headline {
+    color: {{ section.settings.headline_color }};
+    font-family: {{ section.settings.headline_font_family }};
+    margin-bottom: 1.5rem;
+  }
+
+  #ContentColumn-{{ section.id }} .gls-our-story__text {
+    color: {{ section.settings.text_color }};
+    font-family: {{ section.settings.text_font_family }};
+    margin-bottom: 2rem;
+  }
+{%- endstyle -%}
+
+<div class="gls-our-story page-width section-{{ section.id }}-padding">
+  <div class="gls-our-story__grid">
+    
+    <!-- Left Column: Image -->
+    <div class="gls-our-story__column gls-our-story__image-column" id="ImageColumn-{{ section.id }}">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          widths: '165, 360, 535, 750, 1070, 1500',
+          class: 'gls-our-story__image'
+        }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: Content -->
+    <div class="gls-our-story__column gls-our-story__content-column" id="ContentColumn-{{ section.id }}">
+      {%- if section.settings.headline_text != blank -%}
+        <{{ section.settings.headline_tag }} class="gls-our-story__headline {{ section.settings.headline_size }}">
+          {{ section.settings.headline_text }}
+        </{{ section.settings.headline_tag }}>
+      {%- endif -%}
+
+      {%- if section.settings.content_text != blank -%}
+        <div class="gls-our-story__text rte">
+          {{ section.settings.content_text }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="button button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GLS Our Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Left Column (Image) Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_scale",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Scale (Width)",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "image_height_mode",
+      "options": [
+        { "value": "auto", "label": "Auto (Aspect Ratio)" },
+        { "value": "fixed", "label": "Fixed Height" }
+      ],
+      "default": "auto",
+      "label": "Image Height Mode"
+    },
+    {
+      "type": "range",
+      "id": "image_fixed_height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Fixed Image Height",
+      "default": 400,
+      "info": "Only applies if Height Mode is Fixed"
+    },
+    {
+      "type": "range",
+      "id": "image_min_height",
+      "min": 0,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Column Min Height",
+      "default": 300
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" },
+        { "value": "fill", "label": "Fill" },
+        { "value": "scale-down", "label": "Scale Down" }
+      ],
+      "default": "cover",
+      "label": "Object Fit Type"
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Column Padding",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_vertical_alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center",
+      "label": "Vertical Alignment"
+    },
+    {
+      "type": "select",
+      "id": "image_horizontal_alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center",
+      "label": "Horizontal Alignment"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Column Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Right Column (Content) Settings"
+    },
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Headline Text",
+      "default": "Our Story"
+    },
+    {
+      "type": "select",
+      "id": "headline_tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2",
+      "label": "Headline Tag"
+    },
+    {
+      "type": "select",
+      "id": "headline_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h1",
+      "label": "Headline Size"
+    },
+    {
+      "type": "select",
+      "id": "headline_font_family",
+      "label": "Headline Font Family",
+      "options": [
+        { "value": "var(--font-heading-family)", "label": "Lato (Heading)" },
+        { "value": "var(--font-body-family)", "label": "Montserrat (Body)" }
+      ],
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline Color",
+      "default": "#000000"
+    },
+    {
+      "type": "richtext",
+      "id": "content_text",
+      "label": "Content Text",
+      "default": "<p>Share your brand's story here.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Text Font Family",
+      "options": [
+        { "value": "var(--font-heading-family)", "label": "Lato (Heading)" },
+        { "value": "var(--font-body-family)", "label": "Montserrat (Body)" }
+      ],
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Column Padding",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center",
+      "label": "Vertical Alignment"
+    },
+    {
+      "type": "select",
+      "id": "content_horizontal_alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start",
+      "label": "Horizontal Alignment"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "label": "Text Alignment"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Column Background Color",
+      "default": "transparent"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GLS Our Story",
+      "settings": {
+        "headline_text": "Our Story",
+        "content_text": "<p>Tell your story here.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}
