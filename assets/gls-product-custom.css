@@ -1,0 +1,94 @@
+
+/* GLS Custom Product Page Styles */
+
+@media screen and (min-width: 990px) {
+  .product.grid {
+    width: 70% !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+  }
+  
+  /* Adjust grid columns to fit the new width */
+  .product--large:not(.product--no-media) .product__media-wrapper,
+  .product--small:not(.product--no-media) .product__info-wrapper {
+    max-width: 50%;
+    width: 50%;
+  }
+  
+  .product--large:not(.product--no-media) .product__info-wrapper,
+  .product--small:not(.product--no-media) .product__media-wrapper {
+    max-width: 50%;
+    width: 50%;
+  }
+  
+  .product--medium:not(.product--no-media) .product__media-wrapper,
+  .product--medium:not(.product--no-media) .product__info-wrapper {
+    max-width: 50%;
+    width: 50%;
+  }
+}
+
+/* Rating Styles */
+.gls-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 0;
+  animation: glsFadeIn 0.8s ease forwards;
+}
+
+.gls-stars {
+  color: #FFD700; /* Golden */
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.gls-sold-count {
+  color: #333;
+  font-weight: 500;
+}
+
+@keyframes glsFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Metafield Badges Styling Updates */
+.product-metafield-badges {
+  margin-top: 0 !important;
+  margin-bottom: 24px !important;
+  animation: glsFadeIn 0.8s ease forwards 0.2s; /* Staggered animation */
+  opacity: 0;
+}
+
+.pm-badge {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pm-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* General Polish */
+.product__title h1 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.product__info-container .price {
+  font-size: 1.2em;
+}
+
+.quantity__input,
+.quantity__button {
+  transition: all 0.2s ease;
+}
+
+.quantity__input:focus {
+  border-color: #7AAE5C;
+  box-shadow: 0 0 0 1px #7AAE5C;
+}
