@@ -565,7 +565,7 @@
               {%- when 'buy_buttons' -%}
                 {% if product.price == 0 %}
                   <div class="product-form__buttons" {{ block.shopify_attributes }}>
-                    <a href="/pages/contact?product={{ product.title | url_encode }}" class="product-form__submit button button--full-width button--primary">
+                    <a href="/pages/request-a-quote?product={{ product.title | url_encode }}" class="product-form__submit button button--full-width button--primary">
                       Request a Quote
                     </a>
                   </div>
