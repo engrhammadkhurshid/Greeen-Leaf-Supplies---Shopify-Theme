@@ -293,6 +293,9 @@
                   {%- for field in product.metafields.custom -%}
                     {%- assign key = field.first -%}
                     {%- assign value = field.last -%}
+                    {%- if key == 'short_description' -%}
+                      {%- continue -%}
+                    {%- endif -%}
                     {%- if value != blank -%}
                       <span class="pm-badge pm-badge-default">
                         {{ key | replace: '_', ' ' | capitalize }}: {{ value }}
@@ -300,6 +303,11 @@
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
+                {%- if product.metafields.custom.short_description != blank -%}
+                  <div class="product__short-description rte" style="margin-bottom: 1.5rem;">
+                    {{ product.metafields.custom.short_description }}
+                  </div>
+                {%- endif -%}
 
                 <div
                   id="Quantity-Form-{{ section.id }}"
