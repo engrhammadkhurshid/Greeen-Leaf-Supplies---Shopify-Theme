@@ -56,6 +56,12 @@
 
   .gls-quote-header-content-col {
     align-items: center;
+    text-align: center;
+  }
+
+  .gls-quote-header-title,
+  .gls-quote-header-tagline {
+    text-align: center;
   }
 
   .gls-quote-header-image-col {
