@@ -1,0 +1,551 @@
+{{ 'gls-request-quote.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .gls-quote-section--contact .gls-quote-contact-grid {
+    max-width: {{ section.settings.section_width }}px;
+    gap: {{ section.settings.column_gap }}px;
+    padding: {{ section.settings.section_padding }}px;
+    background-color: {{ section.settings.section_bg_color }};
+    border-radius: {{ section.settings.section_border_radius }}px;
+  }
+  .gls-quote-section--contact .gls-contact-content {
+    text-align: {{ section.settings.content_alignment }};
+  }
+  .gls-quote-section--contact .gls-contact-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    color: {{ section.settings.heading_color }};
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+  }
+  .gls-quote-section--contact .gls-contact-text {
+    font-size: {{ section.settings.text_size }}px;
+    color: {{ section.settings.text_color }};
+    line-height: {{ section.settings.text_line_height }};
+    margin-bottom: {{ section.settings.text_margin_bottom }}px;
+  }
+  .gls-quote-section--contact .gls-contact-buttons {
+    gap: {{ section.settings.buttons_gap }}px;
+    justify-content: {{ section.settings.buttons_alignment }};
+  }
+  .gls-quote-section--contact .gls-contact-btn {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+  }
+  .gls-quote-section--contact .gls-contact-btn:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+  }
+  .gls-quote-section--contact .gls-contact-btn svg {
+    width: {{ section.settings.button_icon_size }}px;
+    height: {{ section.settings.button_icon_size }}px;
+  }
+  .gls-quote-section--contact .gls-contact-image-column {
+    flex: 0 0 {{ section.settings.image_column_width }}%;
+  }
+  .gls-quote-section--contact .gls-contact-image {
+    border-radius: {{ section.settings.image_border_radius }}px;
+    width: 100%;
+    max-width: {{ section.settings.image_max_width }}px;
+    height: {{ section.settings.image_height | default: 350 }}px;
+    object-fit: {{ section.settings.image_object_fit | default: 'cover' }};
+    object-position: {{ section.settings.image_object_position | default: 'center' }};
+    display: block;
+  }
+{%- endstyle -%}
+
+<div class="gls-quote-section gls-quote-section--contact">
+  <div class="gls-quote-container">
+    
+    <!-- Two Column Grid -->
+    <div class="gls-quote-contact-grid">
+      
+      <!-- Left Column: Content -->
+      <div class="gls-contact-content">
+        <{{ section.settings.heading_tag }} class="gls-contact-heading">{{ section.settings.contact_heading | default: 'Prefer to Talk?' }}</{{ section.settings.heading_tag }}>
+        
+        {%- if section.settings.contact_text != blank -%}
+          <p class="gls-contact-text">{{ section.settings.contact_text }}</p>
+        {%- endif -%}
+        
+        <div class="gls-contact-buttons">
+          {%- if section.settings.phone_number != blank -%}
+            <a href="tel:{{ section.settings.phone_number }}" class="gls-contact-btn">
+              {%- if section.settings.show_phone_icon -%}
+                {%- if section.settings.phone_icon_svg != blank -%}
+                  {{ section.settings.phone_icon_svg }}
+                {%- else -%}
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- endif -%}
+              {%- endif -%}
+              {{ section.settings.phone_button_text | default: section.settings.phone_number }}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.email_address != blank -%}
+            <a href="mailto:{{ section.settings.email_address }}" class="gls-contact-btn">
+              {%- if section.settings.show_email_icon -%}
+                {%- if section.settings.email_icon_svg != blank -%}
+                  {{ section.settings.email_icon_svg }}
+                {%- else -%}
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- endif -%}
+              {%- endif -%}
+              {{ section.settings.email_button_text | default: section.settings.email_address }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <!-- Right Column: Image -->
+      <div class="gls-contact-image-column">
+        {%- if section.settings.contact_image != blank -%}
+          {{ section.settings.contact_image | image_url: width: 1200 | image_tag:
+            class: 'gls-contact-image',
+            loading: 'lazy',
+            alt: section.settings.image_alt | default: section.settings.contact_heading | escape,
+            widths: '200, 300, 400, 500, 600, 800, 1000, 1200'
+          }}
+        {%- else -%}
+          <div class="gls-contact-image-placeholder">
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quote - Contact (v2)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Max Width",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "section_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap Between Columns",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Left Column - Heading"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Heading Text",
+      "default": "Prefer to Talk?"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading Bottom Spacing",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Left Column - Body Text"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_text",
+      "label": "Body Text",
+      "default": "Our team is available Monday through Friday, 9am to 5pm EST to answer your questions and help with your packaging needs."
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "text_line_height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "label": "Text Line Height",
+      "default": 1.6
+    },
+    {
+      "type": "range",
+      "id": "text_margin_bottom",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Text Bottom Spacing",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Phone Button"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "type": "text",
+      "id": "phone_button_text",
+      "label": "Phone Button Text (Optional)",
+      "info": "Leave blank to show the phone number"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone_icon",
+      "label": "Show Phone Icon",
+      "default": true
+    },
+    {
+      "type": "html",
+      "id": "phone_icon_svg",
+      "label": "Custom Phone Icon (SVG)",
+      "info": "Paste custom SVG code. Leave blank for default icon."
+    },
+    {
+      "type": "header",
+      "content": "Email Button"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Email Address",
+      "default": "sales@greenleafsupplies.com"
+    },
+    {
+      "type": "text",
+      "id": "email_button_text",
+      "label": "Email Button Text (Optional)",
+      "info": "Leave blank to show the email address"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email_icon",
+      "label": "Show Email Icon",
+      "default": true
+    },
+    {
+      "type": "html",
+      "id": "email_icon_svg",
+      "label": "Custom Email Icon (SVG)",
+      "info": "Paste custom SVG code. Leave blank for default icon."
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "select",
+      "id": "buttons_alignment",
+      "label": "Buttons Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "buttons_gap",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap Between Buttons",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Font Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Vertical Padding",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Button Horizontal Padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Border Width",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button Hover Background",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Button Hover Border Color",
+      "default": "#7AAE5C"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_icon_size",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Icon Size",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Right Column - Image"
+    },
+    {
+      "type": "range",
+      "id": "image_column_width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Column Width",
+      "default": 45
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Contact Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "info": "Describe the image for accessibility. Leave blank to use heading text."
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Image Max Width",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Image Height",
+      "default": 350
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image Scaling",
+      "options": [
+        { "value": "cover", "label": "Cover (fill area, crop if needed)" },
+        { "value": "contain", "label": "Contain (fit whole image)" },
+        { "value": "fill", "label": "Fill (stretch to fit)" },
+        { "value": "none", "label": "None (original size)" },
+        { "value": "scale-down", "label": "Scale Down (smaller of contain/none)" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "image_object_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" },
+        { "value": "top left", "label": "Top Left" },
+        { "value": "top right", "label": "Top Right" },
+        { "value": "bottom left", "label": "Bottom Left" },
+        { "value": "bottom right", "label": "Bottom Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Border Radius",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote - Contact Section"
+    }
+  ]
+}
+{% endschema %}
