@@ -119,7 +119,7 @@
             "category_image": "shopify://shop_images/GLS_Food_Liquid_Category_Featured_Image.webp",
             "image_fit": "contain",
             "category_title": "Food & Liquid",
-            "category_link": "",
+            "category_link": "shopify://collections/food-liquid",
             "subcategory_1": "Sauces",
             "subcategory_1_link": "",
             "subcategory_2": "Oil",
