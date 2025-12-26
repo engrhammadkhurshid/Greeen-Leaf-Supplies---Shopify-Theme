@@ -72,14 +72,17 @@
                 box-shadow: 0 4px 12px {{ block.settings.card_shadow_color }};
                 border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
                 padding: {{ block.settings.card_padding }}px;
+                min-height: {{ block.settings.card_min_height }}px;
               "
             >
+              <!-- Left: Icon (40% width fixed via CSS) -->
               <div class="gls-core-values__item-icon-wrapper" style="
                 background-color: {{ block.settings.icon_bg_color }};
-                padding: {{ block.settings.icon_padding }}px;
-                border-radius: {{ block.settings.icon_border_radius }}px;
+                align-items: {{ block.settings.icon_vertical_alignment }};
               ">
-                <div class="gls-core-values__item-icon" style="width: {{ block.settings.icon_size }}px; height: {{ block.settings.icon_size }}px;">
+                <div class="gls-core-values__item-icon" style="
+                  transform: scale({{ block.settings.icon_scale | divided_by: 100.0 }});
+                ">
                   {%- if block.settings.custom_icon != blank -%}
                     {{ block.settings.custom_icon | image_url: width: 100 | image_tag: loading: 'lazy' }}
                   {%- elsif block.settings.icon_svg != blank -%}
@@ -102,14 +105,19 @@
                   {%- endif -%}
                 </div>
               </div>
-              <div class="gls-core-values__item-content">
-                <h3 class="gls-core-values__item-title" style="
+
+              <!-- Right: Content (Headline + Body) -->
+              <div class="gls-core-values__item-content" style="
+                justify-content: {{ block.settings.content_vertical_alignment }};
+              ">
+                <{{ block.settings.title_tag }} class="gls-core-values__item-title" style="
                   font-size: {{ block.settings.title_size }}px;
                   color: {{ block.settings.title_color }};
                   font-family: {{ block.settings.title_font_family }};
                 ">
                   {{ block.settings.title }}
-                </h3>
+                </{{ block.settings.title_tag }}>
+                
                 <div class="gls-core-values__item-text" style="
                   font-size: {{ block.settings.text_size }}px;
                   color: {{ block.settings.text_color }};
@@ -272,13 +280,24 @@
         },
         {
           "type": "range",
-          "id": "icon_size",
-          "min": 20,
-          "max": 80,
-          "step": 4,
-          "unit": "px",
-          "label": "Icon Size",
-          "default": 32
+          "id": "icon_scale",
+          "min": 50,
+          "max": 150,
+          "step": 5,
+          "unit": "%",
+          "label": "Icon Scale",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "icon_vertical_alignment",
+          "label": "Icon Vertical Alignment",
+          "options": [
+            { "value": "flex-start", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Bottom" }
+          ],
+          "default": "center"
         },
         {
           "type": "color",
@@ -291,26 +310,6 @@
           "id": "icon_bg_color",
           "label": "Icon Background Color",
           "default": "transparent"
-        },
-        {
-          "type": "range",
-          "id": "icon_padding",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "label": "Icon Padding",
-          "default": 0
-        },
-        {
-          "type": "range",
-          "id": "icon_border_radius",
-          "min": 0,
-          "max": 50,
-          "step": 2,
-          "unit": "px",
-          "label": "Icon Border Radius",
-          "default": 0
         },
         {
           "type": "header",
@@ -327,6 +326,16 @@
           "id": "card_shadow_color",
           "label": "Shadow Color",
           "default": "rgba(0,0,0,0.1)"
+        },
+        {
+          "type": "range",
+          "id": "card_min_height",
+          "min": 100,
+          "max": 500,
+          "step": 10,
+          "unit": "px",
+          "label": "Card Min Height",
+          "default": 200
         },
         {
           "type": "range",
@@ -373,6 +382,21 @@
           "id": "title",
           "label": "Title",
           "default": "Value Title"
+        },
+        {
+          "type": "select",
+          "id": "title_tag",
+          "label": "Title Tag",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "p", "label": "Paragraph" },
+            { "value": "div", "label": "Div" }
+          ],
+          "default": "h3"
         },
         {
           "type": "range",
@@ -443,6 +467,21 @@
             { "value": "var(--font-body-family)", "label": "Montserrat (Body)" }
           ],
           "default": "var(--font-body-family)"
+        },
+        {
+          "type": "header",
+          "content": "Content Alignment"
+        },
+        {
+          "type": "select",
+          "id": "content_vertical_alignment",
+          "label": "Text Vertical Alignment",
+          "options": [
+            { "value": "flex-start", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Bottom" }
+          ],
+          "default": "center"
         }
       ]
     }
