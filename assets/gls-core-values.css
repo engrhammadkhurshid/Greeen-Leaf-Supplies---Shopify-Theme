@@ -96,6 +96,7 @@
 .gls-core-values__number {
   flex: 0 0 30px;
   font-weight: 400;
+  font-size: var(--number-size);
 }
 
 .gls-core-values__icon {
@@ -114,6 +115,7 @@
 .gls-core-values__icon img {
   display: block;
   object-fit: contain;
+  width: var(--icon-width);
 }
 
 .gls-core-values__content {
@@ -126,10 +128,12 @@
   font-weight: 700;
   margin: 0 0 10px;
   line-height: 1.2;
+  font-size: var(--title-size);
 }
 
 .gls-core-values__item-text {
   margin: 0;
+  font-size: var(--text-size);
   line-height: 1.6;
 }
 
@@ -160,5 +164,20 @@
   /* Adjust hover for mobile to avoid weird jumps */
   .gls-core-values__item:hover {
     transform: none;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .gls-core-values__number {
+    font-size: var(--desktop-number-size);
+  }
+  .gls-core-values__icon img {
+    width: var(--desktop-icon-width);
+  }
+  .gls-core-values__item-title {
+    font-size: var(--desktop-title-size);
+  }
+  .gls-core-values__item-text {
+    font-size: var(--desktop-text-size);
   }
 }

@@ -2,8 +2,8 @@
 
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-top: {{ section.settings.mobile_padding_top }}px;
+    padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     padding-left: {{ section.settings.padding_left | times: 0.75 | round: 0 }}px;
     padding-right: {{ section.settings.padding_right | times: 0.75 | round: 0 }}px;
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
@@ -24,6 +24,15 @@
   .gls-core-values-{{ section.id }} {
     background-color: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
+    --heading-size: {{ section.settings.mobile_heading_size }}px;
+    --subheading-size: {{ section.settings.mobile_subheading_size }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .gls-core-values-{{ section.id }} {
+      --heading-size: {{ section.settings.heading_size }}px;
+      --subheading-size: {{ section.settings.subheading_size }}px;
+    }
   }
 
   .gls-core-values-{{ section.id }} .gls-core-values__container {
@@ -36,7 +45,7 @@
   }
 
   .gls-core-values-{{ section.id }} .gls-core-values__subheading {
-    font-size: {{ section.settings.subheading_size }}px;
+    font-size: var(--subheading-size);
     color: {{ section.settings.subheading_color }};
     font-family: {{ section.settings.subheading_font_family }};
   }
@@ -46,7 +55,7 @@
   }
 
   .gls-core-values-{{ section.id }} .gls-core-values__heading {
-    font-size: {{ section.settings.heading_size }}px;
+    font-size: var(--heading-size);
     color: {{ section.settings.heading_color }};
     font-family: {{ section.settings.heading_font_family }};
   }
@@ -73,26 +82,26 @@
     <!-- Content Rows -->
     <div class="gls-core-values__rows">
       {%- for block in section.blocks -%}
-        <div class="gls-core-values__item" {{ block.shopify_attributes }}>
+        <div class="gls-core-values__item" {{ block.shopify_attributes }} style="--number-size: {{ block.settings.mobile_number_size }}px; --desktop-number-size: {{ block.settings.number_size }}px; --icon-width: {{ block.settings.mobile_icon_width }}px; --desktop-icon-width: {{ block.settings.icon_width }}px; --title-size: {{ block.settings.mobile_title_size }}px; --desktop-title-size: {{ block.settings.title_size }}px; --text-size: {{ block.settings.mobile_text_size }}px; --desktop-text-size: {{ block.settings.text_size }}px;">
           
           <!-- Number -->
-          <div class="gls-core-values__number" style="color: {{ block.settings.number_color }}; font-size: {{ block.settings.number_size }}px;">
+          <div class="gls-core-values__number" style="color: {{ block.settings.number_color }};">
             {{ block.settings.number }}
           </div>
 
           <!-- Icon -->
           <div class="gls-core-values__icon">
             {%- if block.settings.icon_image != blank -%}
-              {{ block.settings.icon_image | image_url: width: block.settings.icon_width | image_tag: loading: 'lazy', class: 'gls-core-values__icon-img', style: 'width: 100%; height: auto;' }}
+              {{ block.settings.icon_image | image_url: width: block.settings.icon_width | image_tag: loading: 'lazy', class: 'gls-core-values__icon-img', style: 'height: auto;' }}
             {%- endif -%}
           </div>
 
           <!-- Description -->
           <div class="gls-core-values__content">
-            <h3 class="gls-core-values__item-title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px;">
+            <h3 class="gls-core-values__item-title" style="color: {{ block.settings.title_color }};">
               {{ block.settings.title }}
             </h3>
-            <div class="gls-core-values__item-text" style="color: {{ block.settings.text_color }}; font-size: {{ block.settings.text_size }}px;">
+            <div class="gls-core-values__item-text" style="color: {{ block.settings.text_color }};">
               {{ block.settings.text }}
             </div>
           </div>
@@ -182,6 +191,26 @@
     },
     {
       "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
       "id": "padding_left",
       "min": 0,
       "max": 100,
@@ -242,6 +271,16 @@
       "default": 47
     },
     {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Subheading Size",
+      "default": 20
+    },
+    {
       "type": "color",
       "id": "subheading_color",
       "label": "Subheading Color",
@@ -278,6 +317,16 @@
       "unit": "px",
       "label": "Heading Size",
       "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 16,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Heading Size",
+      "default": 24
     },
     {
       "type": "color",
@@ -324,6 +373,16 @@
           "default": 14
         },
         {
+          "type": "range",
+          "id": "mobile_number_size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Mobile Number Size",
+          "default": 12
+        },
+        {
           "type": "header",
           "content": "Icon"
         },
@@ -343,6 +402,16 @@
           "default": 50
         },
         {
+          "type": "range",
+          "id": "mobile_icon_width",
+          "min": 15,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "Mobile Icon Width",
+          "default": 30
+        },
+        {
           "type": "header",
           "content": "Content"
         },
@@ -357,6 +426,16 @@
           "id": "title_color",
           "label": "Title Color",
           "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "mobile_title_size",
+          "min": 14,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Mobile Title Size",
+          "default": 18
         },
         {
           "type": "range",
@@ -379,6 +458,16 @@
           "id": "text_color",
           "label": "Text Color",
           "default": "#9f9f9f"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Mobile Text Size",
+          "default": 14
         },
         {
           "type": "range",
