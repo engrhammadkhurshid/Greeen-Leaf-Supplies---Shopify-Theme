@@ -1,14 +1,10 @@
-/* Import Fonts to match the design */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
-
 .gls-core-values {
   width: 100%;
-  font-family: "Nunito", sans-serif;
+  /* Font family is now handled via Liquid settings */
 }
 
 .gls-core-values__container {
-  max-width: 1320px; /* Bootstrap container max-width */
+  max-width: 1320px;
   margin: 0 auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -18,10 +14,10 @@
 /* Header Styles */
 .gls-core-values__header {
   margin-bottom: 70px;
+  /* Text align handled via Liquid */
 }
 
 .gls-core-values__subheading {
-  font-family: 'Tangerine', cursive;
   text-transform: capitalize;
   font-weight: 100;
   display: inline-block;
@@ -55,12 +51,40 @@
   flex-direction: column;
 }
 
+/* Entry Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .gls-core-values__item {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
   padding-bottom: 30px;
   /* Border color set via Liquid */
+  
+  /* Animation Setup */
+  opacity: 0; /* Start hidden */
+  animation: fadeInUp 0.8s ease-out forwards;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Staggered Animation Delays */
+.gls-core-values__item:nth-child(1) { animation-delay: 0.1s; }
+.gls-core-values__item:nth-child(2) { animation-delay: 0.2s; }
+.gls-core-values__item:nth-child(3) { animation-delay: 0.3s; }
+.gls-core-values__item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Hover Animation */
+.gls-core-values__item:hover {
+  transform: translateX(10px); /* Subtle slide right on hover */
 }
 
 .gls-core-values__item:last-child {
@@ -80,13 +104,16 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  transition: transform 0.3s ease;
 }
 
-.gls-core-values__icon svg,
+.gls-core-values__item:hover .gls-core-values__icon {
+  transform: scale(1.1); /* Scale icon on hover */
+}
+
 .gls-core-values__icon img {
-  width: 100%;
-  height: auto;
   display: block;
+  object-fit: contain;
 }
 
 .gls-core-values__content {
@@ -128,5 +155,10 @@
   
   .gls-core-values__number {
     margin-bottom: 10px;
+  }
+  
+  /* Adjust hover for mobile to avoid weird jumps */
+  .gls-core-values__item:hover {
+    transform: none;
   }
 }

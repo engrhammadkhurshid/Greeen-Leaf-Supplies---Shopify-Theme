@@ -19,9 +19,14 @@
   }
 
   /* Dynamic Settings for Headings */
+  .gls-core-values-{{ section.id }} .gls-core-values__header {
+    text-align: {{ section.settings.heading_alignment }};
+  }
+
   .gls-core-values-{{ section.id }} .gls-core-values__subheading {
     font-size: {{ section.settings.subheading_size }}px;
     color: {{ section.settings.subheading_color }};
+    font-family: {{ section.settings.subheading_font_family }};
   }
   
   .gls-core-values-{{ section.id }} .gls-core-values__subheading::after {
@@ -31,6 +36,7 @@
   .gls-core-values-{{ section.id }} .gls-core-values__heading {
     font-size: {{ section.settings.heading_size }}px;
     color: {{ section.settings.heading_color }};
+    font-family: {{ section.settings.heading_font_family }};
   }
 
   /* Dynamic Settings for Blocks */
@@ -64,26 +70,8 @@
 
           <!-- Icon -->
           <div class="gls-core-values__icon">
-            {%- if block.settings.custom_icon != blank -%}
-              {{ block.settings.custom_icon | image_url: width: 100 | image_tag: loading: 'lazy' }}
-            {%- elsif block.settings.icon_svg != blank -%}
-              <div class="gls-icon-svg" style="color: {{ block.settings.icon_color }}; width: {{ block.settings.icon_size }}px; height: {{ block.settings.icon_size }}px;">
-                {{ block.settings.icon_svg }}
-              </div>
-            {%- else -%}
-              <!-- Fallback Icons based on selection -->
-              <div class="gls-icon-svg" style="color: {{ block.settings.icon_color }}; width: {{ block.settings.icon_size }}px; height: {{ block.settings.icon_size }}px;">
-                {% case block.settings.icon_name %}
-                  {% when 'rocket' %}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8c.828 0 1.5-.895 1.5-2S8.828 4 8 4s-1.5.895-1.5 2S7.172 8 8 8"/><path d="M11.953 8.81c-.195-3.388-.968-5.507-1.777-6.819C9.707 1.233 9.23.751 8.85.51c-.538-.34-1.162-.34-1.7 0-1.07.679-1.966 1.938-2.392 3.504C4.168 5.844 4 7.1 4 8c0 .374.032.735.094 1.09.06.355.15.709.264 1.055.114.346.25.68.406 1.002.155.322.328.63.516.922l.497.745c.305.456.665.867 1.072 1.226a.5.5 0 0 0 .638-.057l.5-.5a.5.5 0 0 0-.057-.638 8.98 8.98 0 0 1-1.226-1.072l-.745-.497a10.86 10.86 0 0 1-.922-.516 9.75 9.75 0 0 1-1.002-.406 9.15 9.15 0 0 1-1.055-.264A9.29 9.29 0 0 1 4.094 8c0-.9.168-2.156.758-3.996.426-1.566 1.322-2.825 2.392-3.504.538-.34 1.162-.34 1.7 0 .38.241.857.723 1.326 1.481.809 1.312 1.582 3.43 1.777 6.819a.5.5 0 0 0 .499.499.5.5 0 0 0 .499-.499z"/></svg>
-                  {% when 'eye' %}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/></svg>
-                  {% when 'gem' %}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413h2.582zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm13.002.001-3.291 6.819 2.103-6.82 1.188.001z"/></svg>
-                  {% when 'star' %}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                {% endcase %}
-              </div>
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: block.settings.icon_width | image_tag: loading: 'lazy', class: 'gls-core-values__icon-img', style: 'width: 100%; height: auto;' }}
             {%- endif -%}
           </div>
 
@@ -151,10 +139,31 @@
       "content": "Headings"
     },
     {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
       "default": "our value"
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_family",
+      "label": "Subheading Font Family",
+      "options": [
+        { "value": "var(--font-heading-family)", "label": "Heading Font" },
+        { "value": "var(--font-body-family)", "label": "Body Font" }
+      ],
+      "default": "var(--font-heading-family)"
     },
     {
       "type": "range",
@@ -183,6 +192,16 @@
       "id": "heading",
       "label": "Main Heading",
       "default": "lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading Font Family",
+      "options": [
+        { "value": "var(--font-heading-family)", "label": "Heading Font" },
+        { "value": "var(--font-body-family)", "label": "Body Font" }
+      ],
+      "default": "var(--font-heading-family)"
     },
     {
       "type": "range",
@@ -243,42 +262,19 @@
           "content": "Icon"
         },
         {
-          "type": "select",
-          "id": "icon_name",
-          "label": "Choose Icon",
-          "options": [
-            { "value": "rocket", "label": "Rocket" },
-            { "value": "eye", "label": "Eye" },
-            { "value": "gem", "label": "Gem" },
-            { "value": "star", "label": "Star" }
-          ],
-          "default": "rocket"
-        },
-        {
-          "type": "html",
-          "id": "icon_svg",
-          "label": "Custom SVG (Overrides selection)"
-        },
-        {
           "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom Image (Overrides SVG)"
+          "id": "icon_image",
+          "label": "Icon Image"
         },
         {
           "type": "range",
-          "id": "icon_size",
+          "id": "icon_width",
           "min": 20,
           "max": 100,
           "step": 2,
           "unit": "px",
-          "label": "Icon Size",
+          "label": "Icon Width",
           "default": 50
-        },
-        {
-          "type": "color",
-          "id": "icon_color",
-          "label": "Icon Color",
-          "default": "#ffffff"
         },
         {
           "type": "header",
@@ -333,30 +329,27 @@
   ],
   "presets": [
     {
-      "name": "GLS Core Values (List)",
+      "name": "GLS Core Values",
       "blocks": [
         {
           "type": "value_block",
           "settings": {
             "number": "01",
-            "title": "Our Mission",
-            "icon_name": "rocket"
+            "title": "Our Mission"
           }
         },
         {
           "type": "value_block",
           "settings": {
             "number": "02",
-            "title": "Our Vision",
-            "icon_name": "eye"
+            "title": "Our Vision"
           }
         },
         {
           "type": "value_block",
           "settings": {
             "number": "03",
-            "title": "Our Value",
-            "icon_name": "gem"
+            "title": "Our Value"
           }
         }
       ]
