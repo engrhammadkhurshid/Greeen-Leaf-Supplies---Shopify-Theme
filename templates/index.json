@@ -127,6 +127,9 @@
       ],
       "settings": {
         "image": "shopify://shop_images/GLS_About_Section_Image.webp",
+        "image_width": 800,
+        "image_height": 500,
+        "image_object_fit": "fill",
         "quote_text": "Committed to being the finest source for premium packaging.",
         "heading": "About Green Leaf Supplies",
         "heading_tag": "h2",
