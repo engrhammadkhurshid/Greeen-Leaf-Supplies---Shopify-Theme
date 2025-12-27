@@ -31,12 +31,13 @@
           <div class="gls-about__image-accent"></div>
           {%- if section.settings.image != blank -%}
             <img
-              src="{{ section.settings.image | image_url: width: 800 }}"
+              src="{{ section.settings.image | image_url: width: section.settings.image_width }}"
               alt="{{ section.settings.image.alt | escape }}"
               loading="lazy"
               width="{{ section.settings.image.width }}"
               height="{{ section.settings.image.height }}"
               class="gls-about__image"
+              style="height: {{ section.settings.image_height }}px; object-fit: {{ section.settings.image_object_fit }};"
             >
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'gls-about__image gls-about__image--placeholder' }}
@@ -79,6 +80,43 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 300,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Image Width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Image Height",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image Object Fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" },
+        { "value": "fill", "label": "Fill" },
+        { "value": "none", "label": "None" },
+        { "value": "scale-down", "label": "Scale Down" }
+      ],
+      "default": "cover"
     },
     {
       "type": "text",
