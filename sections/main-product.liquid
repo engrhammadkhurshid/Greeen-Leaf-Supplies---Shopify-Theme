@@ -555,6 +555,12 @@
                     show_pickup_availability: true
                   -%}
                 {% endif %}
+                
+                {%- comment -%} Product Specifications - Right Column {%- endcomment -%}
+                <div class="product-specifications-sidebar" style="margin-top: 2rem;">
+                  {% render 'product-metadata', product: product %}
+                </div>
+                
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
