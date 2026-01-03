@@ -767,11 +767,6 @@
                 </div>
               </div>
             {%- endif -%}
-            
-            {%- comment -%} Product Metadata/Specifications {%- endcomment -%}
-            <div class="product-description-specs">
-              {% render 'product-metadata', product: product %}
-            </div>
           </div>
         </div>
       </div>
@@ -831,16 +826,6 @@
           margin-bottom: 0.5rem;
         }
 
-        .product-description-specs {
-          margin-top: 2rem;
-        }
-
-        /* Override metadata styles for this section */
-        .product-description-specs .product-metadata {
-          margin: 0;
-          background: #f9fafb;
-          border: 1px solid #e5e7eb;
-        }
 
         @media (max-width: 768px) {
           .product-description-section {
