@@ -231,14 +231,10 @@
                   {%- endif -%}
                 </p>
               {%- when 'description' -%}
-                {%- if product.description != blank -%}
-                  <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    {{ product.description }}
-                  </div>
-                {%- endif -%}
-                
-                {%- comment -%} Product Metadata Display {%- endcomment -%}
-                {% render 'product-metadata', product: product %}
+                {%- comment -%}
+                  Description is now displayed in a dedicated section below the product grid
+                  See the "Product Description & Specifications" section after line 759
+                {%- endcomment -%}
 
               {%- when 'sku' -%}
                 <p
@@ -757,6 +753,111 @@
         </section>
       </div>
     </div>
+
+    {%- comment -%} Product Description & Specifications Section {%- endcomment -%}
+    {%- if product.description != blank -%}
+      <div class="product-description-section">
+        <div class="page-width">
+          <div class="product-description-container">
+            {%- if product.description != blank -%}
+              <div class="product-description-content">
+                <h2 class="product-description-title">Product Description</h2>
+                <div class="product__description rte">
+                  {{ product.description }}
+                </div>
+              </div>
+            {%- endif -%}
+            
+            {%- comment -%} Product Metadata/Specifications {%- endcomment -%}
+            <div class="product-description-specs">
+              {% render 'product-metadata', product: product %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .product-description-section {
+          margin-top: 4rem;
+          margin-bottom: 4rem;
+          background: #ffffff;
+        }
+
+        .product-description-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        .product-description-content {
+          margin-bottom: 3rem;
+        }
+
+        .product-description-title {
+          font-size: 2rem;
+          font-weight: 600;
+          margin-bottom: 1.5rem;
+          color: #1a1a1a;
+          padding-bottom: 1rem;
+          border-bottom: 2px solid #e5e7eb;
+        }
+
+        .product-description-content .product__description {
+          font-size: 1rem;
+          line-height: 1.8;
+          color: #4b5563;
+        }
+
+        .product-description-content .product__description h1,
+        .product-description-content .product__description h2,
+        .product-description-content .product__description h3,
+        .product-description-content .product__description h4 {
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          color: #1f2937;
+        }
+
+        .product-description-content .product__description p {
+          margin-bottom: 1rem;
+        }
+
+        .product-description-content .product__description ul,
+        .product-description-content .product__description ol {
+          margin-left: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .product-description-content .product__description li {
+          margin-bottom: 0.5rem;
+        }
+
+        .product-description-specs {
+          margin-top: 2rem;
+        }
+
+        /* Override metadata styles for this section */
+        .product-description-specs .product-metadata {
+          margin: 0;
+          background: #f9fafb;
+          border: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+          .product-description-section {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+          }
+
+          .product-description-container {
+            padding: 0 1rem;
+          }
+
+          .product-description-title {
+            font-size: 1.5rem;
+          }
+        }
+      </style>
+    {%- endif -%}
 
     {% render 'product-media-modal', variant_images: variant_images %}
 
