@@ -155,7 +155,7 @@
               {% assign skip_card_product_styles = false %}
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
-                {%- if forloop.index > 2 -%}
+                {%- if forloop.index > section.settings.columns_desktop -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
                 <li

@@ -48,6 +48,9 @@
   assign fetch_priority = 'auto'
   if section.index == 1
     assign fetch_priority = 'high'
+    assign loading_strategy = 'eager'
+  else
+    assign loading_strategy = 'lazy'
   endif
 -%}
 
@@ -79,7 +82,8 @@
           class: image_class,
           sizes: sizes,
           widths: widths,
-          fetchpriority: fetch_priority
+          fetchpriority: fetch_priority,
+          loading: loading_strategy
       }}
     </div>
   {%- elsif section.settings.image_2 == blank -%}
@@ -111,7 +115,8 @@
           class: image_class_2,
           sizes: sizes,
           widths: widths,
-          fetchpriority: fetch_priority
+          fetchpriority: fetch_priority,
+          loading: loading_strategy
       }}
     </div>
   {%- endif -%}

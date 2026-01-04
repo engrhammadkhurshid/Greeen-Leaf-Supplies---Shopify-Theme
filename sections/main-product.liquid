@@ -136,11 +136,6 @@
                     <span class="gls-sold-count">{{ random_number | number_with_delimiter }}+ Units Sold</span>
                   </div>
                   <h1>{{ product.title | escape }}</h1>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
-                      {{ product.title | escape }}
-                    </h2>
-                  </a>
                 </div>
               {%- when 'price' -%}
                 {% if product.price > 0 %}

@@ -27,6 +27,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'schema-breadcrumbs' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -307,6 +308,17 @@
       }
     </script>
   </head>
+  {%- liquid
+    if template.name == 'product' and product.featured_media
+      assign fetch_priority = 'high'
+      echo '<!-- Preload LCP Image -->'
+      echo product.featured_media | image_url: width: 1100 | preload_tag: as: 'image', fetchpriority: fetch_priority
+    elsif template.name == 'collection' and collection.image
+      assign fetch_priority = 'high'
+      echo '<!-- Preload LCP Image -->'
+      echo collection.image | image_url: width: 1500 | preload_tag: as: 'image', fetchpriority: fetch_priority
+    endif
+  -%}
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
