@@ -25,16 +25,19 @@
 .card__inner {
   position: relative;
   width: 100%;
-  height: 260px !important; /* Strict fixed height */
+  height: 260px !important;
+  /* Strict fixed height */
   min-height: 260px !important;
-  padding: 0 !important; 
-  background-color: transparent !important; /* Match website background (transparent/white) */
+  padding: 0 !important;
+  background-color: transparent !important;
+  /* Match website background (transparent/white) */
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  display: block !important; /* Force display */
+  display: block !important;
+  /* Force display */
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -93,29 +96,29 @@
 }
 
 /* Primary Image */
-.card__media .media > img:first-child {
+.card__media .media>img:first-child {
   opacity: 1 !important;
   z-index: 1;
 }
 
 /* Secondary Image (Hover) */
-.card__media .media > img + img {
+.card__media .media>img+img {
   opacity: 0 !important;
   z-index: 2;
 }
 
 /* Hover Effects */
-.product-card-wrapper .card:hover .card__media .media > img + img {
+.product-card-wrapper .card:hover .card__media .media>img+img {
   opacity: 1 !important;
   transform: scale(1.05);
 }
 
-.product-card-wrapper .card:hover .card__media .media > img:first-child {
+.product-card-wrapper .card:hover .card__media .media>img:first-child {
   transform: scale(1.05);
 }
 
 /* Disable default hover effects */
-.media--hover-effect > img:first-child:only-child {
+.media--hover-effect>img:first-child:only-child {
   opacity: 1 !important;
 }
 
@@ -127,9 +130,12 @@
   flex: 1;
   background-color: #fff;
   text-align: left;
-  justify-content: flex-start; /* Align to top */
-  position: relative;
-  z-index: 2;
+  justify-content: flex-start;
+  /* Align to top */
+  position: static;
+  /* Changed from relative to allow link to cover whole card */
+  z-index: auto;
+  /* Changed from 2 */
 }
 
 .card__information {
@@ -147,7 +153,8 @@
   color: var(--gls-primary, #7AAE5C);
   letter-spacing: 0.8px;
   margin-bottom: 4px;
-  height: 16px; /* Fixed height */
+  height: 16px;
+  /* Fixed height */
   overflow: hidden;
   line-height: 16px;
 }
@@ -157,37 +164,43 @@
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 8px 0;
-  line-height: 1.4; /* 16 * 1.4 = 22.4px */
+  line-height: 1.4;
+  /* 16 * 1.4 = 22.4px */
   color: #111;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 46px; /* Fixed height for 2 lines */
+  height: 46px;
+  /* Fixed height for 2 lines */
 }
 
 .card__heading a {
-  text-decoration: none !important; /* Remove underline */
+  text-decoration: none !important;
+  /* Remove underline */
   color: inherit;
   transition: color 0.2s;
 }
 
 .card__heading a:hover {
   color: var(--gls-primary, #7AAE5C);
-  text-decoration: none !important; /* Ensure no underline on hover */
+  text-decoration: none !important;
+  /* Ensure no underline on hover */
 }
 
 /* Description - Fixed Height (3 lines) */
 .card__description {
   font-size: 13px;
   color: #666;
-  line-height: 1.5; /* 13 * 1.5 = 19.5px */
+  line-height: 1.5;
+  /* 13 * 1.5 = 19.5px */
   margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 60px; /* Fixed height for 3 lines */
+  height: 60px;
+  /* Fixed height for 3 lines */
 }
 
 /* 4. Footer Area (Fixed Height) */
@@ -196,10 +209,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: auto; /* Push to bottom if there's extra space, but heights are fixed so this is just safety */
+  margin-top: auto;
+  /* Push to bottom if there's extra space, but heights are fixed so this is just safety */
   padding-top: 16px;
   border-top: 1px solid #f3f4f6;
-  height: 54px; /* Fixed height container */
+  height: 54px;
+  /* Fixed height container */
   box-sizing: border-box;
 }
 
@@ -226,7 +241,11 @@ a.card__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 36px; /* Fixed button height */
+  height: 36px;
+  /* Fixed button height */
+  position: relative;
+  /* Ensure button stays above the card link */
+  z-index: 2;
 }
 
 a.card__button:hover {
@@ -250,7 +269,8 @@ a.card__button:after {
   font-weight: 700;
   padding: 4px 8px;
   border-radius: 4px;
-  z-index: 10; /* High z-index */
+  z-index: 10;
+  /* High z-index */
   letter-spacing: 0.5px;
 }
 
@@ -281,9 +301,11 @@ a.card__button:after {
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 749px) {
+
   /* 1. Reduce Image Height */
   .card__inner {
-    height: 180px !important; /* Smaller image area for mobile */
+    height: 180px !important;
+    /* Smaller image area for mobile */
     min-height: 180px !important;
   }
 
@@ -300,13 +322,15 @@ a.card__button:after {
 
   .card__heading {
     font-size: 14px;
-    height: 40px; /* Adjusted for smaller font */
+    height: 40px;
+    /* Adjusted for smaller font */
     margin-bottom: 4px;
   }
 
   .card__description {
     font-size: 12px;
-    height: 54px; /* Adjusted for smaller font */
+    height: 54px;
+    /* Adjusted for smaller font */
     margin-bottom: 12px;
     -webkit-line-clamp: 3;
   }
@@ -314,25 +338,33 @@ a.card__button:after {
   /* 4. Fix Footer & Button Overflow */
   .card__footer-row {
     padding-top: 12px;
-    height: auto; /* Allow flexibility if needed, but try to keep compact */
+    height: auto;
+    /* Allow flexibility if needed, but try to keep compact */
     min-height: 40px;
     gap: 8px;
-    flex-wrap: wrap; /* Allow wrapping to prevent overflow on very small screens */
+    flex-wrap: wrap;
+    /* Allow wrapping to prevent overflow on very small screens */
   }
 
   .card__moq-label {
     font-size: 11px;
-    flex: 1; /* Allow it to take space but shrink if needed */
-    min-width: 60px; /* Ensure it doesn't get too squashed */
+    flex: 1;
+    /* Allow it to take space but shrink if needed */
+    min-width: 60px;
+    /* Ensure it doesn't get too squashed */
   }
 
   a.card__button {
-    padding: 6px 10px; /* Smaller padding */
-    font-size: 11px; /* Smaller font */
-    height: 30px; /* Smaller height */
+    padding: 6px 10px;
+    /* Smaller padding */
+    font-size: 11px;
+    /* Smaller font */
+    height: 30px;
+    /* Smaller height */
     width: auto;
     white-space: nowrap;
-    flex-shrink: 0; /* Don't shrink the button text */
+    flex-shrink: 0;
+    /* Don't shrink the button text */
   }
 
   /* 5. Adjust Badges */
@@ -370,5 +402,3 @@ a.card__button:after {
   position: relative;
   z-index: 2;
 }
-
-
