@@ -30,15 +30,19 @@
         <div class="gls-about__image-wrapper">
           <div class="gls-about__image-accent"></div>
           {%- if section.settings.image != blank -%}
-            <img
-              src="{{ section.settings.image | image_url: width: section.settings.image_width }}"
-              alt="{{ section.settings.image.alt | escape }}"
-              loading="lazy"
-              width="{{ section.settings.image.width }}"
-              height="{{ section.settings.image.height }}"
-              class="gls-about__image"
-              style="height: {{ section.settings.image_height }}px; object-fit: cover;"
-            >
+            {%- liquid
+              assign heights = 'height: ' | append: section.settings.image_height | append: 'px; object-fit: cover;'
+            -%}
+            {{
+              section.settings.image
+              | image_url: width: 1500
+              | image_tag:
+                loading: 'lazy',
+                class: 'gls-about__image',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                widths: '375, 550, 750, 1100, 1500',
+                style: heights
+            }}
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'gls-about__image gls-about__image--placeholder' }}
           {%- endif -%}
