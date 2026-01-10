@@ -37,14 +37,12 @@
         <a href="{{ block.settings.link | default: '#' }}" class="gls-categories__card" {{ block.shopify_attributes }}>
           <div class="gls-categories__image-wrapper">
             {%- if block.settings.image != blank -%}
-              <img
-                src="{{ block.settings.image | image_url: width: 600 }}"
-                alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
-                loading="lazy"
-                width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}"
-                class="gls-categories__image"
-              >
+              {{ block.settings.image | image_url: width: 800 | image_tag: 
+                class: 'gls-categories__image', 
+                loading: 'lazy', 
+                sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw',
+                widths: '375, 550, 750, 1100'
+              }}
             {%- else -%}
               {{ 'collection-1' | placeholder_svg_tag: 'gls-categories__image gls-categories__image--placeholder' }}
             {%- endif -%}
