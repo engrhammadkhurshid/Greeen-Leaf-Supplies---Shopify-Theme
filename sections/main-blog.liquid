@@ -201,7 +201,7 @@
             {% if block.type == 'category' %}
               <a href="{{ target_blog.url }}/tagged/{{ block.settings.tag | handle }}" class="gls-blog-cat-card" {{ block.shopify_attributes }}>
                 {% if block.settings.image != blank %}
-                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.tag }}" loading="lazy">
+                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.tag }}" width="400" height="400" loading="lazy">
                 {% else %}
                   {{ 'collection-1' | placeholder_svg_tag }}
                 {% endif %}

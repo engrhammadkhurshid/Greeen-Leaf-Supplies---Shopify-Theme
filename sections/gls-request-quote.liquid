@@ -145,7 +145,7 @@
           <div class="gls-feature-card" {{ block.shopify_attributes }}>
             <div class="gls-feature-icon">
               {%- if block.settings.custom_icon != blank -%}
-                <img src="{{ block.settings.custom_icon | image_url: width: 64 }}" alt="{{ block.settings.title }}" loading="lazy">
+                <img src="{{ block.settings.custom_icon | image_url: width: 64 }}" alt="{{ block.settings.title }}" width="64" height="64" loading="lazy">
               {%- else -%}
                 <!-- Default Icon Placeholder -->
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
